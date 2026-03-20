@@ -1,51 +1,82 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Login HPOK</title>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-
-const firebaseConfig = {
-apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
-authDomain: "hpok-d355c.firebaseapp.com",
-projectId: "hpok-d355c"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.login = function(){
-let email = document.getElementById("email").value;
-let pass = document.getElementById("pass").value;
-
-signInWithEmailAndPassword(auth,email,pass)
-.then(user=>{
-localStorage.setItem("uid",user.user.uid);
-location.href="home.html";
-})
-.catch(()=>alert("Sai tài khoản"));
-}
-</script>
-
-<style>
-body{background:#0b0b0b;color:#fff;font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh;}
-.box{background:#111;padding:25px;border-radius:20px;box-shadow:0 0 20px #ff2d55;width:90%;max-width:350px;}
-input{width:100%;padding:12px;margin-bottom:10px;border:none;border-radius:10px;background:#1b1b1b;color:#fff;}
-button{width:100%;padding:12px;border:none;border-radius:10px;background:#ff2d55;color:#fff;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>HPOK - ĐĂNG NHẬP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* (Sử dụng chung CSS từ trang Register để đồng bộ) */
+        :root { --pink: #ff2d55; --gold: linear-gradient(135deg, #ffe1a8, #d4af37); }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #050505; color: #fff; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 420px; min-height: 100vh; background: radial-gradient(circle at 50% 10%, #301018 0%, #050505 100%); padding: 25px; box-sizing: border-box; }
+        .slogan { text-align: center; color: #ff9eb5; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 25px 0; }
+        .auth-card { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; padding: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+        .tabs { display: flex; background: rgba(0,0,0,0.4); border-radius: 15px; padding: 5px; margin-bottom: 25px; border: 1px solid #333; }
+        .tab { flex: 1; text-align: center; padding: 12px; border-radius: 12px; font-weight: 700; color: #777; text-decoration: none; }
+        .tab.active { background: var(--gold); color: #000; }
+        .input-wrap { background: rgba(0,0,0,0.5); border: 1px solid #444; border-radius: 12px; display: flex; align-items: center; padding: 0 15px; margin-bottom: 15px; }
+        .input-wrap i { color: var(--pink); width: 25px; }
+        .input-wrap input { background: none; border: none; padding: 14px 5px; color: #fff; width: 100%; outline: none; font-size: 15px; }
+        .btn-submit { width: 100%; padding: 16px; border-radius: 15px; border: none; background: var(--gold); color: #000; font-weight: 900; font-size: 16px; text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 25px rgba(184, 134, 11, 0.5); }
+        
+        .support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .btn-mini { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: #aaa; padding: 12px; border-radius: 12px; font-size: 10px; text-transform: uppercase; font-weight: bold; text-align: center; text-decoration: none; transition: 0.3s; }
+        .btn-mini:hover { border-color: var(--pink); color: #fff; }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <div class="slogan">Nơi Cảm Xúc Không Giới Hạn</div>
+        <div class="auth-card">
+            <div class="tabs">
+                <a href="register.html" class="tab">ĐĂNG KÝ</a>
+                <a href="login.html" class="tab active">ĐĂNG NHẬP</a>
+            </div>
 
-<div class="box">
-<h2>Đăng nhập</h2>
-<input id="email" placeholder="Email">
-<input id="pass" type="password" placeholder="Mật khẩu">
-<button onclick="login()">Đăng nhập</button>
-</div>
+            <div class="input-wrap"><i class="fa-solid fa-user"></i><input type="text" id="logUser" placeholder="Tên đăng nhập / SĐT"></div>
+            <div class="input-wrap"><i class="fa-solid fa-lock"></i><input type="password" id="logPass" placeholder="Mật khẩu"></div>
 
+            <button class="btn-submit" onclick="doLogin()">Đăng Nhập Ngay</button>
+
+            <div class="support-grid">
+                <a href="khoiphuc.html" class="btn-mini"><i class="fa-solid fa-mobile-screen-button"></i> Quên SĐT</a>
+                <a href="khoiphuc.html" class="btn-mini"><i class="fa-solid fa-envelope-open-text"></i> Quên Email</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // Firebase Config dùng chung...
+        const firebaseConfig = {
+            apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
+            authDomain: "hpok-d355c.firebaseapp.com",
+            databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "hpok-d355c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.doLogin = function() {
+            const user = document.getElementById('logUser').value;
+            const pass = document.getElementById('logPass').value;
+
+            if(!user || !pass) return alert("Vui lòng nhập tài khoản mật khẩu!");
+
+            get(ref(db, 'users/' + user)).then((snapshot) => {
+                if (snapshot.exists() && snapshot.val().password === pass) {
+                    localStorage.setItem("username", user);
+                    localStorage.setItem("isLoggedIn", "true");
+                    window.location.href = "index.html";
+                } else {
+                    alert("Sai tài khoản hoặc mật khẩu!");
+                }
+            });
+        }
+    </script>
 </body>
 </html>
