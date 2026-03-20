@@ -1,218 +1,174 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Trang Chủ Game - 888 NOW</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HPOK OFFICIAL CASINO</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #3B0144, #6a0dad);
-            color: white;
-        }
-
-        a { text-decoration: none; color: inherit; }
-
-        /* THÔNG BÁO CHẠY NGANG */
-        .announcement {
-            width: 100%;
-            background-color: #FFD700;
-            color: #3B0144;
-            overflow: hidden;
-            white-space: nowrap;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-        }
-
-        .announcement p {
-            display: inline-block;
-            padding-left: 100%;
-            font-weight: bold;
-            font-size: 1em;
-            line-height: 40px;
-            animation: scroll 15s linear infinite;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        @media (max-width: 768px) { .announcement p { font-size: 0.9em; } }
-        @media (max-width: 480px) { .announcement p { font-size: 0.8em; } }
-
-        /* HEADER */
-        header {
-            background-color: rgba(59,1,68,0.95);
-            padding: 20px 0;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        header h1 {
-            font-size: 2.5em;
-            color: #FFD700;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-        }
-        nav { margin-top: 10px; }
-        nav a { margin: 0 15px; font-weight: bold; transition: color 0.3s; }
-        nav a:hover { color: #FFB700; }
-
-        /* CONTAINER */
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-
-        /* GRID GAME */
-        .game-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-        }
-
-        /* CARD GAME */
-        .game-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: transform 0.4s, box-shadow 0.4s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        .game-item img {
-            width: 100%;
-            display: block;
-            transition: transform 0.4s;
-        }
-        .game-item:hover img { transform: scale(1.1); }
-        .game-item:hover { transform: translateY(-5px); box-shadow: 0 15px 25px rgba(0,0,0,0.7); }
-
-        /* TÊN GAME */
-        .game-item p {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            margin: 0;
-            padding: 10px;
-            background: rgba(0,0,0,0.6);
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #FFD700;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            transition: background 0.3s;
-        }
-        .game-item:hover p { background: rgba(0,0,0,0.8); }
-
-        /* FOOTER */
-        footer {
-            background-color: rgba(59,1,68,0.95);
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #FFD700;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header h1 { font-size: 2em; }
-            .game-item p { font-size: 1em; }
-        }
-        @media (max-width: 480px) {
-            .game-list { grid-template-columns: repeat(1, 1fr); gap: 20px; }
-            nav a { display: block; margin: 5px 0; }
-        }
-    </style>
+<style>
+html,body{min-height:100%;overflow-x:hidden;}
+body{margin:0;padding:0;background:#0b0b0b;font-family:Arial,Helvetica,sans-serif;color:#fff;}
+header{background:#000;padding:1px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #2d1d23;position:sticky;top:0;z-index:999;}
+.logo{font-size:26px;font-weight:900;background:linear-gradient(180deg,#ff9bb5,#ff2d55);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 10px rgba(255,45,85,0.6);}
+.auth-bar{display:flex;gap:10px;padding:15px;position:relative;}
+.btn-app{background:linear-gradient(180deg,#ff85a2,#ff2d55);padding:6px 14px;border-radius:20px;font-size:11px;font-weight:800;text-decoration:none;color:#fff;box-shadow:0 0 10px #ff2d55;}
+.content{padding-top:65px;padding-bottom:120px;}
+.slider-container{width:100%;overflow:hidden;position:relative;}
+.slider-wrapper{display:flex;}
+.slide{min-width:100%;}
+.slide img{width:100%;height:auto;}
+.news{background:#1b1b1b;padding:10px;overflow:hidden;white-space:nowrap;}
+.news span{display:inline-block;animation:runnews 14s linear infinite;color:#ff5ec4;}
+@keyframes runnews{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.wallet{margin:10px;padding:18px;border-radius:16px;background:linear-gradient(145deg,#ff3ca6,#ff0080);box-shadow:0 0 20px #ff0080 inset;}
+.wallet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.wallet-name{font-size:16px;font-weight:bold;}
+.wallet-id{font-size:12px;opacity:.8;}
+.balance-label{font-size:12px;}
+.balance-number{font-size:26px;font-weight:bold;}
+.wallet-actions{display:flex;justify-content:space-between;}
+.wallet-item{flex:1;text-align:center;font-size:12px;}
+.wallet-icon{font-size:22px;margin-bottom:4px;}
+.wallet-more{display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,.3);padding-top:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+.games{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:8px;margin-top:6px;margin-bottom:60px;}
+.game{position:relative;background:#140b0e;border-radius:18px;overflow:hidden;border:none;}
+.game:hover{transform:scale(1.05);box-shadow:0 0 20px #ff2d55;}
+.game img{width:100%;display:block;}
+.game span{display:block;padding:6px;text-align:center;font-size:12px;font-weight:700;}
+.game::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:linear-gradient(45deg,#ffd700,#ffb300,#ffd700);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.4s;}
+.game-frame{display:none;position:fixed;top:55px;left:0;width:100%;height:calc(100vh - 115px);background:#000;z-index:999;}
+.game-frame iframe{width:100%;height:100%;border:none;}
+.backBtn{position:absolute;top:10px;left:10px;background:#ff0080;border:none;padding:8px 14px;border-radius:8px;color:#fff;font-weight:bold;}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:50px;background:#111;display:flex;justify-content:space-around;align-items:center;border-top:1px solid #333;}
+.bottom a{text-decoration:none;color:#ff5ec4;font-size:12px;text-align:center;}
+.bottom span{display:block;font-size:22px;}
+</style>
 </head>
+
 <body>
 
-    <!-- THÔNG BÁO CHẠY NGANG -->
-    <div class="announcement">
-        <p>🎉 Chào mừng đến với 888 NOW! Cập nhật game mới mỗi ngày - Nhận thưởng hấp dẫn ngay hôm nay! 🎁</p>
+<header>
+<a href="#" style="color:#ff85a2;font-size:24px;"><i class="fa-solid fa-bars"></i></a>
+<div class="logo">HPOK OFFICIAL</div>
+<a href="#" class="btn-app">TẢI APP</a>
+</header>
+
+<div class="slider-container">
+  <div class="slider-wrapper" id="slider">
+    <div class="slide"><img src="https://i.postimg.cc/TY72yWyk/IMG-3695.png" alt="Banner 1"></div>
+    <div class="slide"><img src="https://i.postimg.cc/QNn1DVXy/IMG-3697.png" alt="Banner 2"></div>
+    <div class="slide"><img src="https://i.postimg.cc/MZPt7gPz/IMG-3756.png" alt="Banner 3"></div>
+  </div>
+</div>
+
+<div class="news">
+<span>🎉 Chào mừng bạn đến với hệ thống game giải trí trực tuyến</span>
+</div>
+
+<div class="wallet">
+  <div class="wallet-top">
+    <div>
+      <div class="wallet-name" id="username">Người chơi</div>
+      <div class="wallet-id">ID: <span id="playerID">000001</span></div>
     </div>
-
-    <!-- HEADER -->
-    <header>
-        <h1>888 NOW</h1>
-        <nav>
-            <a href="#home">Trang Chủ</a>
-            <a href="#games">Game</a>
-            <a href="#about">Giới Thiệu</a>
-            <a href="#contact">Liên Hệ</a>
-        </nav>
-    </header>
-
-    <!-- GAME SECTION -->
-    <div class="container" id="games">
-        <h2 style="text-align:center; margin-bottom:20px; color:#FFD700; text-shadow:1px 1px 3px black;">Danh Sách Game</h2>
-        <div class="game-list">
-            <div class="game-item" onclick="openGame('sl.html')">
-                <img src="image/Starlight-Princess_EN_339x180_01.png" alt="Công chúa Starlight">
-                <p>Công chúa Starlight</p>
-            </div>
-            <div class="game-item" onclick="openGame('slc.html')">
-                <img src="image/Starlight-Christmas_339x180.png" alt="Starlight Giáng Sinh">
-                <p>Starlight Giáng Sinh</p>
-            </div>
-            <div class="game-item" onclick="openGame('gool.html')">
-                <img src="image/GOOL_EN_339x180.png" alt="Cổng Olympus">
-                <p>Cổng Olympus</p>
-            </div>
-            <div class="game-item" onclick="openGame('sbc.html')">
-                <img src="image/Sweet-Bonanza-Xmas_339x180.png" alt="Sweet Bonanza Giáng Sinh">
-                <p>Sweet Bonanza Giáng Sinh</p>
-            </div>
-            <div class="game-item" onclick="openGame('sb.html')">
-                <img src="image/Sweet-Bonanza_Thumb_339x180-3.png" alt="Sweet Bonanza">
-                <p>Sweet Bonanza</p>
-            </div>
-            <div class="game-item" onclick="openGame('dog.html')">
-                <img src="image/The-Dog-House_339x180px-1-1.png" alt="Ngôi nhà của chó">
-                <p>Ngôi nhà của chó</p>
-            </div>
-            <div class="game-item" onclick="openGame('thor.html')">
-                <img src="image/Power_of_Thor_Megaways_EN_339x180.png" alt="Thor Megaways">
-                <p>Thor Megaways</p>
-            </div>
-            <div class="game-item" onclick="openGame('wwg.html')">
-                <img src="image/Wild_West_Gold_Megaways_EN_339x180_01-1.png" alt="Vàng Miền Tây Hoang Dã">
-                <p>Vàng Miền Tây Hoang Dã</p>
-            </div>
-            <div class="game-item" onclick="openGame('zvh.html')">
-                <img src="image/Zeus-vs-Hades-Gods-of-war_339x180.png" alt="Zeus vs Hades">
-                <p>Zeus vs Hades</p>
-            </div>
-        </div>
+    <div>
+      <div class="balance-label">Số dư</div>
+      <div class="balance-number" id="balance">0</div>
     </div>
+  </div>
 
-    <!-- ABOUT SECTION -->
-    <div class="container" id="about" style="margin-top:50px;">
-        <h2 style="text-align:center; color:#FFD700; margin-bottom:20px;">Giới Thiệu</h2>
-        <p style="text-align:center; line-height:1.6;">
-            Trang web <strong>888 NOW</strong> cung cấp danh sách các trò chơi hấp dẫn, cập nhật liên tục. 
-            Giao diện đẹp mắt, dễ dàng truy cập trên cả máy tính và điện thoại.
-        </p>
-    </div>
+  <div class="wallet-actions">
+    <div class="wallet-item" onclick="napTien()"><div class="wallet-icon">💳</div>Nạp tiền</div>
+    <div class="wallet-item" onclick="rutTien()"><div class="wallet-icon">💸</div>Rút tiền</div>
+    <div class="wallet-item" onclick="openBonus()"><div class="wallet-icon">🧧</div>Lì xì</div>
+    <div class="wallet-item" onclick="toggleMoreWallet()"><div class="wallet-icon">➕</div>Xem thêm</div>
+  </div>
 
-    <!-- CONTACT SECTION -->
-    <div class="container" id="contact" style="margin-top:50px;">
-        <h2 style="text-align:center; color:#FFD700; margin-bottom:20px;">Liên Hệ</h2>
-        <p style="text-align:center; line-height:1.6;">
-            Hotline: <strong>034.6984.269</strong><br>
-            Email: <strong>maiviethoangofficial@icloud.com</strong>
-        </p>
-    </div>
+  <div class="wallet-more" id="walletMore">
+    <div class="wallet-item"><div class="wallet-icon">⭐</div>VIP</div>
+    <div class="wallet-item"><div class="wallet-icon">📩</div>Hộp thư</div>
+    <div class="wallet-item"><div class="wallet-icon">🔄</div>Hoàn trả</div>
+    <div class="wallet-item"><div class="wallet-icon">📜</div>Lịch sử</div>
+    <div class="wallet-item"><div class="wallet-icon">👑</div>Đại lý</div>
+  </div>
+</div>
 
-    <!-- FOOTER -->
-    <footer>
-        &copy; 2026 888 NOW - Bản quyền thuộc về 888 NOW
-    </footer>
+<div class="games">
+<!-- GAME 1 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongways')"><img src="https://lh3.googleusercontent.com/d/1B0QJ7xyglE8or4Cf7ZkM5bRkP8rI-dgN" alt="Mahjong Ways"></div>
+<!-- GAME 2 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongways2')"><img src="https://lh3.googleusercontent.com/d/1kcroer7oDEoBkX1r4JT4oX3yYFXMPt-y" alt="Mahjong Ways 2"></div>
+<!-- GAME 3 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/treasuresofaztec')"><img src="https://drive.google.com/thumbnail?id=17Yeaf-mcBIaWZi2VNg6nMsdNSSdUR-0-&sz=w1000" alt="Treasures of Aztec"></div>
+<!-- GAME 4 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongwins2')"><img src="https://drive.google.com/thumbnail?id=1U_lNSHEtpsFRx1beq53LUzUqzYi4Nz5J&sz=w1000" alt="Mahjong Wins 2"></div>
+<!-- GAME 5 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/wildbountyshowdown')"><img src="https://drive.google.com/thumbnail?id=10pkvs_IbdqmprzgIhRObUteHKYaRmAXb&sz=w1000" alt="Wild Bounty Showdown"></div>
+<!-- GAME 6 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/luckyneko')"><img src="https://drive.google.com/thumbnail?id=1L44JEYCaDpj_avYPeEok4oyFuNkDmb-Y&sz=w1000" alt="Lucky Neko"></div>
+<!-- GAME 7 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/fortunerabbit')"><img src="https://drive.google.com/thumbnail?id=11upSq5AZD8__-dD8S9tiGJqgrEC068Zc&sz=w1000" alt="Fortune Rabbit"></div>
+<!-- GAME 8 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/fortunetiger')"><img src="https://drive.google.com/thumbnail?id=1j7TU3afS_jd0ZVTKmVrFD_mbgHGomsFk&sz=w1000" alt="Fortune Tiger"></div>
+<!-- GAME 9 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/caishenwins')"><img src="https://drive.google.com/thumbnail?id=13MM0fIMqonGWX0jYKU7hXJWDnxAHW1GQ&sz=w1000" alt="Caishen Wins"></div>
+<!-- GAME 10 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/songkransplash')"><img src="https://drive.google.com/thumbnail?id=1aB3f8qwzzJC0Z-AMpbCO06p5txSm0K-W&sz=w1000" alt="Songkran Splash"></div>
+<!-- GAME 11 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mythicalsand')"><img src="https://drive.google.com/thumbnail?id=1PhnzOLzPvSJTQAL_tl4kt7im9rNI9uha&sz=w1000" alt="Mythical Sand"></div>
+<!-- GAME 12 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/zeusvstyphon')"><img src="https://drive.google.com/thumbnail?id=1BLK3DVo_a8hwDgzO6jomEz9UenLVvtlI&sz=w1000" alt="Zeus vs Typhon"></div>
+<!-- GAME 13 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/gatesofolympus1000')"><img src="https://drive.google.com/thumbnail?id=1hL3OEUrnOaGfMlDRJyl1G2WwXfovPL44&sz=w1000" alt="Gates of Olympus"></div>
+<!-- GAME 14 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongwinsgongxifacai')"><img src="https://drive.google.com/thumbnail?id=1FjM7jh7EJ0q2RP4jc22d8fOtJfDLDJNC&sz=w1000" alt="Mahjong Wins Gong Xi Fa Cai"></div>
+<!-- GAME 15 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/supergolfdrive')"><img src="https://drive.google.com/thumbnail?id=11rBe_tZxJaKE4NAbezeHIkQR9ogpvnB3&sz=w1000" alt="Super Golf Drive"></div>
+<!-- GAME 16 -->
+<div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/knockoutriches')"><img src="https://drive.google.com/thumbnail?id=1Bqxzp2n5qbj5rgvjhc0a1CUbhds1J-d8&sz=w1000" alt="Knockout Riches"></div>
+</div>
 
-    <script>
-        function openGame(url) {
-            window.location.href = url;
-        }
-    </script>
+<div class="game-frame" id="gameFrame">
+<button class="backBtn" onclick="closeGame()">⬅ Trở về</button>
+<iframe id="iframeGame"></iframe>
+</div>
+
+<div class="bottom">
+  <a href="home.html"><span>🏠</span>Trang chủ</a>
+  <a href="nap.html"><span>💳</span>Nạp</a>
+  <a href="khuyenmai.html"><span>🎁</span>Khuyến mãi</a>
+  <a href="cskh.html"><span>🎧</span>CSKH</a>
+  <a href="taikhoan.html"><span>👤</span>Tài khoản</a>
+</div>
+
+<script>
+// KHỞI TẠO NGƯỜI CHƠI
+var username = localStorage.getItem("username")
+if(!username){username = "Khách"+Math.floor(Math.random()*9999); localStorage.setItem("username",username);}
+document.getElementById("username").innerText = username
+// SỐ DƯ BAN ĐẦU
+var balance = localStorage.getItem("balance")
+if(balance==null){balance = 500000; localStorage.setItem("balance",balance);}
+function updateBalance(){document.getElementById("balance").innerText = Number(balance).toLocaleString()+" VNĐ";}
+updateBalance();
+// TAB VÍ XEM THÊM
+function toggleMoreWallet(){var tab=document.getElementById("walletMore"); tab.style.display=(tab.style.display=="grid")?"none":"grid";}
+// NẠP TIỀN
+function napTien(){var money=prompt("Nhập số tiền nạp");if(money){balance=Number(balance)+Number(money); localStorage.setItem("balance",balance); updateBalance(); alert("Nạp thành công");}}
+// RÚT TIỀN
+function rutTien(){var money=prompt("Nhập số tiền rút"); if(money>balance){alert("Không đủ số dư"); return;} balance=Number(balance)-Number(money); localStorage.setItem("balance",balance); updateBalance(); alert("Rút thành công");}
+// LÌ XÌ MỖI NGÀY
+function openBonus(){var today=new Date().toDateString(); var last=localStorage.getItem("bonusDay"); if(last==today){alert("Bạn đã nhận lì xì hôm nay"); return;} var bonus=[2000,5000,10000,20000]; var win=bonus[Math.floor(Math.random()*bonus.length)]; balance=Number(balance)+win; localStorage.setItem("balance",balance); localStorage.setItem("bonusDay",today); updateBalance(); alert("Bạn nhận được "+win+" VNĐ");}
+// GAME
+var gameSession=false, betCost=100000;
+function openGame(url){if(balance<betCost){alert("Không đủ số dư để vào game"); return;} balance=Number(balance)-betCost; localStorage.setItem("balance",balance); updateBalance(); document.getElementById("gameFrame").style.display="block"; document.getElementById("iframeGame").src=url; gameSession=true; sessionStart();}
+function closeGame(){document.getElementById("gameFrame").style.display="none"; document.getElementById("iframeGame").src=""; gameSession=false;}
+function sessionStart(){setTimeout(function(){if(!gameSession) return; var chance=Math.random(); if(chance<=0.6){var win=Math.floor(Math.random()*200000); balance=Number(balance)+win; localStorage.setItem("balance",balance); updateBalance(); alert("Bạn thắng "+win+" VNĐ");} else{alert("Chúc bạn may mắn lần sau");}},10000);}
+function saveHistory(game,result){var history=localStorage.getItem("history"); if(!history){history=[];}else{history=JSON.parse(history);} history.push({game:game,result:result,time:new Date().toLocaleString()}); localStorage.setItem("history",JSON.stringify(history));}
+function checkVip(){var total=localStorage.getItem("tongnap"); if(!total) total=0; var vip="VIP0"; if(total>1000000) vip="VIP1"; if(total>5000000) vip="VIP2"; if(total>20000000) vip="VIP3"; if(total>100000000) vip="VIP4"; return vip;}
+</script>
 
 </body>
 </html>
