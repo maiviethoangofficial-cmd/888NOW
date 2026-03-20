@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>NẠP TIỀN - HPOK OFFICIAL</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+    <style>
+        :root { --pink: #ff4d94; --bg: #0b0b0b; --card: #1a1a1a; --text-gray: #a0a0a0; --gold: #ffca28; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: #fff; padding-bottom: 90px; }
+
+        /* HEADER */
+        header { padding: 15px; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); display: flex; align-items: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
+        header h2 { font-size: 16px; margin: 0; flex: 1; text-align: center; font-weight: 700; }
+        
+        .marquee-box { background: #151515; padding: 10px 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
+        marquee { font-size: 11px; color: #eee; }
+
+        /* TABS */
+        .tabs { display: flex; background: #000; border-bottom: 1px solid #222; }
+        .tab-item { flex: 1; padding: 15px; text-align: center; font-size: 13px; font-weight: 700; color: var(--text-gray); position: relative; }
+        .tab-item.active { color: var(--pink); }
+        .tab-item.active::after { content: ''; position: absolute; bottom: 0; left: 25%; width: 50%; height: 3px; background: var(--pink); border-radius: 10px; }
+
+        /* METHOD GRID */
+        .section-title { padding: 20px 15px 10px; font-size: 12px; color: var(--pink); font-weight: 800; text-transform: uppercase; }
+        #methodGrid { padding: 0 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .m-card { background: var(--card); border-radius: 20px; padding: 22px 10px; display: flex; flex-direction: column; align-items: center; gap: 12px; border: 1.5px solid #252525; transition: 0.2s; position: relative; }
+        .m-card:active { transform: scale(0.95); border-color: var(--pink); }
+        
+        /* SVG ICON WRAPPER */
+        .icon-svg { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .icon-svg svg { width: 100%; height: 100%; }
+        .m-card span { font-size: 13px; font-weight: 700; color: #fff; }
+        
+        /* MAINTENANCE */
+        .m-card.disabled { opacity: 0.3; filter: grayscale(1); pointer-events: none; }
+        .status-tag { position: absolute; top: 8px; right: 8px; background: #ff3333; color: #fff; font-size: 8px; padding: 2px 6px; border-radius: 4px; font-weight: 900; }
+
+        /* PAYMENT FORM */
+        #paymentForm { display: none; padding: 15px; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .bank-card { background: linear-gradient(135deg, #222, #111); border: 1px solid #333; border-radius: 20px; padding: 20px; margin-bottom: 20px; border-left: 4px solid var(--pink); }
+        .bank-card .label { font-size: 11px; color: var(--text-gray); margin-bottom: 5px; }
+        .bank-card .val { font-size: 18px; font-weight: 900; color: #fff; }
+
+        .input-box { background: #1a1a1a; border-radius: 15px; padding: 15px; border: 1px solid #333; margin-bottom: 15px; }
+        .input-box input { background: transparent; border: none; color: var(--pink); font-size: 26px; font-weight: 900; width: 100%; text-align: center; }
+        
+        .p-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px; }
+        .p-btn { background: #252525; border: 1px solid #333; color: #fff; padding: 12px 0; border-radius: 10px; font-size: 12px; font-weight: 700; }
+
+        .ocr-container { border: 2px dashed #333; border-radius: 20px; padding: 25px; text-align: center; background: rgba(255,255,255,0.02); }
+        #billImg { width: 100%; border-radius: 12px; margin-top: 15px; display: none; }
+
+        .btn-confirm { background: var(--pink); color: #fff; width: 100%; padding: 18px; border: none; border-radius: 18px; font-weight: 900; font-size: 16px; margin-top: 20px; box-shadow: 0 10px 20px rgba(255, 77, 148, 0.3); }
+        .btn-exit { background: transparent; color: var(--text-gray); width: 100%; padding: 15px; border: 1px solid #222; border-radius: 18px; margin-top: 15px; }
+
+        #loader { position: fixed; inset: 0; background: #000; z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .spin { width: 40px; height: 40px; border: 4px solid #222; border-top: 4px solid var(--pink); border-radius: 50%; animation: rot 0.8s linear infinite; }
+        @keyframes rot { 100% { transform: rotate(360deg); } }
+
+        .nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: #000; display: flex; padding: 12px 0; border-top: 1px solid #222; }
+        .nav-link { flex: 1; text-decoration: none; color: #555; text-align: center; font-size: 10px; }
+        .nav-link i { font-size: 22px; display: block; margin-bottom: 4px; }
+        .nav-link.active { color: var(--pink); }
+    </style>
+</head>
+<body>
+
+<div id="loader">
+    <div class="spin"></div>
+    <p style="margin-top:20px; font-weight:800; font-size: 12px;">ĐANG KẾT NỐI HỆ THỐNG...</p>
+</div>
+
+<header>
+    <a href="home.html" style="color:#fff; width:40px"><i class="fa-solid fa-chevron-left"></i></a>
+    <h2>NẠP TIỀN AUTO</h2>
+</header>
+
+<div class="marquee-box">
+    <i class="fa-solid fa-circle-info" style="color:var(--gold)"></i>
+    <marquee>Lưu ý: Hệ thống tự động cộng tiền sau 5 phút nếu Bill hợp lệ!</marquee>
+</div>
+
+<div class="tabs">
+    <div class="tab-item active">Nạp Tiền</div>
+    <div class="tab-item">Rút Tiền</div>
+</div>
+
+<div id="gateSelection">
+    <div class="section-title">Phương thức thanh toán</div>
+    <div id="methodGrid">
+        
+        <div class="m-card" onclick="openForm('QR Ngân hàng')">
+            <div class="icon-svg">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 14V6C4 4.89543 4.89543 4 6 4H14" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><path d="M34 4H42C43.1046 4 44 4.89543 44 6V14" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><path d="M44 34V42C44 43.1046 43.1046 44 42 44H34" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><path d="M14 44H6C4.89543 44 4 43.1046 4 42V34" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><rect x="14" y="14" width="20" height="20" rx="2" fill="#ff4d94"/></svg>
+            </div>
+            <span>QR Ngân hàng</span>
+        </div>
+
+        <div class="m-card" onclick="openForm('Momo Pay')">
+            <div class="icon-svg">
+                <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="10" fill="#A50064"/><path d="M12 18H15V32H12V18ZM21 18H24V21C24 23 26 23 26 21V18H29V21C29 26 24 26 24 26C24 26 19 26 19 21V18ZM35 18H38V32H35V18Z" fill="white"/></svg>
+            </div>
+            <span>Momo Pay</span>
+        </div>
+
+        <div class="m-card" onclick="openForm('ZaloPay')">
+            <div class="icon-svg">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#0068FF"/><path d="M14 16H34V32H14V16Z" fill="white"/><path d="M20 20L28 28M28 20L20 28" stroke="#0068FF" stroke-width="3" stroke-linecap="round"/></svg>
+            </div>
+            <span>ZaloPay</span>
+        </div>
+
+        <div class="m-card" onclick="openForm('Thẻ Cào')">
+            <div class="icon-svg">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10C4 8.89543 4.89543 8 6 8H42C43.1046 8 44 8.89543 44 10V38C44 39.1046 43.1046 44 42 44H6C4.89543 44 4 43.1046 4 42V10Z" fill="#ffca28"/><path d="M4 16H44" stroke="#000" stroke-width="4"/><rect x="10" y="28" width="12" height="6" rx="1" fill="#fff"/></svg>
+            </div>
+            <span>Thẻ Cào</span>
+        </div>
+    </div>
+</div>
+
+<div id="paymentForm">
+    <div class="bank-card">
+        <div class="label">Kênh: <b id="gateName" style="color:var(--pink)">...</b></div>
+        <div class="label" style="margin-top:10px">Người nhận / STK:</div>
+        <div class="val" id="stkVal">ĐANG TẢI...</div>
+        <div class="label" style="margin-top:10px">Mã nội dung (Ghi chú):</div>
+        <div style="font-size:18px; font-weight:900; color:#fff" id="billCode">...</div>
+    </div>
+
+    <div class="input-box">
+        <label>Nhập số điểm cần nạp</label>
+        <input type="number" id="amt" placeholder="0" oninput="showVnd()">
+        <p id="vnd" style="font-size:12px; color:var(--text-gray); text-align:center; margin-top:10px">≈ 0 VNĐ</p>
+    </div>
+
+    <div class="p-grid">
+        <button class="p-btn" onclick="fill(200)">200</button>
+        <button class="p-btn" onclick="fill(500)">500</button>
+        <button class="p-btn" onclick="fill(1000)">1,000</button>
+        <button class="p-btn" onclick="fill(5000)">5,000</button>
+    </div>
+
+    <div class="ocr-container">
+        <p style="font-size:11px; color:#aaa">Hệ thống AI sẽ quét Bill và tự cộng tiền sau 5p</p>
+        <button class="p-btn" style="width:140px; background:#444" onclick="document.getElementById('f').click()">TẢI ẢNH BILL</button>
+        <input type="file" id="f" accept="image/*" style="display:none" onchange="ocr(this)">
+        <img id="billImg">
+        <div id="ocrRes" style="font-size:12px; margin-top:12px; font-weight:700"></div>
+    </div>
+
+    <button class="btn-confirm" id="btnSub" onclick="sendReq()" disabled>XÁC NHẬN GỬI</button>
+    <button class="btn-exit" onclick="location.reload()">QUAY LẠI</button>
+</div>
+
+<nav class="nav-bar">
+    <a href="home.html" class="nav-link"><i class="fa-solid fa-house"></i>Trang chủ</a>
+    <a href="naptien.html" class="nav-link active"><i class="fa-solid fa-wallet"></i>Nạp tiền</a>
+    <a href="taikhoan.html" class="nav-link"><i class="fa-solid fa-circle-user"></i>Cá nhân</a>
+</nav>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, set, get, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
+        authDomain: "hpok-d355c.firebaseapp.com",
+        databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "hpok-d355c"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    let selGate = "";
+
+    async function sync() {
+        const snap = await get(ref(db, 'payment_configs'));
+        const cfg = snap.val() || {};
+        document.querySelectorAll('.m-card').forEach(card => {
+            const name = card.querySelector('span').innerText;
+            if(cfg[name] && cfg[name].status === "maintenance") {
+                card.classList.add('disabled');
+                card.innerHTML += `<div class="status-tag">BẢO TRÌ</div>`;
+            }
+        });
+    }
+    sync();
+
+    window.openForm = async (name) => {
+        selGate = name;
+        document.getElementById('gateSelection').style.display = 'none';
+        document.getElementById('paymentForm').style.display = 'block';
+        document.getElementById('gateName').innerText = name;
+        document.getElementById('billCode').innerText = "HPOK" + Math.floor(1000 + Math.random() * 8999);
+        const snap = await get(ref(db, 'payment_configs'));
+        if(snap.exists() && snap.val()[name]) {
+            document.getElementById('stkVal').innerText = snap.val()[name].stk + " - " + snap.val()[name].bankName;
+        }
+    };
+
+    window.fill = (v) => { document.getElementById('amt').value = v; showVnd(); };
+    window.showVnd = () => {
+        const val = document.getElementById('amt').value || 0;
+        document.getElementById('vnd').innerText = `≈ ${(val * 1000).toLocaleString()} VNĐ`;
+    };
+
+    window.ocr = (input) => {
+        const file = input.files[0];
+        const res = document.getElementById('ocrRes');
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('billImg').src = e.target.result;
+                document.getElementById('billImg').style.display = 'block';
+                res.innerText = "⏳ AI ĐANG XÁC THỰC...";
+                Tesseract.recognize(e.target.result, 'vie').then(({ data: { text } }) => {
+                    const low = text.toLowerCase();
+                    if(["thành công", "thanh cong", "đã chuyển"].some(k => low.includes(k))) {
+                        res.innerText = "✅ BILL HỢP LỆ!";
+                        res.style.color = "#44ff44";
+                    } else {
+                        res.innerText = "⚠️ BILL CHƯA RÕ - ADMIN SẼ DUYỆT";
+                        res.style.color = "#ffca28";
+                    }
+                    document.getElementById('btnSub').disabled = false;
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    window.sendReq = async () => {
+        const amount = parseInt(document.getElementById('amt').value) * 1000;
+        const user = localStorage.getItem("username") || "Guest";
+        document.getElementById('loader').style.display = 'flex';
+        try {
+            const rRef = push(ref(db, 'recharge_requests'));
+            const rId = rRef.key;
+            await set(rRef, { username: user, amount: amount, status: "pending", gate: selGate, createdAt: serverTimestamp() });
+            
+            setTimeout(async () => {
+                const s = await get(ref(db, `recharge_requests/${rId}`));
+                if(s.exists() && s.val().status === "pending") {
+                    const uS = await get(ref(db, `users/${user}`));
+                    if(uS.exists()) {
+                        await update(ref(db, `users/${user}`), { balance: (uS.val().balance || 0) + amount });
+                        await update(ref(db, `recharge_requests/${rId}`), { status: "auto_approved" });
+                    }
+                }
+            }, 300000);
+
+            setTimeout(() => { location.href = "home.html"; }, 2000);
+        } catch (e) { document.getElementById('loader').style.display = 'none'; }
+    };
+</script>
+</body>
+</html>
