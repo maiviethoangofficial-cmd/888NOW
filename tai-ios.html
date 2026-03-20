@@ -62,38 +62,11 @@
     </div>
 
     <script>
-        function startInstall() {
-            document.getElementById('initUI').style.display = 'none';
-            document.getElementById('pBox').style.display = 'block';
-            let val = 0;
-            const run = setInterval(() => {
-                val++;
-                document.getElementById('pFill').style.width = val + "%";
-                document.getElementById('pPer').innerText = val + "%";
-                if(val==30) document.getElementById('pMsg').innerText = "ĐANG TẠO CHỨNG CHỈ MAI VIET HOANG...";
-                if(val==70) document.getElementById('pMsg').innerText = "ĐANG KÝ GÓI TIN IPA PRO...";
-                if(val>=100) {
-                    clearInterval(run);
-                    document.getElementById('pMsg').innerText = "HOÀN TẤT GÓI CÀI ĐẶT!";
-                    document.getElementById('pMsg').style.color = "#00ff88";
-                    setTimeout(() => {
-                        window.location.href = "hpok.mobileconfig"; 
-                        document.getElementById('guide').style.display = 'block';
+    ument.getElementById('guide').style.display = 'block';
                     }, 800);
                 }
             }, 35);
         }
-    </script>
-         (function() {
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-                window.location.href = "tai-ios.html";
-            } else if (/android/i.test(ua)) {
-                window.location.href = "tai-android.html";
-            } else {
-                window.location.href = "tai-ios.html"; // Mặc định cho PC
-            }
-        })();
     </script>
 </head>
 <body style="background:#000; display:flex; align-items:center; justify-content:center; height:100vh; color:#fff; font-family:sans-serif;">
