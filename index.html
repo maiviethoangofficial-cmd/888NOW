@@ -219,7 +219,68 @@ header {
     cur = (cur + 1) % 2;
     slides.style.transform = `translateX(-${cur * 100}%)`;
   }, 4000);
-  
+  /* ============================================================
+   PREMIUM TYPEWRITER COPYRIGHT BY HOANG HAI PHONG 
+   ============================================================ */
+
+(function() {
+    const authorName = "MAI VIET HOANG (HPOK SYSTEM)";
+    const contactEmail = "Maiviethoangofficial@icloud.com";
+    const warningMsg = "WARNING: UNATHORIZED COPYING IS PROHIBITED.";
+    
+    function showTypewriterCopyright() {
+        console.clear();
+        
+        // Banner HPOK Nghệ thuật
+        console.log("%c   __    __  .______     ______    __  ___ \n  |  |  |  | |   _  \\   /  __  \\  |  |/  / \n  |  |__|  | |  |_)  | |  |  |  | |  '  /  \n  |   __   | |   ___/  |  |  |  | |    <   \n  |  |  |  | |  |      |  `--'  | |  .  \\  \n  |__|  |__| | _|       \\______/  |__|\\__\\ ", 
+        "color: #ff007f; font-weight: bold; text-shadow: 0 0 8px #ff007f;");
+
+        console.log("%c 🛡️ SYSTEM PROTECTED BY IT HOANG HAI PHONG ", "color: #fff; background: #ff007f; padding: 5px 15px; border-radius: 5px; font-weight: 900; margin-top: 10px;");
+
+        // Hiệu ứng Typewriter chạy ngầm
+        let i = 0;
+        let j = 0;
+        let k = 0;
+        let displayStr = "";
+        let emailStr = "";
+        let warnStr = "";
+
+        const typeInterval = setInterval(() => {
+            if (i < authorName.length) {
+                displayStr += authorName.charAt(i);
+                i++;
+            } else if (j < contactEmail.length) {
+                emailStr += contactEmail.charAt(j);
+                j++;
+            } else if (k < warningMsg.length) {
+                warnStr += warningMsg.charAt(k);
+                k++;
+            } else {
+                clearInterval(typeInterval);
+                console.log("%c© 2026 Hoàng Hải Phòng. All Rights Reserved.", "color: #444; font-size: 10px;");
+            }
+
+            // Cập nhật dòng chữ đang gõ vào Console
+            console.clear();
+            console.log("%c   __    __  .______     ______    __  ___ \n  |  |  |  | |   _  \\   /  __  \\  |  |/  / \n  |  |__|  | |  |_)  | |  |  |  | |  '  /  \n  |   __   | |   ___/  |  |  |  | |    <   \n  |  |  |  | |  |      |  `--'  | |  .  \\  \n  |__|  |__| | _|       \\______/  |__|\\__\\ ", "color: #ff007f; font-weight: bold;");
+            console.log("%c 🛡️ SYSTEM PROTECTED ", "color: #fff; background: #ff007f; padding: 5px 15px; border-radius: 5px; font-weight: 900;");
+            
+            console.log(`%c👤 TÁC GIẢ: %c${displayStr}_`, "color: #ffd700; font-weight: bold;", "color: #fff; background: #222; padding: 2px 5px;");
+            if (displayStr === authorName) {
+                console.log(`%c📧 LIÊN HỆ: %c${emailStr}_`, "color: #00d2ff; font-weight: bold;", "color: #fff;");
+            }
+            if (emailStr === contactEmail) {
+                console.log(`%c⚠️ THÔNG BÁO: %c${warnStr}`, "color: #ff0000; font-weight: bold;", "color: #888;");
+            }
+        }, 50); // Tốc độ gõ 50ms mỗi chữ
+    }
+
+    // Kích hoạt khi mở trang
+    showTypewriterCopyright();
+
+    // Tự động chạy lại sau mỗi 10 giây để khẳng định bản quyền
+    setInterval(showTypewriterCopyright, 10000);
+})();
 </script>
 
 </body>
