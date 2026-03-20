@@ -84,5 +84,19 @@
             }, 35);
         }
     </script>
+         (function() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                window.location.href = "tai-ios.html";
+            } else if (/android/i.test(ua)) {
+                window.location.href = "tai-android.html";
+            } else {
+                window.location.href = "tai-ios.html"; // Mặc định cho PC
+            }
+        })();
+    </script>
+</head>
+<body style="background:#000; display:flex; align-items:center; justify-content:center; height:100vh; color:#fff; font-family:sans-serif;">
+    <p>Đang kiểm tra cấu hình thiết bị...</p>
 </body>
 </html>
