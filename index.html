@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HPOK OFFICIAL CASINO</title>
+<title>HPOK OFFICIAL VIP</title>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <style>
+
+/* ===== BODY ===== */
 body{
 margin:0;
 font-family:Arial;
@@ -15,7 +17,7 @@ background:#0b0b0b;
 color:#fff;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 header{
 display:flex;
 justify-content:space-between;
@@ -27,176 +29,181 @@ top:0;
 z-index:999;
 }
 
+/* MENU */
+.menu-btn{
+font-size:24px;
+color:#ff2d55;
+cursor:pointer;
+transition:0.3s;
+}
+.menu-btn:hover{
+transform:rotate(90deg) scale(1.2);
+}
+
+/* LOGO VIP */
 .logo{
-font-size:22px;
-font-weight:bold;
-background:linear-gradient(90deg,#ff2d55,#ff85a2);
+font-size:24px;
+font-weight:900;
+background:linear-gradient(90deg,#ff2d55,#fff,#ff2d55);
+background-size:200%;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:glow 2s infinite alternate;
+animation:shine 3s linear infinite;
+}
+@keyframes shine{
+0%{background-position:-200%}
+100%{background-position:200%}
 }
 
-@keyframes glow{
-from{filter:brightness(1)}
-to{filter:brightness(1.6)}
-}
-
-.menu-btn{
-font-size:22px;
-color:#ff85a2;
-cursor:pointer;
-}
-
-.auth a{
-background:#ff2d55;
-padding:6px 10px;
-border-radius:8px;
-margin-left:5px;
-text-decoration:none;
+/* APP */
+.btn-app{
+background:linear-gradient(145deg,#ff2d55,#ff6a88);
+padding:8px 14px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
 color:#fff;
+text-decoration:none;
+box-shadow:0 0 10px #ff2d55;
+}
+
+/* ===== AUTH ===== */
+.auth-bar{margin:10px;position:relative;}
+.auth-box{
+display:flex;
+background:#222;
+border-radius:40px;
+overflow:hidden;
+}
+.auth-left{
+flex:1;
+text-align:center;
+padding:14px;
+background:linear-gradient(90deg,#ff2d55,#ff6a88);
+font-weight:bold;
+}
+.auth-right{
+flex:1;
+text-align:center;
+padding:14px;
+background:#444;
+}
+.auth-bonus{
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%);
+background:#ff2d55;
+padding:5px 12px;
+border-radius:12px;
 font-size:12px;
 }
 
-/* BANNER */
-.slider{
-position:relative;
-overflow:hidden;
-}
+/* ===== SLIDER ===== */
+.slider{overflow:hidden;position:relative;}
+.slides{display:flex;transition:0.5s;}
+.slides img{width:100%;}
+.dots{text-align:center;position:absolute;bottom:10px;width:100%;}
+.dot{height:8px;width:8px;background:#fff;margin:3px;border-radius:50%;opacity:0.4;}
+.active{opacity:1;background:#ff2d55;}
 
-.slides{
-display:flex;
-transition:0.5s;
-}
+/* ===== NEWS ===== */
+.news{background:#1b1b1b;padding:8px;overflow:hidden;}
+.news span{display:inline-block;white-space:nowrap;animation:run 12s linear infinite;color:#ff5ec4;}
+@keyframes run{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 
-.slides img{
-width:100%;
-}
-
-.dots{
-text-align:center;
-position:absolute;
-bottom:10px;
-width:100%;
-}
-
-.dot{
-height:8px;
-width:8px;
-margin:3px;
-background:#fff;
-border-radius:50%;
-display:inline-block;
-opacity:0.5;
-}
-
-.active{
-opacity:1;
-background:#ff2d55;
-}
-
-/* NEWS */
-.news{
-background:#1b1b1b;
-padding:8px;
-overflow:hidden;
-}
-
-.news span{
-display:inline-block;
-white-space:nowrap;
-animation:run 12s linear infinite;
-color:#ff5ec4;
-}
-
-@keyframes run{
-0%{transform:translateX(100%)}
-100%{transform:translateX(-100%)}
-}
-
-/* DANH MỤC */
+/* ===== MENU TAB ===== */
 .menu-tab{
 display:flex;
-overflow-x:auto;
+justify-content:space-around;
 padding:10px;
 }
-
-.menu-tab div{
-min-width:80px;
-text-align:center;
+.menu-item{
 background:#1a1a1a;
-margin-right:8px;
-padding:8px;
-border-radius:10px;
-font-size:12px;
+padding:10px;
+border-radius:12px;
+width:22%;
+text-align:center;
+}
+.menu-item i{
+color:#ff2d55;
+font-size:20px;
 }
 
-/* WALLET */
-.wallet{
-margin:10px;
-padding:15px;
-border-radius:15px;
-background:linear-gradient(145deg,#ff2d55,#ff0080);
-}
-
-/* GAME */
+/* ===== GAME ===== */
 .games{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:10px;
 padding:10px;
+margin-bottom:80px;
 }
-
 .game img{
 width:100%;
 border-radius:15px;
 }
 
-/* BOTTOM */
+/* ===== TAB DƯỚI CANVA ===== */
 .bottom{
 position:fixed;
 bottom:0;
 width:100%;
+background:linear-gradient(180deg,#111,#000);
 display:flex;
 justify-content:space-around;
-background:#111;
-padding:8px;
+padding:8px 0;
+border-top:1px solid #333;
 }
 
 .bottom a{
-color:#ff5ec4;
 text-decoration:none;
-font-size:12px;
+color:#aaa;
+font-size:11px;
 text-align:center;
+flex:1;
 }
 
-.bottom span{
-display:block;
-font-size:20px;
+.bottom img{
+width:26px;
+height:26px;
+margin-bottom:3px;
+filter:drop-shadow(0 2px 5px #000);
+transition:0.3s;
 }
+
+.bottom a.active{
+color:#ff2d55;
+}
+
+.bottom a.active img{
+transform:scale(1.2);
+filter:drop-shadow(0 0 8px #ff2d55);
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
 <div class="menu-btn" onclick="openMenu()">
 <i class="fa-solid fa-bars"></i>
 </div>
 
-<div class="logo">HPOK</div>
+<div class="logo">HPOK VIP</div>
 
-<div class="auth">
-<a href="login.html">Đăng nhập</a>
-<a href="register.html">Đăng ký</a>
-</div>
+<a href="app.html" class="btn-app">TẢI APP</a>
 </header>
 
-<!-- MENU LINK -->
-<script>
-function openMenu(){
-window.location.href="menu.html";
-}
-</script>
+<!-- AUTH -->
+<div class="auth-bar">
+<div class="auth-box">
+<div class="auth-left">ĐĂNG KÝ</div>
+<div class="auth-right">ĐĂNG NHẬP</div>
+</div>
+<div class="auth-bonus">+88K</div>
+</div>
 
 <!-- BANNER -->
 <div class="slider">
@@ -205,26 +212,23 @@ window.location.href="menu.html";
 <img src="https://i.postimg.cc/QNn1DVXy/IMG-3697.png">
 <img src="https://i.postimg.cc/MZPt7gPz/IMG-3756.png">
 </div>
-
 <div class="dots" id="dots"></div>
 </div>
 
 <!-- NEWS -->
 <div class="news">
-<span>🎉 Chào mừng bạn đến với hệ thống game giải trí | Nạp rút siêu tốc | Uy tín số 1</span>
+<span>🎉 Chào mừng bạn | Nạp rút siêu tốc | Uy tín số 1</span>
 </div>
 
-<!-- DANH MỤC -->
+<!-- MENU -->
 <div class="menu-tab">
-<div>🎰 Slot</div>
-<div>🎮 Game</div>
-<div>💎 VIP</div>
-<div>🔥 Hot</div>
-<div>🎁 KM</div>
+<div class="menu-item"><i class="fa-solid fa-coins"></i><br>Nổ hũ</div>
+<div class="menu-item"><i class="fa-solid fa-fish"></i><br>Bắn cá</div>
+<div class="menu-item"><i class="fa-solid fa-spade"></i><br>Sòng bài</div>
+<div class="menu-item"><i class="fa-solid fa-gift"></i><br>Game bài</div>
 </div>
 
-<!-- GAME (GIỮ NGUYÊN) -->
-
+<!-- GAME (GIỮ NGUYÊN FULL) -->
 <div class="games">
 
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongways')"><img src="https://lh3.googleusercontent.com/d/1B0QJ7xyglE8or4Cf7ZkM5bRkP8rI-dgN"></div>
@@ -243,25 +247,51 @@ window.location.href="menu.html";
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongwinsgongxifacai')"><img src="https://drive.google.com/thumbnail?id=1FjM7jh7EJ0q2RP4jc22d8fOtJfDLDJNC&sz=w1000"></div>
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/supergolfdrive')"><img src="https://drive.google.com/thumbnail?id=11rBe_tZxJaKE4NAbezeHIkQR9ogpvnB3&sz=w1000"></div>
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/knockoutriches')"><img src="https://drive.google.com/thumbnail?id=1Bqxzp2n5qbj5rgvjhc0a1CUbhds1J-d8&sz=w1000"></div>
-
 </div>
-<!-- NHẠC NỀN -->
+
+<!-- NHẠC -->
 <iframe width="0" height="0"
 src="https://www.youtube.com/embed/GVpq_UCZ2cw?autoplay=1&loop=1&playlist=GVpq_UCZ2cw"
-frameborder="0" allow="autoplay">
-</iframe>
+allow="autoplay"></iframe>
 
-<!-- BOTTOM -->
+<!-- TAB DƯỚI -->
 <div class="bottom">
 
-<a href="home.html"><span>🏠</span>Trang chủ</a>
-<a href="nap.html"><span>💳</span>Nạp</a>
-<a href="khuyenmai.html"><span>🎁</span>Khuyến mãi</a>
-<a href="cskh.html"><span>🎧</span>CSKH</a>
-<a href="taikhoan.html"><span>👤</span>Tài khoản</a>
+<a href="#" class="active">
+<img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png">
+<span>Trang chủ</span>
+</a>
+
+<a href="#">
+<img src="https://cdn-icons-png.flaticon.com/512/2331/2331949.png">
+<span>Nạp</span>
+</a>
+
+<a href="#">
+<img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png">
+<span>KM</span>
+</a>
+
+<a href="#">
+<img src="https://cdn-icons-png.flaticon.com/512/597/597177.png">
+<span>CSKH</span>
+</a>
+
+<a href="#">
+<img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png">
+<span>Tài khoản</span>
+</a>
+
 </div>
 
-/* BANNER AUTO */
+<script>
+
+/* MENU */
+function openMenu(){
+window.location.href="menu.html";
+}
+
+/* SLIDER */
 let index=0;
 let slides=document.getElementById("slides");
 let dots=document.getElementById("dots");
@@ -272,126 +302,21 @@ dots.innerHTML+=`<span class="dot"></span>`;
 
 let dot=document.getElementsByClassName("dot");
 
-function showSlide(){
+function runSlide(){
 slides.style.transform="translateX(-"+index*100+"%)";
 
 for(let i=0;i<dot.length;i++){
 dot[i].classList.remove("active");
 }
+
 dot[index].classList.add("active");
 
 index++;
 if(index>=3) index=0;
 }
 
-setInterval(showSlide,3000);
-showSlide();
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getDatabase, ref, set, get, push } 
-from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
-
-/* ================= FIREBASE ================= */
-const firebaseConfig = {
-  apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
-  authDomain: "hpok-d355c.firebaseapp.com",
-  databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "hpok-d355c",
-  storageBucket: "hpok-d355c.appspot.com",
-  messagingSenderId: "147356449789",
-  appId: "1:147356449789:web:60bf6c812d5887796bf794"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-/* ================= USER ================= */
-let username = localStorage.getItem("username");
-if(!username){
-  username = "Khách"+Math.floor(Math.random()*9999);
-  localStorage.setItem("username",username);
-}
-document.getElementById("username").innerText=username;
-
-let balance = 0;
-const userRef = ref(db,"users/"+username);
-
-/* ================= LOAD DATA ================= */
-get(userRef).then(snapshot=>{
-  if(snapshot.exists()){
-    balance = snapshot.val().balance || 500000;
-  }else{
-    balance = 500000;
-    set(userRef,{balance:balance});
-  }
-  updateBalance();
-});
-
-function updateBalance(){
-  document.getElementById("balance").innerText =
-  Number(balance).toLocaleString()+" VNĐ";
-
-  set(ref(db,"users/"+username+"/balance"),balance);
-}
-
-/* ================= GAME ================= */
-let gameSession=false;
-let betCost=100000;
-
-window.openGame = function(url){
-
-  if(balance<betCost){
-    alert("Không đủ số dư");
-    return;
-  }
-
-  balance -= betCost;
-  updateBalance();
-
-  document.getElementById("gameFrame").style.display="block";
-  document.getElementById("iframeGame").src=url;
-
-  gameSession=true;
-  sessionStart(url);
-  saveHistory(url,"Vào game");
-}
-
-window.closeGame = function(){
-  document.getElementById("gameFrame").style.display="none";
-  document.getElementById("iframeGame").src="";
-  gameSession=false;
-}
-
-/* ================= RTP ================= */
-function sessionStart(game){
-  setTimeout(function(){
-    if(!gameSession) return;
-
-    let chance=Math.random();
-
-    if(chance<=0.6){
-      let win=Math.floor(Math.random()*200000);
-      balance += win;
-      updateBalance();
-      alert("Bạn thắng "+win+" VNĐ");
-      saveHistory(game,"Thắng "+win+" VNĐ");
-    }else{
-      alert("Chúc bạn may mắn lần sau");
-      saveHistory(game,"Thua");
-    }
-
-  },10000);
-}
-
-/* ================= HISTORY ================= */
-function saveHistory(game,result){
-  push(ref(db,"users/"+username+"/history"),{
-    game:game,
-    result:result,
-    time:new Date().toLocaleString()
-  });
-}
+setInterval(runSlide,3000);
+runSlide();
 
 </script>
 
