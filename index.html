@@ -3,127 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HPOK OFFICIAL</title>
+<title>HPOK OFFICIAL CASINO</title>
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Arial;background:#0b0b0b;color:#fff}
+body{
+margin:0;
+font-family:Arial;
+background:#0b0b0b;
+color:#fff;
+}
 
 /* HEADER */
 header{
-display:flex;justify-content:space-between;align-items:center;
-padding:10px;background:#111;position:sticky;top:0;z-index:999;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px;
+background:#000;
+position:sticky;
+top:0;
+z-index:999;
 }
 
-.menu a{color:#ff7b00;font-size:22px}
-.logo{font-size:20px;font-weight:bold}
-.download{
-background:#ff3c00;padding:6px 12px;border-radius:20px;
-font-size:12px;text-decoration:none;color:#fff;
-box-shadow:0 0 10px #ff3c00;
+.logo{
+font-size:22px;
+font-weight:bold;
+background:linear-gradient(90deg,#ff2d55,#ff85a2);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:glow 2s infinite alternate;
 }
 
-/* SLIDER */
+@keyframes glow{
+from{filter:brightness(1)}
+to{filter:brightness(1.6)}
+}
+
+.menu-btn{
+font-size:22px;
+color:#ff85a2;
+cursor:pointer;
+}
+
+.auth a{
+background:#ff2d55;
+padding:6px 10px;
+border-radius:8px;
+margin-left:5px;
+text-decoration:none;
+color:#fff;
+font-size:12px;
+}
+
+/* BANNER */
 .slider{
-position:relative;overflow:hidden;
+position:relative;
+overflow:hidden;
 }
+
 .slides{
-display:flex;transition:0.5s;
+display:flex;
+transition:0.5s;
 }
-.slides img{width:100%}
+
+.slides img{
+width:100%;
+}
 
 .dots{
-position:absolute;bottom:10px;width:100%;text-align:center;
+text-align:center;
+position:absolute;
+bottom:10px;
+width:100%;
 }
-.dots span{
-display:inline-block;width:8px;height:8px;border-radius:50%;
-background:#fff;margin:0 3px;opacity:.4;cursor:pointer;
-}
-.dots .active{opacity:1;background:#ff3c00}
 
-/* LOGIN BAR */
-.auth-bar{
-margin:10px;background:#222;border-radius:30px;
-display:flex;overflow:hidden;
+.dot{
+height:8px;
+width:8px;
+margin:3px;
+background:#fff;
+border-radius:50%;
+display:inline-block;
+opacity:0.5;
 }
-.auth-bar a{
-flex:1;text-align:center;padding:12px;
-font-weight:bold;text-decoration:none;
-transition:0.2s;
-}
-.auth-bar a:active{transform:scale(0.95)}
-.register{background:#ff3c00}
-.login{background:#333}
 
-/* MARQUEE */
-.marquee{
-background:#1a1a1a;padding:6px;overflow:hidden;
+.active{
+opacity:1;
+background:#ff2d55;
+}
+
+/* NEWS */
+.news{
+background:#1b1b1b;
+padding:8px;
+overflow:hidden;
+}
+
+.news span{
+display:inline-block;
 white-space:nowrap;
+animation:run 12s linear infinite;
+color:#ff5ec4;
 }
-.marquee span{
-display:inline-block;animation:run 10s linear infinite;color:#ffb400;
-}
+
 @keyframes run{
 0%{transform:translateX(100%)}
 100%{transform:translateX(-100%)}
 }
 
+/* DANH MỤC */
+.menu-tab{
+display:flex;
+overflow-x:auto;
+padding:10px;
+}
+
+.menu-tab div{
+min-width:80px;
+text-align:center;
+background:#1a1a1a;
+margin-right:8px;
+padding:8px;
+border-radius:10px;
+font-size:12px;
+}
+
 /* WALLET */
 .wallet{
 margin:10px;
-background:linear-gradient(45deg,#ff3c00,#ff0080);
-padding:15px;border-radius:12px;
-display:flex;justify-content:space-between;
+padding:15px;
+border-radius:15px;
+background:linear-gradient(145deg,#ff2d55,#ff0080);
 }
 
 /* GAME */
 .games{
-display:grid;grid-template-columns:repeat(2,1fr);
-gap:10px;padding:10px;margin-bottom:70px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+padding:10px;
 }
-.game img{
-width:100%;border-radius:12px;
-transition:0.2s;
-}
-.game:active img{transform:scale(0.95)}
 
-/* FRAME */
-.game-frame{
-display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-background:#000;z-index:999;
+.game img{
+width:100%;
+border-radius:15px;
 }
-.backBtn{
-position:absolute;top:10px;left:10px;
-background:#ff3c00;color:#fff;border:none;padding:6px;
-}
-.game-frame iframe{width:100%;height:100%}
 
 /* BOTTOM */
 .bottom{
-position:fixed;bottom:0;width:100%;
-background:#111;display:flex;justify-content:space-around;
-padding:6px 0;border-top:1px solid #333;
+position:fixed;
+bottom:0;
+width:100%;
+display:flex;
+justify-content:space-around;
+background:#111;
+padding:8px;
 }
-.bottom a{
-color:#aaa;text-decoration:none;font-size:11px;text-align:center;
-}
-.bottom a.active{color:#ff3c00}
-.bottom i{display:block;font-size:20px}
 
-/* POPUP */
-.popup{
-position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.8);
-display:flex;justify-content:center;align-items:center;
-z-index:1000;
-}
-.popup-box{
-background:#222;padding:20px;border-radius:12px;
+.bottom a{
+color:#ff5ec4;
+text-decoration:none;
+font-size:12px;
 text-align:center;
 }
-.popup button{
-margin-top:10px;padding:8px 15px;
-background:#ff3c00;border:none;color:#fff;
+
+.bottom span{
+display:block;
+font-size:20px;
 }
 </style>
 </head>
@@ -131,16 +179,26 @@ background:#ff3c00;border:none;color:#fff;
 <body>
 
 <header>
-<div class="menu">
-<a href="menu.html"><i class="fa-solid fa-bars"></i></a>
+<div class="menu-btn" onclick="openMenu()">
+<i class="fa-solid fa-bars"></i>
 </div>
 
 <div class="logo">HPOK</div>
 
-<a href="download.html" class="download">Tải app</a>
+<div class="auth">
+<a href="login.html">Đăng nhập</a>
+<a href="register.html">Đăng ký</a>
+</div>
 </header>
 
-<!-- SLIDER -->
+<!-- MENU LINK -->
+<script>
+function openMenu(){
+window.location.href="menu.html";
+}
+</script>
+
+<!-- BANNER -->
 <div class="slider">
 <div class="slides" id="slides">
 <img src="https://i.postimg.cc/TY72yWyk/IMG-3695.png">
@@ -148,26 +206,21 @@ background:#ff3c00;border:none;color:#fff;
 <img src="https://i.postimg.cc/MZPt7gPz/IMG-3756.png">
 </div>
 
-<div class="dots">
-<span onclick="goSlide(0)"></span>
-<span onclick="goSlide(1)"></span>
-<span onclick="goSlide(2)"></span>
-</div>
+<div class="dots" id="dots"></div>
 </div>
 
-<!-- LOGIN -->
-<div class="auth-bar">
-<a href="register.html" class="register">ĐĂNG KÝ</a>
-<a href="login.html" class="login">ĐĂNG NHẬP</a>
+<!-- NEWS -->
+<div class="news">
+<span>🎉 Chào mừng bạn đến với hệ thống game giải trí | Nạp rút siêu tốc | Uy tín số 1</span>
 </div>
 
-<div class="marquee">
-<span>🔥 Nạp rút siêu tốc - Khuyến mãi cực lớn 🔥</span>
-</div>
-
-<div class="wallet">
-<div id="username">Người chơi</div>
-<div id="balance">0 VNĐ</div>
+<!-- DANH MỤC -->
+<div class="menu-tab">
+<div>🎰 Slot</div>
+<div>🎮 Game</div>
+<div>💎 VIP</div>
+<div>🔥 Hot</div>
+<div>🎁 KM</div>
 </div>
 
 <!-- GAME (GIỮ NGUYÊN) -->
@@ -192,70 +245,154 @@ background:#ff3c00;border:none;color:#fff;
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/knockoutriches')"><img src="https://drive.google.com/thumbnail?id=1Bqxzp2n5qbj5rgvjhc0a1CUbhds1J-d8&sz=w1000"></div>
 
 </div>
-
-<!-- FRAME -->
-<div class="game-frame" id="gameFrame">
-<button class="backBtn" onclick="closeGame()">⬅</button>
-<iframe id="iframeGame"></iframe>
-</div>
+<!-- NHẠC NỀN -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/GVpq_UCZ2cw?autoplay=1&loop=1&playlist=GVpq_UCZ2cw"
+frameborder="0" allow="autoplay">
+</iframe>
 
 <!-- BOTTOM -->
 <div class="bottom">
-<a href="login.html" class="active"><i class="fa fa-home"></i>Trang chủ</a>
-<a href="nap.html"><i class="fa fa-wallet"></i>Nạp</a>
-<a href="kh.html"><i class="fa fa-gift"></i>KM</a>
-<a href="cskh.html"><i class="fa fa-headset"></i>CSKH</a>
-<a href="toi.html"><i class="fa fa-user"></i>Tôi</a>
+
+<a href="home.html"><span>🏠</span>Trang chủ</a>
+<a href="nap.html"><span>💳</span>Nạp</a>
+<a href="khuyenmai.html"><span>🎁</span>Khuyến mãi</a>
+<a href="cskh.html"><span>🎧</span>CSKH</a>
+<a href="taikhoan.html"><span>👤</span>Tài khoản</a>
 </div>
 
-<!-- POPUP -->
-<div class="popup" id="popup">
-<div class="popup-box">
-<h3>🎁 Khuyến mãi</h3>
-<p>Nạp 100k tặng 50k</p>
-<button onclick="closePopup()">Đóng</button>
-</div>
-</div>
-
-<script>
+/* BANNER AUTO */
 let index=0;
 let slides=document.getElementById("slides");
-let dots=document.querySelectorAll(".dots span");
+let dots=document.getElementById("dots");
 
-function showSlide(i){
-index=i;
-slides.style.transform="translateX(-"+i*100+"%)";
-dots.forEach(d=>d.classList.remove("active"));
-dots[i].classList.add("active");
+for(let i=0;i<3;i++){
+dots.innerHTML+=`<span class="dot"></span>`;
 }
 
-function goSlide(i){showSlide(i)}
+let dot=document.getElementsByClassName("dot");
 
-setInterval(()=>{
-index=(index+1)%3;
-showSlide(index);
-},3000);
+function showSlide(){
+slides.style.transform="translateX(-"+index*100+"%)";
 
-showSlide(0);
+for(let i=0;i<dot.length;i++){
+dot[i].classList.remove("active");
+}
+dot[index].classList.add("active");
 
-/* USER */
-let username=localStorage.getItem("username")||"Khách";
+index++;
+if(index>=3) index=0;
+}
+
+setInterval(showSlide,3000);
+showSlide();
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getDatabase, ref, set, get, push } 
+from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+/* ================= FIREBASE ================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
+  authDomain: "hpok-d355c.firebaseapp.com",
+  databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "hpok-d355c",
+  storageBucket: "hpok-d355c.appspot.com",
+  messagingSenderId: "147356449789",
+  appId: "1:147356449789:web:60bf6c812d5887796bf794"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* ================= USER ================= */
+let username = localStorage.getItem("username");
+if(!username){
+  username = "Khách"+Math.floor(Math.random()*9999);
+  localStorage.setItem("username",username);
+}
 document.getElementById("username").innerText=username;
-document.getElementById("balance").innerText="500000 VNĐ";
 
-/* GAME */
-function openGame(url){
-document.getElementById("gameFrame").style.display="block";
-document.getElementById("iframeGame").src=url;
-}
-function closeGame(){
-document.getElementById("gameFrame").style.display="none";
+let balance = 0;
+const userRef = ref(db,"users/"+username);
+
+/* ================= LOAD DATA ================= */
+get(userRef).then(snapshot=>{
+  if(snapshot.exists()){
+    balance = snapshot.val().balance || 500000;
+  }else{
+    balance = 500000;
+    set(userRef,{balance:balance});
+  }
+  updateBalance();
+});
+
+function updateBalance(){
+  document.getElementById("balance").innerText =
+  Number(balance).toLocaleString()+" VNĐ";
+
+  set(ref(db,"users/"+username+"/balance"),balance);
 }
 
-/* POPUP */
-function closePopup(){
-document.getElementById("popup").style.display="none";
+/* ================= GAME ================= */
+let gameSession=false;
+let betCost=100000;
+
+window.openGame = function(url){
+
+  if(balance<betCost){
+    alert("Không đủ số dư");
+    return;
+  }
+
+  balance -= betCost;
+  updateBalance();
+
+  document.getElementById("gameFrame").style.display="block";
+  document.getElementById("iframeGame").src=url;
+
+  gameSession=true;
+  sessionStart(url);
+  saveHistory(url,"Vào game");
 }
+
+window.closeGame = function(){
+  document.getElementById("gameFrame").style.display="none";
+  document.getElementById("iframeGame").src="";
+  gameSession=false;
+}
+
+/* ================= RTP ================= */
+function sessionStart(game){
+  setTimeout(function(){
+    if(!gameSession) return;
+
+    let chance=Math.random();
+
+    if(chance<=0.6){
+      let win=Math.floor(Math.random()*200000);
+      balance += win;
+      updateBalance();
+      alert("Bạn thắng "+win+" VNĐ");
+      saveHistory(game,"Thắng "+win+" VNĐ");
+    }else{
+      alert("Chúc bạn may mắn lần sau");
+      saveHistory(game,"Thua");
+    }
+
+  },10000);
+}
+
+/* ================= HISTORY ================= */
+function saveHistory(game,result){
+  push(ref(db,"users/"+username+"/history"),{
+    game:game,
+    result:result,
+    time:new Date().toLocaleString()
+  });
+}
+
 </script>
 
 </body>
