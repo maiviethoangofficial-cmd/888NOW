@@ -3,46 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <title>HPOK - ĐĂNG KÝ VIP</title>
+    <title>HPOK - HỆ THỐNG ĐĂNG KÝ TÀI KHOẢN</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
     <style>
-        :root {
-            --pink: #ff2d55;
+        :root { 
+            --pink: #ff2d55; 
             --gold: linear-gradient(135deg, #ffe1a8 0%, #d4af37 50%, #b8860b 100%);
             --glass: rgba(255, 255, 255, 0.08);
+            --bg-dark: #050505;
         }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #050505; color: #fff; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 420px; min-height: 100vh; background: radial-gradient(circle at 50% 10%, #301018 0%, #050505 100%); padding: 25px; box-sizing: border-box; }
-        
-        .slogan { text-align: center; color: #ff9eb5; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; text-shadow: 0 0 10px rgba(255, 45, 85, 0.5); }
-        
-        .auth-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; padding: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
-        
-        /* Tab Switch */
-        .tabs { display: flex; background: rgba(0,0,0,0.4); border-radius: 15px; padding: 5px; margin-bottom: 25px; border: 1px solid #333; }
-        .tab { flex: 1; text-align: center; padding: 12px; border-radius: 12px; font-weight: 700; color: #777; transition: 0.3s; text-decoration: none; font-size: 14px; }
-        .tab.active { background: var(--gold); color: #000; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
 
-        /* Input Styles */
-        .input-group { margin-bottom: 18px; }
-        .input-group label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; padding-left: 5px; }
-        .input-wrap { background: rgba(0,0,0,0.5); border: 1px solid #444; border-radius: 12px; display: flex; align-items: center; padding: 0 15px; transition: 0.3s; }
-        .input-wrap:focus-within { border-color: var(--pink); box-shadow: 0 0 12px rgba(255, 45, 85, 0.3); }
-        .input-wrap i { color: var(--pink); font-size: 16px; width: 25px; }
-        .input-wrap input { background: none; border: none; padding: 14px 5px; color: #fff; width: 100%; outline: none; font-size: 15px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg-dark); color: #fff; overflow-x: hidden; }
+        
+        /* Hiệu ứng Nền Aura */
+        .aura-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% -20%, #631a2b 0%, #050505 100%); }
+        .moving-light { position: absolute; width: 300px; height: 300px; background: var(--pink); border-radius: 50%; filter: blur(120px); opacity: 0.15; animation: orbit 15s linear infinite; }
+        @keyframes orbit { 0% { top: 10%; left: 10%; } 25% { top: 50%; left: 80%; } 50% { top: 80%; left: 20%; } 100% { top: 10%; left: 10%; } }
 
-        /* Nút bấm xác nhận */
-        .btn-submit { width: 100%; padding: 16px; border-radius: 15px; border: none; background: var(--gold); color: #000; font-weight: 900; font-size: 16px; text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 25px rgba(184, 134, 11, 0.5); transition: 0.2s; margin-top: 10px; }
-        .btn-submit:active { transform: scale(0.96); box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3); }
+        .container { width: 100%; max-width: 450px; margin: 0 auto; min-height: 100vh; padding: 20px; display: flex; flex-direction: column; position: relative; }
+        
+        /* Header Logo */
+        .header { text-align: center; padding: 30px 0 20px; }
+        .logo-main { font-size: 65px; font-weight: 900; background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -4px; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); margin: 0; }
+        .tagline { font-size: 11px; letter-spacing: 5px; color: #ff9eb5; font-weight: 800; text-transform: uppercase; margin-top: 5px; }
 
-        .agreement { font-size: 12px; color: #666; margin: 15px 0; display: flex; align-items: center; gap: 8px; justify-content: center; }
-        .agreement input { accent-color: var(--pink); }
+        /* Banner Ưu Đãi */
+        .promo-banner { background: linear-gradient(90deg, transparent, rgba(255,45,85,0.1), transparent); border-top: 1px solid rgba(255,45,85,0.2); border-bottom: 1px solid rgba(255,45,85,0.2); padding: 10px; margin: 15px 0; text-align: center; font-size: 12px; color: #ffd700; font-weight: 600; }
+
+        /* Auth Card */
+        .auth-card { background: var(--glass); backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 30px; box-shadow: 0 40px 100px rgba(0,0,0,0.9); position: relative; overflow: hidden; }
+        .tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 30px; border: 1px solid #333; }
+        .tab { flex: 1; text-align: center; padding: 14px; border-radius: 15px; font-weight: 800; color: #777; text-decoration: none; transition: 0.4s; font-size: 14px; }
+        .tab.active { background: var(--gold); color: #000; box-shadow: 0 10px 20px rgba(184, 134, 11, 0.4); }
+
+        /* Form Elements */
+        .input-group { margin-bottom: 20px; }
+        .label-text { display: block; font-size: 11px; color: #888; margin-left: 15px; margin-bottom: 8px; font-weight: 700; text-transform: uppercase; }
+        .input-wrap { background: rgba(0,0,0,0.6); border: 1.5px solid #222; border-radius: 20px; display: flex; align-items: center; padding: 0 20px; transition: 0.3s; }
+        .input-wrap:focus-within { border-color: var(--pink); background: rgba(0,0,0,0.8); }
+        .input-wrap i:first-child { color: var(--pink); font-size: 20px; width: 30px; }
+        .input-wrap input { background: none; border: none; padding: 18px 10px; color: #fff; width: 100%; outline: none; font-size: 16px; }
+        
+        /* Password Strength */
+        .strength-meter { height: 4px; background: #222; margin-top: 8px; border-radius: 2px; overflow: hidden; display: none; }
+        .strength-bar { height: 100%; width: 0%; transition: 0.5s; }
+
+        /* Button */
+        .btn-reg { width: 100%; padding: 20px; border-radius: 22px; border: none; background: var(--gold); color: #000; font-weight: 900; font-size: 17px; text-transform: uppercase; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 15px 35px rgba(184,134,11,0.4); display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-reg:active { transform: scale(0.95); }
+        .btn-reg:disabled { filter: grayscale(1); opacity: 0.5; }
+
+        /* Terms */
+        .terms-wrap { display: flex; align-items: flex-start; gap: 10px; margin: 20px 0; font-size: 12px; color: #999; line-height: 1.4; }
+        .terms-wrap input { margin-top: 3px; accent-color: var(--pink); width: 18px; height: 18px; }
+
+        /* Footer */
+        .footer-info { margin-top: auto; padding: 40px 0 20px; text-align: center; border-top: 1px solid #111; }
+        .partner-logos { display: flex; justify-content: center; gap: 20px; opacity: 0.3; filter: grayscale(1); margin-bottom: 20px; }
+        .partner-logos i { font-size: 25px; }
+        .copyright { font-size: 10px; color: #444; letter-spacing: 1px; }
+
+        /* Loader */
+        .loader-spin { width: 22px; height: 22px; border: 3px solid rgba(0,0,0,0.1); border-top: 3px solid #000; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
+
+    <div class="aura-bg"><div class="moving-light"></div></div>
+
     <div class="container">
-        <div class="slogan">Nơi Cảm Xúc Không Giới Hạn</div>
-        
+        <div class="header">
+            <h1 class="logo-main">HPOK</h1>
+            <div class="tagline">Hải Phòng Online King</div>
+        </div>
+
+        <div class="promo-banner">
+            <i class="fa-solid fa-crown"></i> CHÀO MỪNG TÂN THỦ - TẶNG NGAY 88.000đ KHI ĐĂNG KÝ
+        </div>
+
         <div class="auth-card">
             <div class="tabs">
                 <a href="register.html" class="tab active">ĐĂNG KÝ</a>
@@ -50,63 +91,126 @@
             </div>
 
             <div class="input-group">
-                <label>Tên đăng nhập</label>
-                <div class="input-wrap"><i class="fa-solid fa-user-shield"></i><input type="text" id="regUser" placeholder="Tên tài khoản..."></div>
-            </div>
-
-            <div class="input-group">
-                <label>Mật khẩu</label>
-                <div class="input-wrap"><i class="fa-solid fa-key"></i><input type="password" id="regPass" placeholder="Mật khẩu bảo mật..."></div>
-            </div>
-
-            <div class="input-group">
-                <label>Số điện thoại</label>
+                <span class="label-text">Tên tài khoản</span>
                 <div class="input-wrap">
-                    <span style="color:var(--pink); font-weight:bold; margin-right:8px;">+84</span>
-                    <input type="number" id="regPhone" placeholder="Nhận KM 88K...">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <input type="text" id="regUser" placeholder="Ví dụ: hpok2026" autocomplete="off">
                 </div>
             </div>
 
-            <div class="agreement">
-                <input type="checkbox" checked> <span>Tôi đồng ý với điều khoản HPOK</span>
+            <div class="input-group">
+                <span class="label-text">Mật khẩu bảo mật</span>
+                <div class="input-wrap">
+                    <i class="fa-solid fa-lock-hashtag"></i>
+                    <input type="password" id="regPass" placeholder="Tối thiểu 6 ký tự">
+                    <i class="fa-solid fa-eye" id="eyeIcon" style="color:#444; cursor:pointer;" onclick="togglePass()"></i>
+                </div>
+                <div class="strength-meter" id="meter"><div class="strength-bar" id="bar"></div></div>
             </div>
 
-            <button class="btn-submit" onclick="doRegister()">Xác Nhận Đăng Ký</button>
+            <div class="input-group">
+                <span class="label-text">Số điện thoại chính chủ</span>
+                <div class="input-wrap">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <input type="number" id="regPhone" placeholder="Dùng để rút tiền">
+                </div>
+            </div>
+
+            <div class="terms-wrap">
+                <input type="checkbox" id="agree" checked>
+                <label for="agree">Tôi đã trên 18 tuổi và đồng ý với các Điều khoản bảo mật & Chính sách người dùng của HPOK.</label>
+            </div>
+
+            <button class="btn-reg" id="btnSubmit" onclick="runRegister()">
+                <div class="loader-spin" id="loader"></div>
+                <span>Xác Nhận Đăng Ký</span>
+            </button>
+        </div>
+
+        <div class="footer-info">
+            <div class="partner-logos">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-brands fa-bitcoin"></i>
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <p style="color:#888; font-size:11px; margin-bottom:10px;">ĐỐI TÁC CHIẾN LƯỢC CỦA CÁC NHÀ CÁI HÀNG ĐẦU CHÂU Á</p>
+            <div class="copyright">LICENSE BY PAGCOR & HPOK GROUP © 2026</div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
-            authDomain: "hpok-d355c.firebaseapp.com",
-            databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "hpok-d355c"
-        };
-
+        const firebaseConfig = { apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE", authDomain: "hpok-d355c.firebaseapp.com", databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "hpok-d355c" };
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        window.doRegister = function() {
-            const user = document.getElementById('regUser').value;
+        // Hiển thị pass
+        window.togglePass = () => {
+            const input = document.getElementById('regPass');
+            const icon = document.getElementById('eyeIcon');
+            if(input.type === 'password') {
+                input.type = 'text'; icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                input.type = 'password'; icon.className = 'fa-solid fa-eye';
+            }
+        };
+
+        // Kiểm tra độ mạnh mật khẩu
+        document.getElementById('regPass').addEventListener('input', (e) => {
+            const val = e.target.value;
+            const meter = document.getElementById('meter');
+            const bar = document.getElementById('bar');
+            meter.style.display = val ? 'block' : 'none';
+            let score = 0;
+            if(val.length > 6) score += 40;
+            if(/[A-Z]/.test(val)) score += 30;
+            if(/[0-9]/.test(val)) score += 30;
+            bar.style.width = score + "%";
+            bar.style.background = score < 50 ? "#ff2d55" : (score < 80 ? "#ffd700" : "#00ff88");
+        });
+
+        window.runRegister = async () => {
+            const user = document.getElementById('regUser').value.trim();
             const pass = document.getElementById('regPass').value;
             const phone = document.getElementById('regPhone').value;
+            const agree = document.getElementById('agree').checked;
+            const btn = document.getElementById('btnSubmit');
+            const loader = document.getElementById('loader');
 
-            if(!user || !pass || !phone) return alert("Vui lòng nhập đầy đủ!");
+            if(!user || !pass || !phone) return showToast("Vui lòng điền đầy đủ thông tin!");
+            if(!/^[a-z0-9]+$/.test(user)) return showToast("Tên chỉ gồm chữ thường và số!");
+            if(!agree) return showToast("Vui lòng đồng ý điều khoản!");
 
-            set(ref(db, 'users/' + user), {
-                password: pass,
-                phone: phone,
-                balance: 50000, // Tặng vốn khởi nghiệp
-                createdAt: new Date().toISOString()
-            }).then(() => {
-                localStorage.setItem("username", user);
-                localStorage.setItem("isLoggedIn", "true");
-                alert("Đăng ký thành công! Chào mừng bạn đến với HPOK.");
-                window.location.href = "index.html";
-            });
+            btn.disabled = true; loader.style.display = "block";
+
+            try {
+                const snap = await get(ref(db, 'users/' + user));
+                if(snap.exists()) {
+                    showToast("Tên tài khoản này đã được sử dụng!");
+                } else {
+                    await set(ref(db, 'users/' + user), {
+                        password: pass,
+                        phone: phone,
+                        balance: 88000,
+                        level: "Newbie",
+                        status: "Active",
+                        ip: "127.0.0.1",
+                        created: new Date().toISOString()
+                    });
+                    showToast("Đăng ký thành công! Đang chuyển hướng...", "success");
+                    localStorage.setItem("username", user);
+                    setTimeout(() => window.location.href = "index.html", 2000);
+                }
+            } catch (err) { showToast("Lỗi máy chủ: " + err.message); }
+            btn.disabled = false; loader.style.display = "none";
+        };
+
+        function showToast(msg, type = "error") {
+            Toastify({ text: msg, gravity: "top", position: "center", style: { background: type === "success" ? "#00ff88" : "#ff2d55", color: "#000", fontWeight: "bold" } }).showToast();
         }
     </script>
 </body>
