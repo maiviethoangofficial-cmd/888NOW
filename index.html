@@ -17,64 +17,109 @@ color:#fff;
 
 /* HEADER */
 header{
+background:#000;
+padding:10px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:10px;
-background:#000;
-border-bottom:1px solid #333;
+position:sticky;
+top:0;
+z-index:999;
 }
 
 .logo{
 font-size:22px;
-font-weight:900;
-background:linear-gradient(#ff9bb5,#ff2d55);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+font-weight:bold;
+color:#ff2d55;
 }
 
-.auth-btns a{
-padding:6px 12px;
-margin-left:5px;
-border-radius:20px;
-font-size:12px;
-text-decoration:none;
+/* MENU */
+.menu-box{
+position:absolute;
+top:55px;
+left:10px;
+background:#111;
+border-radius:10px;
+display:none;
+flex-direction:column;
+padding:10px;
+z-index:999;
+}
+
+.menu-box a{
 color:#fff;
-background:linear-gradient(#ff85a2,#ff2d55);
+padding:10px;
+text-decoration:none;
+border-bottom:1px solid #333;
+}
+
+.menu-box a:hover{
+background:#ff2d55;
+}
+
+/* AUTH */
+.auth-btns a{
+background:#ff2d55;
+padding:6px 10px;
+border-radius:6px;
+color:#fff;
+text-decoration:none;
+margin-left:5px;
+font-size:12px;
 }
 
 /* SLIDER */
 .slider{
 overflow:hidden;
 }
-.slider-track{
-display:flex;
-animation:slide 12s infinite;
-}
-.slide{min-width:100%;}
-.slide img{width:100%;}
 
-@keyframes slide{
-0%{transform:translateX(0)}
-33%{transform:translateX(-100%)}
-66%{transform:translateX(-200%)}
-100%{transform:translateX(0)}
+.slides{
+display:flex;
+transition:0.5s;
+}
+
+.slide{
+min-width:100%;
+}
+
+.slide img{
+width:100%;
+}
+
+/* DOT */
+.dots{
+text-align:center;
+margin:5px;
+}
+
+.dot{
+height:8px;
+width:8px;
+background:#555;
+display:inline-block;
+border-radius:50%;
+margin:3px;
+}
+
+.active{
+background:#ff2d55;
 }
 
 /* NEWS */
 .news{
-background:#111;
+background:#1b1b1b;
 overflow:hidden;
 white-space:nowrap;
 }
+
 .news span{
 display:inline-block;
-padding-left:100%;
-animation:run 10s linear infinite;
-color:#ff5ec4;
+padding:10px;
+animation:run 12s linear infinite;
 }
+
 @keyframes run{
-0%{transform:translateX(0)}
+0%{transform:translateX(100%)}
 100%{transform:translateX(-100%)}
 }
 
@@ -82,25 +127,22 @@ color:#ff5ec4;
 .wallet{
 margin:10px;
 padding:15px;
-border-radius:15px;
+border-radius:12px;
 background:linear-gradient(#ff3ca6,#ff0080);
-box-shadow:0 0 20px #ff0080 inset;
 }
 
 .balance{
-font-size:26px;
+font-size:22px;
 font-weight:bold;
 }
 
-/* ACTION */
 .wallet-actions{
 display:flex;
-justify-content:space-between;
+justify-content:space-around;
 margin-top:10px;
 }
 
 .wallet-item{
-flex:1;
 text-align:center;
 font-size:12px;
 color:#fff;
@@ -111,40 +153,21 @@ text-decoration:none;
 font-size:20px;
 }
 
-/* MORE */
-.wallet-more{
-margin-top:10px;
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:5px;
-}
-
 /* GAME */
 .games{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:10px;
-padding:10px;
+gap:8px;
+padding:8px;
 margin-bottom:60px;
-}
-
-.game{
-border-radius:15px;
-overflow:hidden;
-cursor:pointer;
-transition:.3s;
-}
-
-.game:hover{
-transform:scale(1.05);
-box-shadow:0 0 15px #ff2d55;
 }
 
 .game img{
 width:100%;
+border-radius:12px;
 }
 
-/* IFRAME */
+/* FRAME */
 .game-frame{
 display:none;
 position:fixed;
@@ -156,25 +179,13 @@ background:#000;
 z-index:999;
 }
 
-.game-frame iframe{
+iframe{
 width:100%;
 height:100%;
 border:none;
 }
 
-/* BACK */
-.backBtn{
-position:absolute;
-top:10px;
-left:10px;
-background:#ff0080;
-border:none;
-padding:8px 12px;
-color:#fff;
-border-radius:8px;
-}
-
-/* MENU */
+/* BOTTOM */
 .bottom{
 position:fixed;
 bottom:0;
@@ -182,11 +193,11 @@ width:100%;
 display:flex;
 justify-content:space-around;
 background:#111;
-padding:5px;
+padding:8px;
 }
 
 .bottom a{
-color:#ff5ec4;
+color:#ff2d55;
 text-decoration:none;
 font-size:12px;
 text-align:center;
@@ -197,49 +208,61 @@ text-align:center;
 <body>
 
 <header>
+
+<i class="fa fa-bars" onclick="toggleMenu()" style="color:#ff85a2;font-size:20px;"></i>
+
 <div class="logo">HPOK</div>
-<div class="auth-btns">
+
+<div id="authBox" class="auth-btns">
 <a href="login.html">Đăng nhập</a>
 <a href="register.html">Đăng ký</a>
 </div>
+
+<div id="menu" class="menu-box">
+<a href="nap.html">Nạp tiền</a>
+<a href="rut.html">Rút tiền</a>
+<a href="lichsu.html">Lịch sử</a>
+<a href="vip.html">VIP</a>
+<a href="cskh.html">CSKH</a>
+</div>
+
 </header>
 
 <!-- SLIDER -->
 <div class="slider">
-<div class="slider-track">
+<div class="slides" id="slides">
+
 <div class="slide"><img src="https://i.postimg.cc/TY72yWyk/IMG-3695.png"></div>
 <div class="slide"><img src="https://i.postimg.cc/QNn1DVXy/IMG-3697.png"></div>
 <div class="slide"><img src="https://i.postimg.cc/MZPt7gPz/IMG-3756.png"></div>
+
 </div>
+</div>
+
+<div class="dots">
+<span class="dot active"></span>
+<span class="dot"></span>
+<span class="dot"></span>
 </div>
 
 <!-- NEWS -->
 <div class="news">
-<span>🎉 Nạp lần đầu nhận 100% | RTP cao | Chơi là thắng 🔥</span>
+<span>🎉 Chào mừng bạn đến với HPOK CASINO - Trải nghiệm game đổi thưởng cực chất</span>
 </div>
 
 <!-- WALLET -->
 <div class="wallet">
 <div id="username">Người chơi</div>
-<div class="balance" id="balance">0</div>
+<div class="balance" id="balance">0 VNĐ</div>
 
 <div class="wallet-actions">
-<a href="nap.html" class="wallet-item"><div class="wallet-icon">💳</div>Nạp tiền</a>
-<a href="rut.html" class="wallet-item"><div class="wallet-icon">💸</div>Rút tiền</a>
-<a href="bonus.html" class="wallet-item"><div class="wallet-icon">🧧</div>Lì xì</a>
-<a href="xemthem.html" class="wallet-item"><div class="wallet-icon">➕</div>Xem thêm</a>
-</div>
-
-<div class="wallet-more">
-<a href="vip.html" class="wallet-item"><div class="wallet-icon">⭐</div>VIP</a>
-<a href="mail.html" class="wallet-item"><div class="wallet-icon">📩</div>Hộp thư</a>
-<a href="hoantra.html" class="wallet-item"><div class="wallet-icon">🔄</div>Hoàn trả</a>
-<a href="lichsu.html" class="wallet-item"><div class="wallet-icon">📜</div>Lịch sử</a>
-<a href="daily.html" class="wallet-item"><div class="wallet-icon">👑</div>Đại lý</a>
+<a href="nap.html" class="wallet-item"><div class="wallet-icon">💳</div>Nạp</a>
+<a href="rut.html" class="wallet-item"><div class="wallet-icon">💸</div>Rút</a>
+<a href="bonus.html" class="wallet-item"><div class="wallet-icon">🧧</div>Bonus</a>
 </div>
 </div>
 
-<!-- GAME 16 -->
+<!-- GAME FULL 16 -->
 <div class="games">
 
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongways')"><img src="https://lh3.googleusercontent.com/d/1B0QJ7xyglE8or4Cf7ZkM5bRkP8rI-dgN"></div>
@@ -277,70 +300,99 @@ text-align:center;
 </div>
 
 <!-- FRAME -->
-<div class="game-frame" id="gameFrame">
-<button class="backBtn" onclick="closeGame()">⬅</button>
-<iframe id="iframeGame"></iframe>
+<div class="game-frame" id="frame">
+<button onclick="closeGame()">⬅</button>
+<iframe id="game"></iframe>
 </div>
 
-<!-- MENU -->
+<!-- BOTTOM -->
 <div class="bottom">
-<a href="#"><span>🏠</span><br>Home</a>
-<a href="nap.html"><span>💳</span><br>Nạp</a>
-<a href="#"><span>🎁</span><br>KM</a>
-<a href="#"><span>🎧</span><br>CSKH</a>
-<a href="#"><span>👤</span><br>Tài khoản</a>
+<a href="#">🏠 Trang chủ</a>
+<a href="nap.html">💳 Nạp</a>
+<a href="khuyenmai.html">🎁 KM</a>
+<a href="taikhoan.html">👤 Tôi</a>
 </div>
 
-<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getDatabase, ref, set, get, push } 
+import { getDatabase, ref, set, get } 
 from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
 const app = initializeApp({
-apiKey:"AIzaSyBD27MY...",
 databaseURL:"https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
 
-const db = getDatabase(app);
+const db=getDatabase(app);
 
-let username = localStorage.getItem("username") || "Khách";
-document.getElementById("username").innerText=username;
+let username=localStorage.getItem("username");
 
-let balance=500000;
+if(username){
+document.getElementById("authBox").innerHTML=
+username+' <a onclick="logout()">Thoát</a>';
+}
 
+let balance=0;
+
+if(username){
 get(ref(db,"users/"+username)).then(s=>{
-if(s.exists()) balance=s.val().balance;
-updateBalance();
+balance=s.val()?.balance||500000;
+update();
 });
+}
 
-function updateBalance(){
-document.getElementById("balance").innerText=
-Number(balance).toLocaleString()+" VNĐ";
+function update(){
+document.getElementById("username").innerText=username||"Chưa login";
+document.getElementById("balance").innerText=balance.toLocaleString()+" VNĐ";
+if(username){
 set(ref(db,"users/"+username+"/balance"),balance);
+}
 }
 
 window.openGame=function(url){
+if(!username){location.href="login.html";return;}
 if(balance<100000){alert("Không đủ tiền");return;}
-balance-=100000;
-updateBalance();
 
-document.getElementById("gameFrame").style.display="block";
-document.getElementById("iframeGame").src=url;
+balance-=100000;
+update();
+
+document.getElementById("frame").style.display="block";
+document.getElementById("game").src=url;
 
 setTimeout(()=>{
 if(Math.random()<0.6){
 let win=Math.floor(Math.random()*200000);
 balance+=win;
-updateBalance();
 alert("Thắng "+win);
 }
+update();
 },8000);
 }
 
 window.closeGame=function(){
-document.getElementById("gameFrame").style.display="none";
+document.getElementById("frame").style.display="none";
 }
+
+window.toggleMenu=function(){
+let m=document.getElementById("menu");
+m.style.display=(m.style.display=="flex")?"none":"flex";
+}
+
+window.logout=function(){
+localStorage.removeItem("username");
+location.reload();
+}
+
+/* SLIDER */
+let i=0;
+setInterval(()=>{
+i=(i+1)%3;
+document.getElementById("slides").style.transform=
+"translateX(-"+i*100+"%)";
+
+document.querySelectorAll(".dot").forEach(d=>d.classList.remove("active"));
+document.querySelectorAll(".dot")[i].classList.add("active");
+
+},3000);
 </script>
 
 </body>
