@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>HPOK - ĐĂNG KÝ VIP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff2d55;
+            --gold: linear-gradient(135deg, #ffe1a8 0%, #d4af37 50%, #b8860b 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #050505; color: #fff; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 420px; min-height: 100vh; background: radial-gradient(circle at 50% 10%, #301018 0%, #050505 100%); padding: 25px; box-sizing: border-box; }
+        
+        .slogan { text-align: center; color: #ff9eb5; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; text-shadow: 0 0 10px rgba(255, 45, 85, 0.5); }
+        
+        .auth-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; padding: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+        
+        /* Tab Switch */
+        .tabs { display: flex; background: rgba(0,0,0,0.4); border-radius: 15px; padding: 5px; margin-bottom: 25px; border: 1px solid #333; }
+        .tab { flex: 1; text-align: center; padding: 12px; border-radius: 12px; font-weight: 700; color: #777; transition: 0.3s; text-decoration: none; font-size: 14px; }
+        .tab.active { background: var(--gold); color: #000; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+
+        /* Input Styles */
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; padding-left: 5px; }
+        .input-wrap { background: rgba(0,0,0,0.5); border: 1px solid #444; border-radius: 12px; display: flex; align-items: center; padding: 0 15px; transition: 0.3s; }
+        .input-wrap:focus-within { border-color: var(--pink); box-shadow: 0 0 12px rgba(255, 45, 85, 0.3); }
+        .input-wrap i { color: var(--pink); font-size: 16px; width: 25px; }
+        .input-wrap input { background: none; border: none; padding: 14px 5px; color: #fff; width: 100%; outline: none; font-size: 15px; }
+
+        /* Nút bấm xác nhận */
+        .btn-submit { width: 100%; padding: 16px; border-radius: 15px; border: none; background: var(--gold); color: #000; font-weight: 900; font-size: 16px; text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 25px rgba(184, 134, 11, 0.5); transition: 0.2s; margin-top: 10px; }
+        .btn-submit:active { transform: scale(0.96); box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3); }
+
+        .agreement { font-size: 12px; color: #666; margin: 15px 0; display: flex; align-items: center; gap: 8px; justify-content: center; }
+        .agreement input { accent-color: var(--pink); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slogan">Nơi Cảm Xúc Không Giới Hạn</div>
+        
+        <div class="auth-card">
+            <div class="tabs">
+                <a href="register.html" class="tab active">ĐĂNG KÝ</a>
+                <a href="login.html" class="tab">ĐĂNG NHẬP</a>
+            </div>
+
+            <div class="input-group">
+                <label>Tên đăng nhập</label>
+                <div class="input-wrap"><i class="fa-solid fa-user-shield"></i><input type="text" id="regUser" placeholder="Tên tài khoản..."></div>
+            </div>
+
+            <div class="input-group">
+                <label>Mật khẩu</label>
+                <div class="input-wrap"><i class="fa-solid fa-key"></i><input type="password" id="regPass" placeholder="Mật khẩu bảo mật..."></div>
+            </div>
+
+            <div class="input-group">
+                <label>Số điện thoại</label>
+                <div class="input-wrap">
+                    <span style="color:var(--pink); font-weight:bold; margin-right:8px;">+84</span>
+                    <input type="number" id="regPhone" placeholder="Nhận KM 88K...">
+                </div>
+            </div>
+
+            <div class="agreement">
+                <input type="checkbox" checked> <span>Tôi đồng ý với điều khoản HPOK</span>
+            </div>
+
+            <button class="btn-submit" onclick="doRegister()">Xác Nhận Đăng Ký</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
+            authDomain: "hpok-d355c.firebaseapp.com",
+            databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "hpok-d355c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.doRegister = function() {
+            const user = document.getElementById('regUser').value;
+            const pass = document.getElementById('regPass').value;
+            const phone = document.getElementById('regPhone').value;
+
+            if(!user || !pass || !phone) return alert("Vui lòng nhập đầy đủ!");
+
+            set(ref(db, 'users/' + user), {
+                password: pass,
+                phone: phone,
+                balance: 50000, // Tặng vốn khởi nghiệp
+                createdAt: new Date().toISOString()
+            }).then(() => {
+                localStorage.setItem("username", user);
+                localStorage.setItem("isLoggedIn", "true");
+                alert("Đăng ký thành công! Chào mừng bạn đến với HPOK.");
+                window.location.href = "index.html";
+            });
+        }
+    </script>
+</body>
+</html>
