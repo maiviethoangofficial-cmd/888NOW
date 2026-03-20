@@ -8,57 +8,72 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Arial;background:#0b0b0b;color:#fff}
+body{
+margin:0;
+font-family:Arial;
+background:#0b0b0b;
+color:#fff;
+}
 
 /* HEADER */
 header{
-background:#000;
-padding:10px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+padding:10px;
+background:#000;
 border-bottom:1px solid #333;
 }
+
 .logo{
-font-size:24px;
-font-weight:bold;
+font-size:22px;
+font-weight:900;
 background:linear-gradient(#ff9bb5,#ff2d55);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-.auth a{
-padding:6px 14px;
+
+.auth-btns a{
+padding:6px 12px;
+margin-left:5px;
 border-radius:20px;
 font-size:12px;
-font-weight:bold;
 text-decoration:none;
 color:#fff;
-margin-left:5px;
+background:linear-gradient(#ff85a2,#ff2d55);
 }
-.login{background:#333}
-.register{background:linear-gradient(#ff85a2,#ff2d55)}
 
-/* BANNER */
-.banner{overflow:hidden}
-.banner-track{display:flex;animation:slide 12s linear infinite}
-.banner img{width:100%}
-@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-200%)}}
-
-/* NEWS RUN */
-.news{
-width:100%;
+/* SLIDER */
+.slider{
 overflow:hidden;
-background:#1b1b1b;
-padding:8px 0;
+}
+.slider-track{
+display:flex;
+animation:slide 12s infinite;
+}
+.slide{min-width:100%;}
+.slide img{width:100%;}
+
+@keyframes slide{
+0%{transform:translateX(0)}
+33%{transform:translateX(-100%)}
+66%{transform:translateX(-200%)}
+100%{transform:translateX(0)}
+}
+
+/* NEWS */
+.news{
+background:#111;
+overflow:hidden;
+white-space:nowrap;
 }
 .news span{
 display:inline-block;
-white-space:nowrap;
 padding-left:100%;
-animation:chaychu 15s linear infinite;
+animation:run 10s linear infinite;
 color:#ff5ec4;
 }
-@keyframes chaychu{
+@keyframes run{
 0%{transform:translateX(0)}
 100%{transform:translateX(-100%)}
 }
@@ -68,34 +83,40 @@ color:#ff5ec4;
 margin:10px;
 padding:15px;
 border-radius:15px;
-background:linear-gradient(145deg,#ff3ca6,#ff0080);
+background:linear-gradient(#ff3ca6,#ff0080);
+box-shadow:0 0 20px #ff0080 inset;
 }
-.wallet-top{display:flex;justify-content:space-between}
-.balance-number{font-size:24px;font-weight:bold}
+
+.balance{
+font-size:26px;
+font-weight:bold;
+}
 
 /* ACTION */
 .wallet-actions{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
+display:flex;
+justify-content:space-between;
 margin-top:10px;
 }
+
 .wallet-item{
-background:#111;
-padding:8px;
-border-radius:10px;
+flex:1;
 text-align:center;
+font-size:12px;
 color:#fff;
 text-decoration:none;
 }
-.wallet-item:hover{background:#ff2d55}
+
+.wallet-icon{
+font-size:20px;
+}
 
 /* MORE */
 .wallet-more{
+margin-top:10px;
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:6px;
-margin-top:10px;
+gap:5px;
 }
 
 /* GAME */
@@ -104,26 +125,51 @@ display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:10px;
 padding:10px;
+margin-bottom:60px;
 }
-.game img{width:100%;border-radius:12px}
 
-/* FRAME */
+.game{
+border-radius:15px;
+overflow:hidden;
+cursor:pointer;
+transition:.3s;
+}
+
+.game:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #ff2d55;
+}
+
+.game img{
+width:100%;
+}
+
+/* IFRAME */
 .game-frame{
 display:none;
 position:fixed;
-top:0;left:0;
-width:100%;height:100%;
+top:0;
+left:0;
+width:100%;
+height:100%;
 background:#000;
 z-index:999;
 }
-iframe{width:100%;height:100%;border:none}
+
+.game-frame iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+/* BACK */
 .backBtn{
 position:absolute;
 top:10px;
 left:10px;
-background:#ff2d55;
+background:#ff0080;
 border:none;
-padding:8px;
+padding:8px 12px;
 color:#fff;
 border-radius:8px;
 }
@@ -132,28 +178,18 @@ border-radius:8px;
 .bottom{
 position:fixed;
 bottom:0;
-left:0;
-right:0;
-height:60px;
-background:#0f0f0f;
+width:100%;
 display:flex;
 justify-content:space-around;
-align-items:center;
-border-top:1px solid #222;
-z-index:999;
+background:#111;
+padding:5px;
 }
+
 .bottom a{
-color:#aaa;
+color:#ff5ec4;
 text-decoration:none;
-font-size:11px;
+font-size:12px;
 text-align:center;
-}
-.bottom a span{
-display:block;
-font-size:20px;
-}
-.bottom a:hover{
-color:#ff2d55;
 }
 </style>
 </head>
@@ -162,73 +198,82 @@ color:#ff2d55;
 
 <header>
 <div class="logo">HPOK</div>
-<div class="auth">
-<a href="login.html" class="login">Đăng nhập</a>
-<a href="register.html" class="register">Đăng ký</a>
+<div class="auth-btns">
+<a href="login.html">Đăng nhập</a>
+<a href="register.html">Đăng ký</a>
 </div>
 </header>
 
-<!-- BANNER -->
-<div class="banner">
-<div class="banner-track">
-<img src="https://i.postimg.cc/TY72yWyk/IMG-3695.png">
-<img src="https://i.postimg.cc/QNn1DVXy/IMG-3697.png">
-<img src="https://i.postimg.cc/MZPt7gPz/IMG-3756.png">
+<!-- SLIDER -->
+<div class="slider">
+<div class="slider-track">
+<div class="slide"><img src="https://i.postimg.cc/TY72yWyk/IMG-3695.png"></div>
+<div class="slide"><img src="https://i.postimg.cc/QNn1DVXy/IMG-3697.png"></div>
+<div class="slide"><img src="https://i.postimg.cc/MZPt7gPz/IMG-3756.png"></div>
 </div>
 </div>
 
-<!-- THÔNG BÁO -->
+<!-- NEWS -->
 <div class="news">
-<span>🔥 Nạp 100K tặng 20K - RTP 60% - Hoàn trả mỗi ngày - Chơi ngay nhận thưởng lớn 🔥</span>
+<span>🎉 Nạp lần đầu nhận 100% | RTP cao | Chơi là thắng 🔥</span>
 </div>
 
 <!-- WALLET -->
 <div class="wallet">
-<div class="wallet-top">
-<div>
 <div id="username">Người chơi</div>
-<div>ID: 000001</div>
-</div>
-<div>
-<div>Số dư</div>
-<div class="balance-number" id="balance">0</div>
-</div>
-</div>
+<div class="balance" id="balance">0</div>
 
 <div class="wallet-actions">
-<a href="nap.html" class="wallet-item">💳 Nạp tiền</a>
-<a href="rut.html" class="wallet-item">💸 Rút tiền</a>
-<a href="bonus.html" class="wallet-item">🧧 Lì xì</a>
-<a href="xemthem.html" class="wallet-item">➕ Xem thêm</a>
+<a href="nap.html" class="wallet-item"><div class="wallet-icon">💳</div>Nạp tiền</a>
+<a href="rut.html" class="wallet-item"><div class="wallet-icon">💸</div>Rút tiền</a>
+<a href="bonus.html" class="wallet-item"><div class="wallet-icon">🧧</div>Lì xì</a>
+<a href="xemthem.html" class="wallet-item"><div class="wallet-icon">➕</div>Xem thêm</a>
 </div>
 
 <div class="wallet-more">
-<a href="vip.html" class="wallet-item">⭐ VIP</a>
-<a href="mail.html" class="wallet-item">📩 Mail</a>
-<a href="hoantra.html" class="wallet-item">🔄 Hoàn</a>
-<a href="lichsu.html" class="wallet-item">📜 Lịch sử</a>
-<a href="daily.html" class="wallet-item">👑 Đại lý</a>
+<a href="vip.html" class="wallet-item"><div class="wallet-icon">⭐</div>VIP</a>
+<a href="mail.html" class="wallet-item"><div class="wallet-icon">📩</div>Hộp thư</a>
+<a href="hoantra.html" class="wallet-item"><div class="wallet-icon">🔄</div>Hoàn trả</a>
+<a href="lichsu.html" class="wallet-item"><div class="wallet-icon">📜</div>Lịch sử</a>
+<a href="daily.html" class="wallet-item"><div class="wallet-icon">👑</div>Đại lý</a>
 </div>
 </div>
 
 <!-- GAME 16 -->
 <div class="games">
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongways')"><img src="https://lh3.googleusercontent.com/d/1B0QJ7xyglE8or4Cf7ZkM5bRkP8rI-dgN"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongways2')"><img src="https://lh3.googleusercontent.com/d/1kcroer7oDEoBkX1r4JT4oX3yYFXMPt-y"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/treasuresofaztec')"><img src="https://drive.google.com/thumbnail?id=17Yeaf-mcBIaWZi2VNg6nMsdNSSdUR-0-&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongwins2')"><img src="https://drive.google.com/thumbnail?id=1U_lNSHEtpsFRx1beq53LUzUqzYi4Nz5J&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/wildbountyshowdown')"><img src="https://drive.google.com/thumbnail?id=10pkvs_IbdqmprzgIhRObUteHKYaRmAXb&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/luckyneko')"><img src="https://drive.google.com/thumbnail?id=1L44JEYCaDpj_avYPeEok4oyFuNkDmb-Y&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/fortunerabbit')"><img src="https://drive.google.com/thumbnail?id=11upSq5AZD8__-dD8S9tiGJqgrEC068Zc&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/fortunetiger')"><img src="https://drive.google.com/thumbnail?id=1j7TU3afS_jd0ZVTKmVrFD_mbgHGomsFk&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/caishenwins')"><img src="https://drive.google.com/thumbnail?id=13MM0fIMqonGWX0jYKU7hXJWDnxAHW1GQ&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/songkransplash')"><img src="https://drive.google.com/thumbnail?id=1aB3f8qwzzJC0Z-AMpbCO06p5txSm0K-W&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mythicalsand')"><img src="https://drive.google.com/thumbnail?id=1PhnzOLzPvSJTQAL_tl4kt7im9rNI9uha&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/zeusvstyphon')"><img src="https://drive.google.com/thumbnail?id=1BLK3DVo_a8hwDgzO6jomEz9UenLVvtlI&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/gatesofolympus1000')"><img src="https://drive.google.com/thumbnail?id=1hL3OEUrnOaGfMlDRJyl1G2WwXfovPL44&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/mahjongwinsgongxifacai')"><img src="https://drive.google.com/thumbnail?id=1FjM7jh7EJ0q2RP4jc22d8fOtJfDLDJNC&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/supergolfdrive')"><img src="https://drive.google.com/thumbnail?id=11rBe_tZxJaKE4NAbezeHIkQR9ogpvnB3&sz=w1000"></div>
+
 <div class="game" onclick="openGame('https://nagaimam.xyz/pgsoft/knockoutriches')"><img src="https://drive.google.com/thumbnail?id=1Bqxzp2n5qbj5rgvjhc0a1CUbhds1J-d8&sz=w1000"></div>
+
 </div>
 
 <!-- FRAME -->
@@ -239,33 +284,62 @@ color:#ff2d55;
 
 <!-- MENU -->
 <div class="bottom">
-<a href="index.html"><span><i class="fa-solid fa-house"></i></span>Trang chủ</a>
-<a href="nap.html"><span><i class="fa-solid fa-credit-card"></i></span>Nạp</a>
-<a href="khuyenmai.html"><span><i class="fa-solid fa-gift"></i></span>KM</a>
-<a href="cskh.html"><span><i class="fa-solid fa-headset"></i></span>CSKH</a>
-<a href="taikhoan.html"><span><i class="fa-solid fa-user"></i></span>TK</a>
+<a href="#"><span>🏠</span><br>Home</a>
+<a href="nap.html"><span>💳</span><br>Nạp</a>
+<a href="#"><span>🎁</span><br>KM</a>
+<a href="#"><span>🎧</span><br>CSKH</a>
+<a href="#"><span>👤</span><br>Tài khoản</a>
 </div>
 
-<script>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getDatabase, ref, set, get, push } 
+from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+const app = initializeApp({
+apiKey:"AIzaSyBD27MY...",
+databaseURL:"https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
+
+const db = getDatabase(app);
+
 let username = localStorage.getItem("username") || "Khách";
 document.getElementById("username").innerText=username;
 
-let balance = localStorage.getItem("balance") || 500000;
+let balance=500000;
+
+get(ref(db,"users/"+username)).then(s=>{
+if(s.exists()) balance=s.val().balance;
 updateBalance();
+});
 
 function updateBalance(){
 document.getElementById("balance").innerText=
 Number(balance).toLocaleString()+" VNĐ";
+set(ref(db,"users/"+username+"/balance"),balance);
 }
 
-function openGame(url){
+window.openGame=function(url){
+if(balance<100000){alert("Không đủ tiền");return;}
+balance-=100000;
+updateBalance();
+
 document.getElementById("gameFrame").style.display="block";
 document.getElementById("iframeGame").src=url;
+
+setTimeout(()=>{
+if(Math.random()<0.6){
+let win=Math.floor(Math.random()*200000);
+balance+=win;
+updateBalance();
+alert("Thắng "+win);
+}
+},8000);
 }
 
-function closeGame(){
+window.closeGame=function(){
 document.getElementById("gameFrame").style.display="none";
-document.getElementById("iframeGame").src="";
 }
 </script>
 
