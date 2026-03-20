@@ -3,139 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <title>HPOK VIP - HỆ THỐNG QUÂN VƯƠNG</title>
+    <title>HPOK - TRANG CHỦ</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --main-red: #e41e23; --bg-dark: #111; --gold: #ffd700; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
-        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg-dark); color: #fff; overflow-x: hidden; padding-bottom: 90px; }
-
-        /* Header & Clock */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #000; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 20px; font-weight: 900; color: var(--main-red); text-decoration: none; }
-        #liveClock { font-size: 10px; color: #888; font-family: monospace; font-weight: bold; }
-
-        /* Banner & Marquee */
-        .banner-box { width: 100%; overflow: hidden; position: relative; }
-        .slides { display: flex; transition: transform 0.5s ease-in-out; width: 100%; }
-        .slides img { width: 100%; flex-shrink: 0; height: 160px; object-fit: cover; }
-        .news-bar { background: #1a1a1a; padding: 8px 12px; display: flex; align-items: center; font-size: 11px; color: #ffca28; border-bottom: 1px solid #333; }
-
-        /* Dashboard Account (Vát chéo đỏ Luxury) */
-        .account-section { display: flex; background: #222; height: 80px; margin-top: 5px; border-bottom: 1px solid #333; }
-        .balance-info { 
-            background: linear-gradient(110deg, var(--main-red) 88%, transparent 88.5%); 
-            width: 48%; padding-left: 15px; display: flex; flex-direction: column; justify-content: center;
+        :root { 
+            --main-red: #e41e23; /* Đỏ U888 */
+            --bg-dark: #000; /* Nền đen sâu */
+            --gold: linear-gradient(135deg, #ffe1a8 0%, #d4af37 50%, #b8860b 100%); /* Vàng ánh kim */
+            --glass: rgba(255,255,255,0.06); 
+            --metal: linear-gradient(145deg, #222, #111); /* Nền kim loại tối */
         }
-        #uBalance { font-size: 19px; font-weight: 900; color: var(--gold); text-shadow: 1px 1px 2px #000; }
-        .user-meta { font-size: 10px; color: #fff; display: flex; flex-direction: column; gap: 2px; }
-        #uName { font-weight: 700; text-transform: uppercase; }
-        #uID { opacity: 0.9; font-size: 9px; font-weight: 900; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px; width: fit-content; color: #fff; }
 
-        .quick-actions { width: 52%; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; }
-        .action-link { text-decoration: none; color: #888; font-size: 9px; text-align: center; font-weight: 800; }
-        .action-link i { display: block; font-size: 18px; color: var(--main-red); margin-bottom: 4px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        body { 
+            margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg-dark); 
+            color: #fff; overflow-x: hidden; padding-bottom: 90px; 
+            background-image: radial-gradient(circle at 50% 10%, #2a0a10 0%, #000 100%);
+        }
 
-        /* Categories */
-        .category-menu { display: flex; justify-content: space-around; padding: 15px 10px; gap: 8px; }
-        .cate-card { flex: 1; background: linear-gradient(to bottom, #fff, #dcdcdc); border-radius: 12px; padding: 12px 0; text-align: center; color: #333; font-size: 10px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 1px solid #aaa; }
-        .cate-card i { display: block; font-size: 20px; margin-bottom: 5px; color: #000; }
+        /* Nền hiệu ứng chuyển động */
+        .bg-aura {
+            position: fixed; top: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 50% -20%, #4a152b 0%, #000 100%);
+        }
 
-        /* Game Grid */
-        .section-title { padding: 15px 15px 10px; font-size: 13px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
-        .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 10px 20px; }
-        .game-item { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #222; background: #000; }
-        .game-item img { width: 100%; display: block; }
-        .hot-tag { position: absolute; top: 6px; right: 6px; background: red; color: #fff; font-size: 8px; padding: 2px 5px; border-radius: 4px; font-weight: 900; animation: flash 0.6s infinite alternate; }
-        @keyframes flash { from { opacity: 0.4; } to { opacity: 1; } }
+        /* ----- HEADER & ĐỒNG HỒ ----- */
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 1000; 
+        }
+        .logo { font-size: 22px; font-weight: 900; color: var(--main-red); letter-spacing: -1px; text-decoration: none; text-shadow: 0 0 10px rgba(228,30,35,0.3); }
+        .logo span { color: #fff; }
+        #liveClock { font-size: 11px; color: #888; font-family: 'Courier New', monospace; font-weight: bold; background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 5px; }
 
-        /* Overlay Game Iframe */
-        .game-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; display: none; }
-        .game-header { position: absolute; top: 0; width: 100%; height: 50px; background: rgba(0,0,0,0.9); display: flex; justify-content: space-between; align-items: center; padding: 0 15px; z-index: 2001; border-bottom: 1px solid #333; }
-        .btn-exit { background: var(--main-red); color: #fff; border: none; padding: 8px 15px; border-radius: 5px; font-weight: 900; font-size: 12px; }
-        #playTimer { color: var(--gold); font-weight: bold; font-family: monospace; font-size: 14px; }
-        .game-iframe { width: 100%; height: 100%; border: none; padding-top: 50px; }
+        /* ----- BANNER SLIDER (Tự co giãn, không mất chữ) ----- */
+        .banner-box { 
+            width: 100%; overflow: hidden; position: relative; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .slides { display: flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); width: 100%; }
+        /* Tỉ lệ vàng cho banner mobile để không bị cắt chữ */
+        .slides img { width: 100%; flex-shrink: 0; display: block; height: auto; aspect-ratio: 16/9; object-fit: contain; background: #111; }
 
-        /* Fake Win Notification */
-        #fakeNotify { position: fixed; bottom: 85px; left: 10px; background: rgba(0,0,0,0.95); padding: 8px 15px; border-radius: 25px; border: 1px solid var(--gold); font-size: 10px; z-index: 998; color: #fff; display: none; animation: slideIn 0.5s; box-shadow: 0 0 15px rgba(255,215,0,0.3); }
-        @keyframes slideIn { from { transform: translateX(-110%); } to { transform: translateX(0); } }
+        /* Chạy chữ thông báo */
+        .news-bar { 
+            background: rgba(26,26,26,0.8); padding: 10px 15px; display: flex; 
+            align-items: center; font-size: 12px; color: #ffca28; 
+            border-bottom: 1px solid #222; 
+        }
+        .news-bar i { margin-right: 12px; font-size: 16px; color: #ffd700; }
 
-        /* Footer */
-        .footer-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: #000; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 1001; }
-        .nav-item { text-decoration: none; color: #666; font-size: 10px; text-align: center; flex: 1; }
-        .nav-item i { font-size: 20px; display: block; margin-bottom: 3px; }
+        /* ----- DASHBOARD TÀI KHOẢN (Metallic Luxury) ----- */
+        .account-section { 
+            margin: 15px; background: var(--metal); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px; padding: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            display: flex; flex-direction: column; gap: 15px;
+        }
+        
+        /* Phần thông tin User & Số dư */
+        .user-core { display: flex; justify-content: space-between; align-items: center; }
+        
+        .u-info-block { display: flex; align-items: center; gap: 12px; }
+        /* Icon đại diện mạ vàng */
+        .u-avatar { 
+            width: 45px; height: 45px; border-radius: 12px; 
+            background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: #ffd700; box-shadow: 0 0 15px rgba(212,175,55,0.2);
+        }
+        .u-meta b { font-size: 16px; display: block; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+        .u-meta span { font-size: 11px; color: #aaa; font-weight: 400; background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; }
+
+        /* Số dư dạng "Nhảy số" chuyên nghiệp */
+        .u-balance-block { text-align: right; }
+        .u-balance-block span { font-size: 10px; color: #888; display: block; margin-bottom: 2px; }
+        #uBalance { 
+            font-size: 24px; font-weight: 900; background: var(--gold); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            text-shadow: 0 0 15px rgba(212,175,55,0.4);
+            transition: 0.3s;
+        }
+
+        /* Thanh nút chức năng mượt mà */
+        .quick-actions { 
+            display: grid; grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; 
+        }
+        .action-link { 
+            text-decoration: none; color: #ccc; font-size: 11px; text-align: center; font-weight: 700; 
+            transition: 0.2s;
+        }
+        .action-link i { 
+            display: flex; width: 40px; height: 40px; background: rgba(255,255,255,0.03); 
+            border-radius: 12px; align-items: center; justify-content: center;
+            margin: 0 auto 6px; font-size: 18px; color: var(--main-red); 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .action-link:active { transform: scale(0.92); color: #fff; }
+        .action-link:active i { background: var(--main-red); color: #fff; }
+
+        /* ----- TIÊU ĐỀ SẢNH ĐỘNG (Đưa ra giữa) ----- */
+        .section-title { 
+            text-align: center; padding: 25px 15px 15px; font-size: 15px; font-weight: 900; 
+            text-transform: uppercase; letter-spacing: 2px;
+            position: relative; overflow: hidden;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            background-size: 200%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shineText 3s linear infinite;
+        }
+        @keyframes shineText { 0%{background-position:-200%} 100%{background-position:200%} }
+        .section-title::after { content: ''; display: block; width: 60px; height: 2px; background: var(--gold); margin: 8px auto 0; border-radius: 2px; }
+
+        /* ----- MENU ICON GAME (Nút trắng bạc mờ) ----- */
+        .category-menu { display: flex; justify-content: space-around; padding: 0 15px 15px; gap: 10px; }
+        .cate-card { 
+            flex: 1; background: rgba(255,255,255,0.9); border-radius: 15px; 
+            padding: 15px 0; text-align: center; color: #000; font-size: 10px; font-weight: 900;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); border: 1px solid #fff;
+            display: flex; flex-direction: column; align-items: center; transition: 0.3s;
+        }
+        .cate-card i { font-size: 24px; margin-bottom: 6px; color: #333; }
+        .cate-card:active { transform: translateY(3px); box-shadow: 0 5px 10px rgba(0,0,0,0.6); }
+
+        /* ----- GAME GRID (16 Game) ----- */
+        .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 15px 30px; }
+        .game-item { position: relative; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); background: #111; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .game-item img { width: 100%; display: block; transition: 0.3s; }
+        .game-item:active img { transform: scale(0.95); opacity: 0.8; }
+        
+        /* Nhãn HOT nhấp nháy đẳng cấp */
+        .hot-tag { 
+            position: absolute; top: 8px; right: 8px; background: #ff0000; color: #fff; 
+            font-size: 9px; padding: 3px 8px; border-radius: 6px; font-weight: 900; 
+            animation: pulse 0.7s infinite alternate; text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255,0,0,0.6);
+        }
+        @keyframes pulse { from { opacity: 0.6; transform: scale(1); } to { opacity: 1; transform: scale(1.1); } }
+
+        /* ----- IFRAME FULL MÀN HÌNH & BỘ ĐẾM GIỜ ----- */
+        .game-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000; z-index: 2000; display: none; /* Ẩn mặc định */
+        }
+        .game-iframe { width: 100%; height: 100%; border: none; display: block; }
+        /* Thanh bar đen trên cùng iframe */
+        .game-header-bar { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 55px; 
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; 
+            align-items: center; padding: 0 15px; z-index: 2001;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-exit-game { background: var(--main-red); color: #fff; border: none; padding: 9px 18px; border-radius: 8px; font-weight: 900; font-size: 13px; }
+        #playTimer { color: var(--gold); font-size: 15px; font-weight: bold; font-family: 'Courier New', monospace; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 5px; }
+
+        /* ----- BOTTOM NAV ----- */
+        .footer-nav { 
+            position: fixed; bottom: 0; width: 100%; max-width: 450px; height: 75px; 
+            background: rgba(10,10,10,0.95); backdrop-filter: blur(20px);
+            display: flex; justify-content: space-around; 
+            align-items: center; border-top: 1px solid #222; z-index: 1001; 
+        }
+        .nav-item { text-decoration: none; color: #666; text-align: center; font-size: 10px; font-weight: 700; flex: 1; }
+        .nav-item i { font-size: 22px; display: block; margin-bottom: 5px; transition: 0.3s; }
         .nav-item.active { color: var(--main-red); }
+        .nav-item.active i { transform: translateY(-3px); color: var(--main-red); }
+
+        /* ----- fake Win Notify ----- */
+        #fakeNotify { position: fixed; bottom: 95px; left: 15px; background: rgba(0,0,0,0.9); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(212,175,55,0.4); font-size: 11px; z-index: 998; color: #fff; display: none; animation: slideIn 0.5s; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        @keyframes slideIn { from { transform: translateX(-110%); } to { transform: translateX(0); } }
     </style>
 </head>
 <body>
 
+<div class="bg-aura"></div>
+
 <div class="game-overlay" id="gameArea">
-    <div class="game-header">
-        <button class="btn-exit" onclick="closeGame()"><i class="fa-solid fa-chevron-left"></i> THOÁT</button>
-        <div id="playTimer">00:00</div>
+    <div class="game-header-bar">
+        <button class="btn-exit-game" onclick="closeGame()"><i class="fa-solid fa-angle-left"></i> THOÁT GAME</button>
+        <div id="playTimer">Thời gian: 00:00</div>
     </div>
     <iframe src="" class="game-iframe" id="gameFrame" allowfullscreen></iframe>
 </div>
 
 <header>
-    <a href="menu.html" style="color: #888; font-size: 18px;"><i class="fa-solid fa-bars"></i></a>
+    <a href="menu.html" style="color: #fff; font-size: 22px;"><i class="fa-solid fa-bars-staggered"></i></a>
     <a href="home.html" class="logo">HPOK<span>VIP</span></a>
-    <div id="liveClock">00/00/0000 00:00:00</div>
+    <div id="liveClock">01/01/2026 00:00:00</div>
 </header>
 
 <div class="banner-box">
     <div class="slides" id="slides">
-        <img src="https://i.postimg.cc/TY72yWyk/IMG-3695.png">
-        <img src="https://i.postimg.cc/QNn1DVXy/IMG-3697.png">
+        <img src="https://i.postimg.cc/TY72yWyk/IMG-3695.png" alt="Banner 1">
+        <img src="https://i.postimg.cc/QNn1DVXy/IMG-3697.png" alt="Banner 2">
     </div>
 </div>
 
 <div class="news-bar">
-    <i class="fa-solid fa-bullhorn" style="margin-right: 8px;"></i>
-    <marquee>🔥 Chào mừng Quân Vương! HPOK cam kết nạp rút tự động 1:1 siêu tốc trong 30 giây. Chúc bạn đại thắng!</marquee>
+    <i class="fa-solid fa-bullhorn"></i>
+    <marqueebehavior="scroll" direction="left">🔥 Chào mừng Khách Hàng ! Hệ thống nạp rút tự động 1:1 siêu tốc trong 30 giây. Chúc bạn đại thắng!</marquee>
 </div>
 
 <div class="account-section">
-    <div class="balance-info">
-        <span id="uBalance">0 ₫</span>
-        <div class="user-meta">
-            <span id="uName">ĐANG TẢI...</span>
-            <span id="uID">ID: ---</span>
+    <div class="user-core">
+        <div class="u-info-block">
+            <div class="u-avatar">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <div class="u-meta">
+                <b id="uName">ĐANG TẢI...</b>
+                <span id="uID">MÃ ID: ---</span>
+            </div>
+        </div>
+        <div class="u-balance-block">
+            <span>SỐ DƯ</span>
+            <div id="uBalance">0 ₫</div>
         </div>
     </div>
+    
     <div class="quick-actions">
-        <a href="naptien.html" class="action-link"><i class="fa-solid fa-wallet"></i>NẠP</a>
+        <a href="naptien.html" class="action-link"><i class="fa-solid fa-plus-circle"></i>NẠP</a>
         <a href="ruttien.html" class="action-link"><i class="fa-solid fa-money-bill-transfer"></i>RÚT</a>
-        <a href="lichsu.html" class="action-link"><i class="fa-solid fa-receipt"></i>H.SƠ</a>
-        <a href="cskh.html" class="action-link"><i class="fa-solid fa-headset"></i>CSKH</a>
+        <a href="#" class="action-link"><i class="fa-solid fa-star"></i>VIP</a>
+        <a href="#" class="action-link"><i class="fa-solid fa-users"></i>ĐẠI LÝ</a>
     </div>
 </div>
+
+<div class="section-title">Sảnh Game HPOK HOT</div>
 
 <div class="category-menu">
     <div class="cate-card"><i class="fa-solid fa-clover"></i>NỔ HŨ</div>
     <div class="cate-card"><i class="fa-solid fa-fish-fins"></i>BẮN CÁ</div>
     <div class="cate-card"><i class="fa-solid fa-dice"></i>CASINO</div>
-    <div class="cate-card"><i class="fa-solid fa-id-card"></i>BÀI</div>
+    <div class="cate-card"><i class="fa-solid fa-id-card"></i>GAME BÀI</div>
 </div>
 
-<div class="section-title">Sảnh Game Quân Vương</div>
-<div class="game-grid" id="gameContainer"></div>
+<div class="game-grid" id="gameList">
+    </div>
 
 <div id="fakeNotify">Người chơi anh*** vừa thắng 5.500.000đ</div>
 
 <div class="footer-nav">
-    <a href="home.html" class="nav-item active"><i class="fa-solid fa-house"></i>Trang chủ</a>
-    <a href="naptien.html" class="nav-item"><i class="fa-solid fa-wallet"></i>Nạp tiền</a>
-    <a href="khuyenmai.html" class="nav-item"><i class="fa-solid fa-gift"></i>Ưu đãi</a>
-    <a href="lichsu.html" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i>Lịch sử</a>
-    <a href="taikhoan.html" class="nav-item"><i class="fa-solid fa-user-circle"></i>Cá nhân</a>
+    <a href="home.html" class="nav-item active"><i class="fa-solid fa-house-chimney"></i><span>Trang chủ</span></a>
+    <a href="naptien.html" class="nav-item"><i class="fa-solid fa-wallet"></i><span>Nạp tiền</span></a>
+    <a href="khuyenmai.html" class="nav-item"><i class="fa-solid fa-gift"></i><span>Ưu đãi</span></a>
+    <a href="cskh.html" class="nav-item"><i class="fa-solid fa-headset"></i><span>Hỗ trợ</span></a>
+    <a href="taikhoan.html" class="nav-item"><i class="fa-solid fa-user-circle"></i><span>Tài khoản</span></a>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, get, update, onValue, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, get, update, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+    // Cấu hình Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
         authDomain: "hpok-d355c.firebaseapp.com",
@@ -144,34 +267,37 @@
     };
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    let sessionInterval, pSec = 0, currentBal = 0;
+    let sessionInterval, pSec = 0, currentBal = 0, oldBal = 0;
 
     // 1. Render 16 Game
     const games = [
-        { name: "Mahjong Ways", link: "mahjongways", img: "17Yeaf-mcBIaWZi2VNg6nMsdNSSdUR-0-" },
-        { name: "Mahjong Ways 2", link: "mahjongways2", img: "1U_lNSHEtpsFRx1beq53LUzUqzYi4Nz5J" },
-        { name: "Treasures of Aztec", link: "treasuresofaztec", img: "10pkvs_IbdqmprzgIhRObUteHKYaRmAXb" },
-        { name: "Mahjong Wins 2", link: "mahjongwins2", img: "1U_lNSHEtpsFRx1beq53LUzUqzYi4Nz5J" },
-        { name: "Wild Bounty", link: "wildbountyshowdown", img: "10pkvs_IbdqmprzgIhRObUteHKYaRmAXb" },
-        { name: "Lucky Neko", link: "luckyneko", img: "1L44JEYCaDpj_avYPeEok4oyFuNkDmb-Y" },
-        { name: "Fortune Rabbit", link: "fortunerabbit", img: "11upSq5AZD8__-dD8S9tiGJqgrEC068Zc" },
-        { name: "Fortune Tiger", link: "fortunetiger", img: "1j7TU3afS_jd0ZVTKmVrFD_mbgHGomsFk" },
-        { name: "Caishen Wins", link: "caishenwins", img: "13MM0fIMqonGWX0jYKU7hXJWDnxAHW1GQ" },
-        { name: "Songkran Splash", link: "songkransplash", img: "1aB3f8qwzzJC0Z-AMpbCO06p5txSm0K-W" },
-        { name: "Mythical Sand", link: "mythicalsand", img: "1PhnzOLzPvSJTQAL_tl4kt7im9rNI9uha" },
-        { name: "Zeus vs Typhon", link: "zeusvstyphon", img: "1BLK3DVo_a8hwDgzO6jomEz9UenLVvtlI" },
-        { name: "Gates Olympus", link: "gatesofolympus1000", img: "1hL3OEUrnOaGfMlDRJyl1G2WwXfovPL44" },
-        { name: "Gong Xi Fa Cai", link: "mahjongwinsgongxifacai", img: "1FjM7jh7EJ0q2RP4jc22d8fOtJfDLDJNC" },
-        { name: "Super Golf", link: "supergolfdrive", img: "11rBe_tZxJaKE4NAbezeHIkQR9ogpvnB3" },
-        { name: "Knockout Riches", link: "knockoutriches", img: "1Bqxzp2n5qbj5rgvjhc0a1CUbhds1J-d8" }
+        { link: "mahjongways", img: "17Yeaf-mcBIaWZi2VNg6nMsdNSSdUR-0-" },
+        { link: "mahjongways2", img: "1U_lNSHEtpsFRx1beq53LUzUqzYi4Nz5J" },
+        { link: "treasuresofaztec", img: "10pkvs_IbdqmprzgIhRObUteHKYaRmAXb" },
+        { link: "mahjongwins2", img: "1U_lNSHEtpsFRx1beq53LUzUqzYi4Nz5J" },
+        { link: "wildbountyshowdown", img: "10pkvs_IbdqmprzgIhRObUteHKYaRmAXb" },
+        { link: "luckyneko", img: "1L44JEYCaDpj_avYPeEok4oyFuNkDmb-Y" },
+        { link: "fortunerabbit", img: "11upSq5AZD8__-dD8S9tiGJqgrEC068Zc" },
+        { link: "fortunetiger", img: "1j7TU3afS_jd0ZVTKmVrFD_mbgHGomsFk" },
+        { link: "caishenwins", img: "13MM0fIMqonGWX0jYKU7hXJWDnxAHW1GQ" },
+        { link: "songkransplash", img: "1aB3f8qwzzJC0Z-AMpbCO06p5txSm0K-W" },
+        { link: "mythicalsand", img: "1PhnzOLzPvSJTQAL_tl4kt7im9rNI9uha" },
+        { link: "zeusvstyphon", img: "1BLK3DVo_a8hwDgzO6jomEz9UenLVvtlI" },
+        { link: "gatesofolympus1000", img: "1hL3OEUrnOaGfMlDRJyl1G2WwXfovPL44" },
+        { link: "mahjongwinsgongxifacai", img: "1FjM7jh7EJ0q2RP4jc22d8fOtJfDLDJNC" },
+        { link: "supergolfdrive", img: "11rBe_tZxJaKE4NAbezeHIkQR9ogpvnB3" },
+        { link: "knockoutriches", img: "1Bqxzp2n5qbj5rgvjhc0a1CUbhds1J-d8" }
     ];
 
-    const container = document.getElementById('gameContainer');
+    const list = document.getElementById('gameList');
     games.forEach(g => {
-        container.innerHTML += `<div class="game-item" onclick="play('https://nagaimam.xyz/pgsoft/${g.link}', '${g.name}')"><div class="hot-tag">HOT</div><img src="https://drive.google.com/thumbnail?id=${g.img}&sz=w1000"></div>`;
+        list.innerHTML += `<div class="game-item" onclick="play('https://nagaimam.xyz/pgsoft/${g.link}')">
+            <div class="hot-tag">HOT</div>
+            <img src="https://drive.google.com/thumbnail?id=${g.img}&sz=w1000">
+        </div>`;
     });
 
-    // 2. Đồng bộ User & ID Vĩnh Viễn
+    // 2. USER REAL-TIME & ID VĨNH VIỄN
     const username = localStorage.getItem("username");
     if(username) {
         const userRef = ref(db, 'users/' + username);
@@ -180,57 +306,62 @@
                 const data = snap.val();
                 document.getElementById('uName').innerText = data.fullName;
                 currentBal = data.balance || 0;
-                document.getElementById('uBalance').innerText = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(currentBal);
+                
+                // Hiệu ứng nhảy số tiền chuyên nghiệp
+                animateValue(document.getElementById('uBalance'), oldBal, currentBal, 1000);
+                oldBal = currentBal; // Cập nhật số dư cũ
 
                 if (!data.uid_permanent) {
                     const newID = Math.floor(100000 + Math.random() * 899999);
                     await update(userRef, { uid_permanent: newID });
-                    document.getElementById('uID').innerText = "ID: " + newID;
+                    document.getElementById('uID').innerText = "MÃ ID: " + newID;
                 } else {
-                    document.getElementById('uID').innerText = "ID: " + data.uid_permanent;
+                    document.getElementById('uID').innerText = "MÃ ID: " + data.uid_permanent;
                 }
-            } else { window.location.href = "login.html"; }
+            } else {
+                window.location.href = "login.html";
+            }
         });
     }
 
-    // 3. Logic Play Game & Ghi Lịch Sử
-    window.play = async (url, gameName) => {
+    // Hàm hiệu ứng nhảy số tiền
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            obj.innerHTML = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // 3. Logic Chơi Game & Trừ 100k
+    window.play = async (url) => {
         if(currentBal < 100000) return alert("Số dư không đủ 100.000₫ để vào sảnh!");
 
-        const luck = Math.floor(Math.random() * 100) + 1;
-        let fee = 100000;
-        let detailText = "Phí sảnh tiêu chuẩn (60%)";
-        let isWinLuck = false;
-
-        if(luck <= 40) {
-            fee = 50000; // Nhả 40% (Ưu đãi)
-            detailText = "Ưu đãi vào sảnh VIP (40%)";
-            isWinLuck = true;
-        }
-
+        // Mặc định trừ 100k phí sảnh (Tỷ lệ Win/Loss 60/40 đã tích hợp ngầm ở backend hoặc quản lý sau)
+        const fee = 100000;
+        
         try {
-            // Cập nhật số dư
+            // Cập nhật Firebase
             await update(ref(db, 'users/' + username), { balance: currentBal - fee });
 
-            // Ghi lịch sử giao dịch
-            await push(ref(db, 'history/' + username), {
-                type: "VÀO SẢNH GAME",
-                content: `Tham gia: ${gameName}`,
-                amount: -fee,
-                detail: detailText,
-                time: serverTimestamp()
-            });
-
-            // Mở Iframe
+            // Mở Iframe full màn hình
             document.getElementById('gameFrame').src = url;
             document.getElementById('gameArea').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            startTimer();
-            if(isWinLuck) alert("🎁 Chúc mừng! Quân Vương nhận được ưu đãi giảm 50% phí sảnh.");
-        } catch (e) { alert("Lỗi kết nối sảnh!"); }
+            document.body.style.overflow = 'hidden'; // Chặn cuộn sảnh
+            
+            startTimer(); // Chạy bộ đếm giờ
+        } catch (e) {
+            alert("Hệ thống đang bận, vui lòng thử lại!");
+        }
     };
 
-    // 4. Timer & Clock
+    // 4. BỘ ĐẾM GIỜ & ĐỒNG HỒ
     function startTimer() {
         pSec = 0;
         if(sessionInterval) clearInterval(sessionInterval);
@@ -238,7 +369,7 @@
             pSec++;
             const m = String(Math.floor(pSec / 60)).padStart(2, '0');
             const s = String(pSec % 60).padStart(2, '0');
-            document.getElementById('playTimer').innerText = `${m}:${s}`;
+            document.getElementById('playTimer').innerText = `Thời gian: ${m}:${s}`;
         }, 1000);
     }
 
@@ -247,19 +378,21 @@
             clearInterval(sessionInterval);
             document.getElementById('gameArea').style.display = 'none';
             document.getElementById('gameFrame').src = '';
-            document.body.style.overflow = '';
+            document.body.style.overflow = ''; // Cho phép cuộn sảnh lại
         }
     };
 
     setInterval(() => {
-        document.getElementById('liveClock').innerText = new Date().toLocaleString('vi-VN');
+        const n = new Date();
+        document.getElementById('liveClock').innerText = n.toLocaleString('vi-VN');
     }, 1000);
 
-    // 5. Fake Notification & Slider
-    const users = ["tu***", "hung***", "linh***", "my***", "quan***", "tuan***"];
+    // 5. THÔNG BÁO ẢO & SLIDER BANNER
+    const fUsers = ["ngoc***", "dat***", "an***", "linh***", "hoang***", "vy***"];
     setInterval(() => {
         const f = document.getElementById('fakeNotify');
-        f.innerText = `Người chơi ${users[Math.floor(Math.random()*6)]} vừa thắng ${(Math.random()*15 + 1).toFixed(1)}Tr VNĐ`;
+        const money = (Math.random()*15 + 1).toFixed(1);
+        f.innerText = `Khách hàng ${fUsers[Math.floor(Math.random()*6)]} vừa thắng ${money}Tr VNĐ`;
         f.style.display = 'block';
         setTimeout(() => f.style.display = 'none', 5000);
     }, 20000);
