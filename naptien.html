@@ -3,173 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <title>NẠP TIỀN - HPOK OFFICIAL</title>
+    <title>HPOK BANK - FINAL VERSION</title>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&family=Inter:wght@400;600;700;900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
     <style>
-        :root { --pink: #ff4d94; --bg: #0b0b0b; --card: #1a1a1a; --text-gray: #a0a0a0; --gold: #ffca28; }
+        :root { 
+            --pink: #ff4d94; --pink-glow: rgba(255, 77, 148, 0.4);
+            --bg: #0b0b0b; --card: #161616; 
+            --teal: #00bfa5; --white: #fff; --gray: #888;
+            --gold-grad: linear-gradient(135deg, #FFD700 0%, #FDB931 50%, #8A6E2F 100%);
+        }
+
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
-        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: #fff; padding-bottom: 90px; }
+        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: var(--white); padding-bottom: 120px; }
 
-        /* HEADER */
-        header { padding: 15px; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); display: flex; align-items: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
-        header h2 { font-size: 16px; margin: 0; flex: 1; text-align: center; font-weight: 700; }
+        header { padding: 20px; text-align: center; border-bottom: 1px solid #222; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; }
+        header h2 { margin: 0; font-size: 18px; font-weight: 900; color: var(--pink); text-transform: uppercase; }
+
+        .container { padding: 15px; }
+
+        /* TABS CHỌN CỔNG */
+        .gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .gate-card { 
+            background: var(--card); padding: 20px 10px; border-radius: 18px; 
+            text-align: center; border: 1.5px solid #252525; transition: 0.3s; cursor: pointer;
+        }
+        .gate-card.active { border-color: var(--pink); background: #1f1f1f; box-shadow: 0 0 15px var(--pink-glow); }
+        .gate-card i { font-size: 28px; margin-bottom: 8px; display: block; }
+        .gate-card span { font-size: 11px; font-weight: 700; display: block; }
+
+        /* FORM BOX */
+        .form-box { background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid #333; display: none; animation: fadeIn 0.3s; }
+        .form-box.active { display: block; }
+        input { width: 100%; background: #222; border: 1px solid #444; color: #fff; padding: 14px; border-radius: 12px; margin-bottom: 15px; font-family: 'Inter'; font-weight: 600; }
+        .btn-main { background: linear-gradient(135deg, var(--pink), #ff1a75); color: #fff; width: 100%; padding: 16px; border: none; border-radius: 14px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
+
+        /* THANH TOÁN UI */
+        #paymentUI { display: none; position: fixed; inset: 0; background: linear-gradient(180deg, #f8fbfb 0%, #e9f2f2 100%); z-index: 2000; overflow-y: auto; color: #333; }
+        .pp-header { background: #fff; padding: 15px; text-align: center; font-weight: 900; color: var(--teal); border-bottom: 1px solid #ddd; position: sticky; top: 0; }
+
+        /* LOGO HPOK BANK CODE */
+        .brand-logo-wrapper { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
+        .hpok-bank-text {
+            font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900;
+            background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-transform: uppercase; letter-spacing: -1px; position: relative;
+        }
+        .hpok-bank-text::after {
+            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.7), transparent);
+            transform: skewX(-25deg); animation: shine 3s infinite;
+        }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+
+        /* KHU VỰC TẢI BILL - FIX LỖI NÉT ĐỨT */
+        .upload-section { margin: 15px; background: #fff; padding: 20px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .upload-title { font-size: 13px; font-weight: 800; margin-bottom: 15px; color: #444; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .marquee-box { background: #151515; padding: 10px 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
-        marquee { font-size: 11px; color: #eee; }
-
-        /* TABS */
-        .tabs { display: flex; background: #000; border-bottom: 1px solid #222; }
-        .tab-item { flex: 1; padding: 15px; text-align: center; font-size: 13px; font-weight: 700; color: var(--text-gray); position: relative; }
-        .tab-item.active { color: var(--pink); }
-        .tab-item.active::after { content: ''; position: absolute; bottom: 0; left: 25%; width: 50%; height: 3px; background: var(--pink); border-radius: 10px; }
-
-        /* METHOD GRID */
-        .section-title { padding: 20px 15px 10px; font-size: 12px; color: var(--pink); font-weight: 800; text-transform: uppercase; }
-        #methodGrid { padding: 0 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .m-card { background: var(--card); border-radius: 20px; padding: 22px 10px; display: flex; flex-direction: column; align-items: center; gap: 12px; border: 1.5px solid #252525; transition: 0.2s; position: relative; }
-        .m-card:active { transform: scale(0.95); border-color: var(--pink); }
+        .upload-box { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; min-height: 160px;
+            border: 2px dashed #00bfa5; /* Màu Teal nét đứt rõ ràng */
+            border-radius: 18px; background: #f9fdfd;
+            cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .upload-box:active { transform: scale(0.98); background: #f0fafa; border-color: #ff4d94; }
         
-        /* SVG ICON WRAPPER */
-        .icon-svg { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .icon-svg svg { width: 100%; height: 100%; }
-        .m-card span { font-size: 13px; font-weight: 700; color: #fff; }
+        .upload-box i { font-size: 36px; color: #00bfa5; margin-bottom: 10px; }
+        .upload-box span { font-size: 12px; font-weight: 600; color: #666; }
         
-        /* MAINTENANCE */
-        .m-card.disabled { opacity: 0.3; filter: grayscale(1); pointer-events: none; }
-        .status-tag { position: absolute; top: 8px; right: 8px; background: #ff3333; color: #fff; font-size: 8px; padding: 2px 6px; border-radius: 4px; font-weight: 900; }
+        #billPreview { 
+            position: absolute; inset: 0; width: 100%; height: 100%; 
+            object-fit: contain; background: #fff; display: none; z-index: 5;
+        }
+        
+        /* TIMER BAR */
+        .timer-bar {
+            background: #fff; color: #00796b; margin: 20px 15px; padding: 12px; border-radius: 12px;
+            display: flex; justify-content: center; align-items: center; font-weight: 800; gap: 8px; border: 1.5px solid #00bfa5;
+        }
+        #countdown { color: #d32f2f; font-size: 16px; font-weight: 900; }
 
-        /* PAYMENT FORM */
-        #paymentForm { display: none; padding: 15px; animation: fadeIn 0.4s ease; }
+        /* QR SECTION */
+        .qr-section { background: #fff; margin: 0 15px 15px; padding: 25px; border-radius: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .qr-holder { width: 220px; height: 220px; margin: 0 auto 15px; background: #fff; padding: 8px; border: 1px dashed #ccc; border-radius: 12px; }
+        #mainQr { width: 100%; height: 100%; display: block; }
+        .price-tag { font-size: 30px; font-weight: 900; color: #d32f2f; }
+
+        /* COPY ROW */
+        .copy-row { background: #fff; margin: 0 15px 10px; padding: 12px 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; }
+        .copy-row label { font-size: 10px; color: #999; text-transform: uppercase; display: block; }
+        .btn-copy { background: var(--teal); color: #fff; border: none; padding: 7px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; }
+          
+        /* NOTE BOX CẢI TIẾN ICON ĐỘNG */
+        .note-area { background: #fff9e6; margin: 15px; padding: 18px; border-radius: 20px; border: 1px solid #ffeeba; color: #856404; font-size: 11.5px; line-height: 1.6; }
+        .note-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; color: #d32f2f; font-weight: 900; text-transform: uppercase; }
+        
+        .icon-blink { animation: blink 1s infinite alternate; font-size: 16px; }
+        @keyframes blink { from { opacity: 1; transform: scale(1); } to { opacity: 0.5; transform: scale(1.1); } }
+        
+
+        /* NGUỒN FOOTER ĐẸP */
+        .footer-source {
+            text-align: center; padding: 20px 0; margin-top: 20px;
+            background: rgba(0,0,0,0.03); border-radius: 50px 50px 0 0;
+        }
+        .footer-source span {
+            font-size: 11px; font-weight: 800; color: #aaa; letter-spacing: 1px;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .footer-source b { color: var(--teal); }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .bank-card { background: linear-gradient(135deg, #222, #111); border: 1px solid #333; border-radius: 20px; padding: 20px; margin-bottom: 20px; border-left: 4px solid var(--pink); }
-        .bank-card .label { font-size: 11px; color: var(--text-gray); margin-bottom: 5px; }
-        .bank-card .val { font-size: 18px; font-weight: 900; color: #fff; }
-
-        .input-box { background: #1a1a1a; border-radius: 15px; padding: 15px; border: 1px solid #333; margin-bottom: 15px; }
-        .input-box input { background: transparent; border: none; color: var(--pink); font-size: 26px; font-weight: 900; width: 100%; text-align: center; }
-        
-        .p-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px; }
-        .p-btn { background: #252525; border: 1px solid #333; color: #fff; padding: 12px 0; border-radius: 10px; font-size: 12px; font-weight: 700; }
-
-        .ocr-container { border: 2px dashed #333; border-radius: 20px; padding: 25px; text-align: center; background: rgba(255,255,255,0.02); }
-        #billImg { width: 100%; border-radius: 12px; margin-top: 15px; display: none; }
-
-        .btn-confirm { background: var(--pink); color: #fff; width: 100%; padding: 18px; border: none; border-radius: 18px; font-weight: 900; font-size: 16px; margin-top: 20px; box-shadow: 0 10px 20px rgba(255, 77, 148, 0.3); }
-        .btn-exit { background: transparent; color: var(--text-gray); width: 100%; padding: 15px; border: 1px solid #222; border-radius: 18px; margin-top: 15px; }
-
-        #loader { position: fixed; inset: 0; background: #000; z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; }
-        .spin { width: 40px; height: 40px; border: 4px solid #222; border-top: 4px solid var(--pink); border-radius: 50%; animation: rot 0.8s linear infinite; }
-        @keyframes rot { 100% { transform: rotate(360deg); } }
-
-        .nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: #000; display: flex; padding: 12px 0; border-top: 1px solid #222; }
-        .nav-link { flex: 1; text-decoration: none; color: #555; text-align: center; font-size: 10px; }
-        .nav-link i { font-size: 22px; display: block; margin-bottom: 4px; }
-        .nav-link.active { color: var(--pink); }
     </style>
 </head>
 <body>
 
-<div id="loader">
-    <div class="spin"></div>
-    <p style="margin-top:20px; font-weight:800; font-size: 12px;">ĐANG KẾT NỐI HỆ THỐNG...</p>
+<header><h2>NẠP TIỀN TỰ ĐỘNG</h2></header>
+
+<div class="container">
+    <div class="gate-grid">
+        <div class="gate-card active" onclick="switchTab('bank', this)"><i class="fa-solid fa-building-columns" style="color:var(--pink)"></i><span>ACB BANK</span></div>
+        <div class="gate-card" onclick="switchTab('momo', this)"><i class="fa-solid fa-wallet" style="color:#a50064"></i><span>MOMO PAY</span></div>
+        <div class="gate-card" onclick="switchTab('card', this)"><i class="fa-solid fa-sd-card" style="color:#ffca28"></i><span>THẺ CÀO</span></div>
+        <div class="gate-card" onclick="switchTab('usdt', this)"><i class="fa-brands fa-ethereum" style="color:#26a17b"></i><span>USDT BEP20</span></div>
+    </div>
+
+    <div id="box_bank" class="form-box active">
+        <input type="number" id="amt_bank" value="100000">
+        <button class="btn-main" onclick="openPay('bank')">TIẾP TỤC THANH TOÁN</button>
+    </div>
 </div>
 
-<header>
-    <a href="home.html" style="color:#fff; width:40px"><i class="fa-solid fa-chevron-left"></i></a>
-    <h2>NẠP TIỀN AUTO</h2>
-</header>
+<div id="paymentUI">
+    <div class="pp-header">HỆ THỐNG THANH TOÁN HPOK</div>
+    
+    <div class="brand-logo-wrapper">
+        <div class="hpok-bank-text">HPOK BANK</div>
+    </div>
 
-<div class="marquee-box">
-    <i class="fa-solid fa-circle-info" style="color:var(--gold)"></i>
-    <marquee>Lưu ý: Hệ thống tự động cộng tiền sau 5 phút nếu Bill hợp lệ!</marquee>
-</div>
+    <div class="timer-bar">
+        <i class="fa-solid fa-shield-check icon-blink"></i> 
+        Đơn hàng hết hạn sau: <span id="countdown">15:00</span>
+    </div>
 
-<div class="tabs">
-    <div class="tab-item active">Nạp Tiền</div>
-    <div class="tab-item">Rút Tiền</div>
-</div>
+    <div class="qr-section">
+        <div class="qr-holder"><img id="mainQr" src=""></div>
+        <div class="price-tag" id="pay_amt">0 VND</div>
+    </div>
 
-<div id="gateSelection">
-    <div class="section-title">Phương thức thanh toán</div>
-    <div id="methodGrid">
+    <div id="pay_details"></div>
+
+    <div class="note-area">
+        <div class="note-header">
+            <i class="fa-solid fa-circle-exclamation icon-blink"></i> LƯU Ý QUAN TRỌNG
+        </div>
+        - Chủ tài khoản: <b>NGUYEN NGOC TAN</b><br>
+        - Ngân hàng thụ hưởng: <b>ACB BANK</b><br>
+        - Bạn phải chuyển <b>ĐÚNG NỘI DUNG</b> để được cộng tiền tự động.<br>
+        - Sau khi chuyển, nhấn nút "Xác nhận" bên dưới.
+    </div>
+        <div class="upload-section">
+        <div class="upload-title">Xác nhận bằng hình ảnh</div>
         
-        <div class="m-card" onclick="openForm('QR Ngân hàng')">
-            <div class="icon-svg">
-                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 14V6C4 4.89543 4.89543 4 6 4H14" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><path d="M34 4H42C43.1046 4 44 4.89543 44 6V14" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><path d="M44 34V42C44 43.1046 43.1046 44 42 44H34" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><path d="M14 44H6C4.89543 44 4 43.1046 4 42V34" stroke="#ff4d94" stroke-width="4" stroke-linecap="round"/><rect x="14" y="14" width="20" height="20" rx="2" fill="#ff4d94"/></svg>
-            </div>
-            <span>QR Ngân hàng</span>
+        <label class="upload-box" for="billInput" id="dropZone">
+            <i class="fa-solid fa-camera-retro icon-blink"></i>
+            <span>Bấm vào đây để tải ảnh Bill</span>
+            <img id="billPreview" src="">
+        </label>
+        
+        <div style="font-size:10px; color:#999; text-align:center; margin-top:10px;">
+            Hệ thống sẽ duyệt nhanh hơn nếu có ảnh minh chứng
         </div>
+    </div>
+    <div style="padding:15px">
+        <button class="btn-main" style="background:var(--teal)" onclick="confirmDone()">XÁC NHẬN ĐÃ CHUYỂN KHOẢN</button>
+        <p onclick="location.reload()" style="text-align:center; color:#888; font-weight:800; margin-top:20px; cursor:pointer; font-size:12px;">HỦY GIAO DỊCH</p>
+    </div>
 
-        <div class="m-card" onclick="openForm('Momo Pay')">
-            <div class="icon-svg">
-                <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="10" fill="#A50064"/><path d="M12 18H15V32H12V18ZM21 18H24V21C24 23 26 23 26 21V18H29V21C29 26 24 26 24 26C24 26 19 26 19 21V18ZM35 18H38V32H35V18Z" fill="white"/></svg>
-            </div>
-            <span>Momo Pay</span>
-        </div>
-
-        <div class="m-card" onclick="openForm('ZaloPay')">
-            <div class="icon-svg">
-                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#0068FF"/><path d="M14 16H34V32H14V16Z" fill="white"/><path d="M20 20L28 28M28 20L20 28" stroke="#0068FF" stroke-width="3" stroke-linecap="round"/></svg>
-            </div>
-            <span>ZaloPay</span>
-        </div>
-
-        <div class="m-card" onclick="openForm('Thẻ Cào')">
-            <div class="icon-svg">
-                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10C4 8.89543 4.89543 8 6 8H42C43.1046 8 44 8.89543 44 10V38C44 39.1046 43.1046 44 42 44H6C4.89543 44 4 43.1046 4 42V10Z" fill="#ffca28"/><path d="M4 16H44" stroke="#000" stroke-width="4"/><rect x="10" y="28" width="12" height="6" rx="1" fill="#fff"/></svg>
-            </div>
-            <span>Thẻ Cào</span>
-        </div>
+    <div class="footer-source">
+        <span><i class="fa-solid fa-copyright"></i> Nguồn: <b>@HPOK BANK Official</b></span>
     </div>
 </div>
-
-<div id="paymentForm">
-    <div class="bank-card">
-        <div class="label">Kênh: <b id="gateName" style="color:var(--pink)">...</b></div>
-        <div class="label" style="margin-top:10px">Người nhận / STK:</div>
-        <div class="val" id="stkVal">ĐANG TẢI...</div>
-        <div class="label" style="margin-top:10px">Mã nội dung (Ghi chú):</div>
-        <div style="font-size:18px; font-weight:900; color:#fff" id="billCode">...</div>
-    </div>
-
-    <div class="input-box">
-        <label>Nhập số điểm cần nạp</label>
-        <input type="number" id="amt" placeholder="0" oninput="showVnd()">
-        <p id="vnd" style="font-size:12px; color:var(--text-gray); text-align:center; margin-top:10px">≈ 0 VNĐ</p>
-    </div>
-
-    <div class="p-grid">
-        <button class="p-btn" onclick="fill(200)">200</button>
-        <button class="p-btn" onclick="fill(500)">500</button>
-        <button class="p-btn" onclick="fill(1000)">1,000</button>
-        <button class="p-btn" onclick="fill(5000)">5,000</button>
-    </div>
-
-    <div class="ocr-container">
-        <p style="font-size:11px; color:#aaa">Hệ thống AI sẽ quét Bill và tự cộng tiền sau 5p</p>
-        <button class="p-btn" style="width:140px; background:#444" onclick="document.getElementById('f').click()">TẢI ẢNH BILL</button>
-        <input type="file" id="f" accept="image/*" style="display:none" onchange="ocr(this)">
-        <img id="billImg">
-        <div id="ocrRes" style="font-size:12px; margin-top:12px; font-weight:700"></div>
-    </div>
-
-    <button class="btn-confirm" id="btnSub" onclick="sendReq()" disabled>XÁC NHẬN GỬI</button>
-    <button class="btn-exit" onclick="location.reload()">QUAY LẠI</button>
-</div>
-
-<nav class="nav-bar">
-    <a href="home.html" class="nav-link"><i class="fa-solid fa-house"></i>Trang chủ</a>
-    <a href="naptien.html" class="nav-link active"><i class="fa-solid fa-wallet"></i>Nạp tiền</a>
-    <a href="taikhoan.html" class="nav-link"><i class="fa-solid fa-circle-user"></i>Cá nhân</a>
-</nav>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, push, set, get, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyBD27MYenkjWOEjqj0hCisbh_61F_6bhSE",
@@ -180,87 +201,53 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    let selGate = "";
+    let currentGate = "bank";
+    let code = "HPOK" + Math.floor(1000 + Math.random() * 8999);
+    let timerInterval;
 
-    async function sync() {
-        const snap = await get(ref(db, 'payment_configs'));
-        const cfg = snap.val() || {};
-        document.querySelectorAll('.m-card').forEach(card => {
-            const name = card.querySelector('span').innerText;
-            if(cfg[name] && cfg[name].status === "maintenance") {
-                card.classList.add('disabled');
-                card.innerHTML += `<div class="status-tag">BẢO TRÌ</div>`;
-            }
-        });
+    window.switchTab = (gate, el) => {
+        currentGate = gate;
+        document.querySelectorAll('.gate-card').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('box_bank').classList.add('active'); // Demo
+    };
+
+    window.openPay = (type) => {
+        let amt = document.getElementById('amt_bank').value;
+        document.getElementById('paymentUI').style.display = 'block';
+        document.getElementById('pay_amt').innerText = Number(amt).toLocaleString() + " VND";
+        
+        document.getElementById('mainQr').src = `https://img.vietqr.io/image/ACB-48794887-qr_only.png?amount=${amt}&addInfo=${code}`;
+        
+        document.getElementById('pay_details').innerHTML = `
+            <div class="copy-row"><div><label>CHỦ TÀI KHOẢN</label><b>NGUYEN NGOC TAN</b></div></div>
+            <div class="copy-row"><div><label>SỐ TÀI KHOẢN (ACB)</label><b>48794887</b></div><button class="btn-copy" onclick="cp('48794887')">COPY</button></div>
+            <div class="copy-row"><div><label>NỘI DUNG CHUYỂN</label><b style="color:red">${code}</b></div><button class="btn-copy" onclick="cp('${code}')">COPY</button></div>
+        `;
+        startTimer(900);
+    };
+
+    function startTimer(duration) {
+        let timer = duration, min, sec;
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            min = Math.floor(timer / 60); sec = timer % 60;
+            document.getElementById('countdown').textContent = (min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec);
+            if (--timer < 0) { clearInterval(timerInterval); location.reload(); }
+        }, 1000);
     }
-    sync();
 
-    window.openForm = async (name) => {
-        selGate = name;
-        document.getElementById('gateSelection').style.display = 'none';
-        document.getElementById('paymentForm').style.display = 'block';
-        document.getElementById('gateName').innerText = name;
-        document.getElementById('billCode').innerText = "HPOK" + Math.floor(1000 + Math.random() * 8999);
-        const snap = await get(ref(db, 'payment_configs'));
-        if(snap.exists() && snap.val()[name]) {
-            document.getElementById('stkVal').innerText = snap.val()[name].stk + " - " + snap.val()[name].bankName;
-        }
+    window.confirmDone = async () => {
+        await push(ref(db, 'recharge_requests'), {
+            username: localStorage.getItem("username") || "Guest",
+            amount: document.getElementById('amt_bank').value,
+            gate: currentGate, code: code, status: "pending", createdAt: serverTimestamp()
+        });
+        alert("Đã gửi yêu cầu! Hệ thống đang kiểm tra.");
+        location.href = "home.html";
     };
 
-    window.fill = (v) => { document.getElementById('amt').value = v; showVnd(); };
-    window.showVnd = () => {
-        const val = document.getElementById('amt').value || 0;
-        document.getElementById('vnd').innerText = `≈ ${(val * 1000).toLocaleString()} VNĐ`;
-    };
-
-    window.ocr = (input) => {
-        const file = input.files[0];
-        const res = document.getElementById('ocrRes');
-        if(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                document.getElementById('billImg').src = e.target.result;
-                document.getElementById('billImg').style.display = 'block';
-                res.innerText = "⏳ AI ĐANG XÁC THỰC...";
-                Tesseract.recognize(e.target.result, 'vie').then(({ data: { text } }) => {
-                    const low = text.toLowerCase();
-                    if(["thành công", "thanh cong", "đã chuyển"].some(k => low.includes(k))) {
-                        res.innerText = "✅ BILL HỢP LỆ!";
-                        res.style.color = "#44ff44";
-                    } else {
-                        res.innerText = "⚠️ BILL CHƯA RÕ - ADMIN SẼ DUYỆT";
-                        res.style.color = "#ffca28";
-                    }
-                    document.getElementById('btnSub').disabled = false;
-                });
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
-    window.sendReq = async () => {
-        const amount = parseInt(document.getElementById('amt').value) * 1000;
-        const user = localStorage.getItem("username") || "Guest";
-        document.getElementById('loader').style.display = 'flex';
-        try {
-            const rRef = push(ref(db, 'recharge_requests'));
-            const rId = rRef.key;
-            await set(rRef, { username: user, amount: amount, status: "pending", gate: selGate, createdAt: serverTimestamp() });
-            
-            setTimeout(async () => {
-                const s = await get(ref(db, `recharge_requests/${rId}`));
-                if(s.exists() && s.val().status === "pending") {
-                    const uS = await get(ref(db, `users/${user}`));
-                    if(uS.exists()) {
-                        await update(ref(db, `users/${user}`), { balance: (uS.val().balance || 0) + amount });
-                        await update(ref(db, `recharge_requests/${rId}`), { status: "auto_approved" });
-                    }
-                }
-            }, 300000);
-
-            setTimeout(() => { location.href = "home.html"; }, 2000);
-        } catch (e) { document.getElementById('loader').style.display = 'none'; }
-    };
+    window.cp = (t) => { navigator.clipboard.writeText(t); alert("Đã sao chép!"); };
 </script>
 </body>
 </html>
