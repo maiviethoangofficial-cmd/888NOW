@@ -80,24 +80,57 @@ header {
 .auth-bonus { position: absolute; top: -15px; left: 15px; background: #ff9800; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; border: 1px solid #fff; z-index: 3; }
 
 /* ===== MENU TAB HOT ===== */
-/* Container chính của menu */
+
+/* Lắc đĩa (Cho XÓC ĐĨA) */
+@keyframes shakePlate {
+    0%, 100% { transform: scale(1); }
+    20%, 60% { transform: translateX(-3px) rotate(-5deg); }
+    40%, 80% { transform: translateX(3px) rotate(5deg); }
+}
+
+/* Nhảy xí ngầu (Cho TÀI XỈU) */
+@keyframes bounceDice {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px) rotate(45deg); }
+}
+
+/* Rung vé số (Cho XỔ SỐ) */
+@keyframes ticketGlow {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.1); filter: brightness(1.3); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* --- Áp dụng khi Hover --- */
+
+.menu-item a:hover .XocDia-animated {
+    animation: shakePlate 0.4s infinite;
+}
+
+.menu-item a:hover .TaiXiu-animated {
+    animation: bounceDice 0.5s ease infinite;
+    color: #ffeb3b !important; /* Đổi sang màu vàng khi nhảy */
+}
+
+.menu-item a:hover .XoSo-animated {
+    animation: ticketGlow 0.8s infinite;
+}
+
+/* --- Tối ưu cho Mobile (Khi có nhiều mục) --- */
 .menu-tab {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    
-    /* Hiệu ứng Glassmorphism */
-    background: rgba(255, 255, 255, 0.15); /* Nền trắng trong suốt */
-    backdrop-filter: blur(10px);          /* Làm mờ hậu cảnh đằng sau */
-    -webkit-backdrop-filter: blur(10px);
-    
-    /* Đổ bóng và viền nhẹ */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2); /* Đổ bóng sâu tạo khối */
-    
-    margin: 20px 10px;
+    overflow-x: auto; /* Cho phép vuốt ngang nếu màn hình quá hẹp */
+    white-space: nowrap;
+    gap: 15px;
+    padding: 15px 10px;
+    background: rgba(0, 0, 0, 0.6); /* Nền tối sang trọng cho app game */
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+}
+
+.menu-item span {
+    font-size: 9px; /* Nhỏ lại một chút để hiển thị đủ chữ */
+    margin-top: 8px;
 }
 
 /* Các mục menu con */
@@ -201,29 +234,53 @@ header {
 <div class="menu-tab">
     <div class="menu-item">
         <a href="no-hu.html">
-            <i class="fa-solid fa-clover" style="color:#ff4e50"></i>
+            <i class="fa-solid fa-clover Clover-animated" style="color:#ff4e50"></i>
             <span>NỔ HŨ</span>
         </a>
     </div>
 
     <div class="menu-item">
         <a href="ban-ca.html">
-            <i class="fa-solid fa-fish-fins" style="color:#0072ff"></i>
+            <i class="fa-solid fa-fish-fins Fish-animated" style="color:#0072ff"></i>
             <span>BẮN CÁ</span>
         </a>
     </div>
 
     <div class="menu-item">
-        <a href="song-bai.html">
-            <i class="fa-solid fa-dice" style="color:#000"></i>
-            <span>SÒNG BÀI</span>
+        <a href="bong-da.html">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-futbol Ball-animated" style="color:#ffd700"></i>
+                <span class="live-badge">LIVE</span>
+            </div>
+            <span>BÓNG ĐÁ</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="xoc-dia.html">
+            <i class="fa-solid fa-circle-dot XocDia-animated" style="color:#ffffff"></i>
+            <span>XÓC ĐĨA</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="tai-xiu.html">
+            <i class="fa-solid fa-dice TaiXiu-animated" style="color:#e91e63"></i>
+            <span>TÀI XỈU</span>
         </a>
     </div>
 
     <div class="menu-item">
         <a href="game-bai.html">
-            <i class="fa-solid fa-id-card" style="color:#f5576c"></i>
+            <i class="fa-solid fa-id-card Card-animated" style="color:#f5576c"></i>
             <span>GAME BÀI</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="xo-so.html">
+            <i class="fa-solid fa-ticket XoSo-animated" style="color:#4caf50"></i>
+            <span>XỔ SỐ</span>
         </a>
     </div>
 </div>
