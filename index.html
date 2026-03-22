@@ -80,15 +80,58 @@ header {
 .auth-bonus { position: absolute; top: -15px; left: 15px; background: #ff9800; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; border: 1px solid #fff; z-index: 3; }
 
 /* ===== MENU TAB HOT ===== */
-.menu-tab { display: flex; justify-content: space-around; padding: 15px 10px; }
-.menu-item { background: linear-gradient(180deg, #ffffff 0%, #f2f2f2 100%); padding: 12px 0; border-radius: 15px; width: 22%; text-align: center; color: #333; font-size: 10px; font-weight: 800; box-shadow: 0 5px 12px rgba(0,0,0,0.4); border: 1px solid #d4af37; display: flex; flex-direction: column; align-items: center; }
-.menu-item i { font-size: 24px; margin-bottom: 6px; }
-.menu-item协议 a {
-    text-decoration: none; /* Bỏ gạch chân */
-    color: inherit;        /* Lấy màu chữ từ phần tử cha */
-    display: flex;         /* Giúp icon và chữ căn chỉnh đẹp hơn */
+/* Container chính của menu */
+.menu-tab {
+    display: flex;
+    justify-content: space-around;
     align-items: center;
-    width: 100%;           /* Để người dùng bấm vào đâu trong item cũng được */
+    padding: 10px;
+    
+    /* Hiệu ứng Glassmorphism */
+    background: rgba(255, 255, 255, 0.15); /* Nền trắng trong suốt */
+    backdrop-filter: blur(10px);          /* Làm mờ hậu cảnh đằng sau */
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Đổ bóng và viền nhẹ */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2); /* Đổ bóng sâu tạo khối */
+    
+    margin: 20px 10px;
+}
+
+/* Các mục menu con */
+.menu-item a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng đàn hồi */
+}
+
+/* Hiệu ứng khi di chuột (Hover) */
+.menu-item a:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1); /* Phóng to nhẹ */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Hiệu ứng Icon sáng lên */
+.menu-item i {
+    font-size: 26px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2)); /* Đổ bóng riêng cho icon */
+}
+
+/* Hiệu ứng chữ */
+.menu-item span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff; /* Chữ trắng để nổi trên nền mờ */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* ===== GAMES & HOT TAG ===== */
