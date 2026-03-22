@@ -83,6 +83,13 @@ header {
 .menu-tab { display: flex; justify-content: space-around; padding: 15px 10px; }
 .menu-item { background: linear-gradient(180deg, #ffffff 0%, #f2f2f2 100%); padding: 12px 0; border-radius: 15px; width: 22%; text-align: center; color: #333; font-size: 10px; font-weight: 800; box-shadow: 0 5px 12px rgba(0,0,0,0.4); border: 1px solid #d4af37; display: flex; flex-direction: column; align-items: center; }
 .menu-item i { font-size: 24px; margin-bottom: 6px; }
+.menu-item协议 a {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: inherit;        /* Lấy màu chữ từ phần tử cha */
+    display: flex;         /* Giúp icon và chữ căn chỉnh đẹp hơn */
+    align-items: center;
+    width: 100%;           /* Để người dùng bấm vào đâu trong item cũng được */
+}
 
 /* ===== GAMES & HOT TAG ===== */
 .games { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 10px; margin-bottom: 90px; }
