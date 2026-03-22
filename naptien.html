@@ -160,8 +160,8 @@
         <div class="note-header">
             <i class="fa-solid fa-circle-exclamation icon-blink"></i> LƯU Ý QUAN TRỌNG
         </div>
-        - Chủ tài khoản: <b>NGUYEN NGOC TAN</b><br>
-        - Ngân hàng thụ hưởng: <b>ACB BANK</b><br>
+        - Chủ tài khoản: <b>OKHP BANKING</b><br>
+        - Ngân hàng thụ hưởng: <b>BVBANK NGÂN HÀNG TMCP BẢN VIỆT</b><br>
         - Bạn phải chuyển <b>ĐÚNG NỘI DUNG</b> để được cộng tiền tự động.<br>
         - Sau khi chuyển, nhấn nút "Xác nhận" bên dưới.
     </div>
@@ -220,8 +220,8 @@
         document.getElementById('mainQr').src = `https://img.vietqr.io/image/ACB-48794887-qr_only.png?amount=${amt}&addInfo=${code}`;
         
         document.getElementById('pay_details').innerHTML = `
-            <div class="copy-row"><div><label>CHỦ TÀI KHOẢN</label><b>NGUYEN NGOC TAN</b></div></div>
-            <div class="copy-row"><div><label>SỐ TÀI KHOẢN (ACB)</label><b>48794887</b></div><button class="btn-copy" onclick="cp('48794887')">COPY</button></div>
+            <div class="copy-row"><div><label>CHỦ TÀI KHOẢN</label><b>BVBANK BANKING </b></div></div>
+            <div class="copy-row"><div><label>SỐ TÀI KHOẢN (BVBANK)</label><b>99MM25287M78000152</b></div><button class="btn-copy" onclick="cp('99MM25287M78000152')">COPY</button></div>
             <div class="copy-row"><div><label>NỘI DUNG CHUYỂN</label><b style="color:red">${code}</b></div><button class="btn-copy" onclick="cp('${code}')">COPY</button></div>
         `;
         startTimer(900);
