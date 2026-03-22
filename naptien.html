@@ -3,100 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <title>HPOK BANK - FINAL VERSION</title>
+    <title>HPOK BANKING - FULL OPTION</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&family=Inter:wght@400;600;700;900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
     <style>
         :root { 
-            --pink: #ff4d94; --pink-glow: rgba(255, 77, 148, 0.4);
-            --bg: #0b0b0b; --card: #161616; 
-            --teal: #00bfa5; --white: #fff; --gray: #888;
-            --gold-grad: linear-gradient(135deg, #FFD700 0%, #FDB931 50%, #8A6E2F 100%);
+            --pink: #ff4d94; --pink-glow: rgba(255, 77, 148, 0.5);
+            --bg: #0b0b0b; --card: #151515; 
+            --teal: #00bfa5; --teal-glow: rgba(0, 191, 165, 0.5);
+            --white: #ffffff; --gray: #888888;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
-        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg); color: var(--white); padding-bottom: 120px; }
+        /* RESET & ANTI-SKEW */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden; width: 100%; background: var(--bg); color: var(--white); font-family: 'Lexend', sans-serif; }
 
-        header { padding: 20px; text-align: center; border-bottom: 1px solid #222; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; }
-        header h2 { margin: 0; font-size: 18px; font-weight: 900; color: var(--pink); text-transform: uppercase; }
+        .app-wrapper { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 30px; }
 
-        .container { padding: 15px; }
-
-        /* TABS CHỌN CỔNG */
-        .gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        .gate-card { 
-            background: var(--card); padding: 20px 10px; border-radius: 18px; 
-            text-align: center; border: 1.5px solid #252525; transition: 0.3s; cursor: pointer;
+        header { 
+            padding: 20px; text-align: center; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; 
         }
-        .gate-card.active { border-color: var(--pink); background: #1f1f1f; box-shadow: 0 0 15px var(--pink-glow); }
-        .gate-card i { font-size: 28px; margin-bottom: 8px; display: block; }
-        .gate-card span { font-size: 11px; font-weight: 700; display: block; }
+        header h2 { font-size: 16px; font-weight: 900; color: var(--pink); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* FORM BOX */
-        .form-box { background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid #333; display: none; animation: fadeIn 0.3s; }
-        .form-box.active { display: block; }
-        input { width: 100%; background: #222; border: 1px solid #444; color: #fff; padding: 14px; border-radius: 12px; margin-bottom: 15px; font-family: 'Inter'; font-weight: 600; }
-        .btn-main { background: linear-gradient(135deg, var(--pink), #ff1a75); color: #fff; width: 100%; padding: 16px; border: none; border-radius: 14px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
-
-        /* THANH TOÁN UI */
-        #paymentUI { display: none; position: fixed; inset: 0; background: linear-gradient(180deg, #f8fbfb 0%, #e9f2f2 100%); z-index: 2000; overflow-y: auto; color: #333; }
-        .pp-header { background: #fff; padding: 15px; text-align: center; font-weight: 900; color: var(--teal); border-bottom: 1px solid #ddd; position: sticky; top: 0; }
-
-        /* LOGO HPOK BANK CODE */
-        .brand-logo-wrapper { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
-        .hpok-bank-text {
-            font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900;
-            background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-transform: uppercase; letter-spacing: -1px; position: relative;
+        /* LOGO & RADAR */
+        .hero-section { text-align: center; margin: 30px 0; }
+        .brand-logo { 
+            font-size: 38px; font-weight: 900; background: linear-gradient(135deg, #FFD700, #FDB931, #8A6E2F);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase;
         }
-        .hpok-bank-text::after {
-            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.7), transparent);
-            transform: skewX(-25deg); animation: shine 3s infinite;
+        .radar-box {
+            width: 60px; height: 60px; background: var(--teal); border-radius: 50%; margin: 15px auto;
+            display: flex; align-items: center; justify-content: center; position: relative;
+            box-shadow: 0 0 20px var(--teal-glow); font-size: 22px;
         }
-        @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+        .pulse { position: absolute; inset: 0; border: 2px solid var(--teal); border-radius: 50%; animation: pulse-anim 2s infinite; opacity: 0; }
+        .pulse:nth-child(2) { animation-delay: 0.7s; }
+        @keyframes pulse-anim { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
 
-        /* KHU VỰC TẢI BILL - FIX LỖI NÉT ĐỨT */
-        .upload-section { margin: 15px; background: #fff; padding: 20px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .upload-title { font-size: 13px; font-weight: 800; margin-bottom: 15px; color: #444; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
+        /* TABS CỔNG NẠP */
+        .tab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 15px; margin-bottom: 25px; }
+        .tab-item { 
+            background: var(--card); border: 1.5px solid #222; border-radius: 24px; padding: 20px 10px;
+            text-align: center; cursor: pointer; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tab-item i { font-size: 28px; color: #444; margin-bottom: 10px; display: block; }
+        .tab-item span { font-size: 11px; font-weight: 800; color: var(--gray); text-transform: uppercase; }
+        .tab-item.active { border-color: var(--pink); background: #1a1a1a; transform: translateY(-3px); box-shadow: 0 10px 20px var(--pink-glow); }
+        .tab-item.active i { color: var(--pink); text-shadow: 0 0 10px var(--pink-glow); }
+        .tab-item.active span { color: #fff; }
+
+        /* FORM NHẬP */
+        .form-card { background: var(--card); margin: 0 15px; padding: 35px 20px; border-radius: 30px; border: 1px solid #222; }
+        .form-card label { display: block; text-align: center; font-size: 11px; font-weight: 800; color: var(--gray); text-transform: uppercase; margin-bottom: 15px; }
+        .form-card input { width: 100%; background: #000; border: 1.5px solid #333; color: var(--pink); padding: 22px; border-radius: 20px; font-size: 34px; font-weight: 900; text-align: center; font-family: 'Inter'; }
+        .btn-pay { width: 100%; background: linear-gradient(135deg, var(--pink), #e6006e); color: #fff; padding: 22px; border: none; border-radius: 20px; font-size: 16px; font-weight: 900; text-transform: uppercase; cursor: pointer; box-shadow: 0 15px 30px var(--pink-glow); margin-top: 20px; }
+
+        /* GIAO DIỆN THANH TOÁN (PAYMENT UI) */
+        #paymentUI { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 2000; overflow-y: auto; }
+        .pp-header { padding: 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; }
+        .timer-strip { background: rgba(255, 165, 0, 0.1); color: #ffa500; padding: 12px; text-align: center; font-size: 12px; font-weight: 800; }
+
+        /* KHUNG QR CỰC ĐẠI */
+        .qr-master-box { 
+            position: relative; width: 340px; height: 380px; margin: 30px auto; 
+            background: linear-gradient(145deg, #1a1a1a, #000); border-radius: 50px; padding: 15px;
+            border: 1px solid #333; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+        .qr-inner { width: 100%; height: 100%; background: #fff; border-radius: 40px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        #qrImg { width: 85%; height: 85%; object-fit: contain; }
+        .laser { position: absolute; width: 100%; height: 4px; background: var(--teal); top: 0; animation: laser-move 3.5s infinite linear; z-index: 10; box-shadow: 0 0 20px var(--teal); }
+        @keyframes laser-move { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* CHI TIẾT THANH TOÁN */
+        .info-list { margin: 25px 15px; }
+        .info-row { background: var(--card); border: 1.5px solid #222; border-radius: 22px; padding: 18px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .info-data label { display: block; font-size: 10px; color: #555; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+        .info-data b { font-size: 16px; font-weight: 800; letter-spacing: 0.5px; }
+        .btn-copy { background: rgba(0, 191, 165, 0.15); color: var(--teal); border: 1px solid rgba(0, 191, 165, 0.3); padding: 8px 15px; border-radius: 12px; font-size: 11px; font-weight: 900; cursor: pointer; }
         
-        .upload-box { 
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; min-height: 160px;
-            border: 2px dashed #00bfa5; /* Màu Teal nét đứt rõ ràng */
-            border-radius: 18px; background: #f9fdfd;
-            cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;
-        }
-        .upload-box:active { transform: scale(0.98); background: #f0fafa; border-color: #ff4d94; }
-        
-        .upload-box i { font-size: 36px; color: #00bfa5; margin-bottom: 10px; }
-        .upload-box span { font-size: 12px; font-weight: 600; color: #666; }
-        
-        #billPreview { 
-            position: absolute; inset: 0; width: 100%; height: 100%; 
-            object-fit: contain; background: #fff; display: none; z-index: 5;
-        }
-        
-        /* TIMER BAR */
-        .timer-bar {
-            background: #fff; color: #00796b; margin: 20px 15px; padding: 12px; border-radius: 12px;
-            display: flex; justify-content: center; align-items: center; font-weight: 800; gap: 8px; border: 1.5px solid #00bfa5;
-        }
-        #countdown { color: #d32f2f; font-size: 16px; font-weight: 900; }
-
-        /* QR SECTION */
-        .qr-section { background: #fff; margin: 0 15px 15px; padding: 25px; border-radius: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .qr-holder { width: 220px; height: 220px; margin: 0 auto 15px; background: #fff; padding: 8px; border: 1px dashed #ccc; border-radius: 12px; }
-        #mainQr { width: 100%; height: 100%; display: block; }
-        .price-tag { font-size: 30px; font-weight: 900; color: #d32f2f; }
-
-        /* COPY ROW */
-        .copy-row { background: #fff; margin: 0 15px 10px; padding: 12px 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; }
-        .copy-row label { font-size: 10px; color: #999; text-transform: uppercase; display: block; }
-        .btn-copy { background: var(--teal); color: #fff; border: none; padding: 7px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; }
-          
         /* NOTE BOX CẢI TIẾN ICON ĐỘNG */
         .note-area { background: #fff9e6; margin: 15px; padding: 18px; border-radius: 20px; border: 1px solid #ffeeba; color: #856404; font-size: 11.5px; line-height: 1.6; }
         .note-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; color: #d32f2f; font-weight: 900; text-transform: uppercase; }
@@ -105,86 +93,118 @@
         @keyframes blink { from { opacity: 1; transform: scale(1); } to { opacity: 0.5; transform: scale(1.1); } }
         
 
-        /* NGUỒN FOOTER ĐẸP */
-        .footer-source {
-            text-align: center; padding: 20px 0; margin-top: 20px;
-            background: rgba(0,0,0,0.03); border-radius: 50px 50px 0 0;
-        }
-        .footer-source span {
-            font-size: 11px; font-weight: 800; color: #aaa; letter-spacing: 1px;
-            display: flex; align-items: center; justify-content: center; gap: 5px;
-        }
-        .footer-source b { color: var(--teal); }
+        /* KHU VỰC BILL */
+        .bill-zone { margin: 15px; background: #111; border: 2px dashed #333; border-radius: 25px; padding: 30px; text-align: center; cursor: pointer; }
+        #ocrStatus { font-size: 12px; margin-top: 15px; font-weight: 700; color: var(--gray); }
+        #imgPrev { width: 100%; margin-top: 15px; border-radius: 15px; display: none; border: 1px solid #333; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-confirm { width: 100%; background: linear-gradient(135deg, var(--teal), #00897b); color: #fff; padding: 22px; border: none; border-radius: 22px; font-size: 16px; font-weight: 900; text-transform: uppercase; box-shadow: 0 15px 30px var(--teal-glow); cursor: pointer; }
+
+        #loader { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #222; border-top-color: var(--pink); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<header><h2>NẠP TIỀN TỰ ĐỘNG</h2></header>
+<div id="loader">
+    <div class="spinner"></div>
+    <p style="margin-top:20px; font-weight:800; color:var(--pink); letter-spacing:1px;">HỆ THỐNG ĐANG XỬ LÝ...</p>
+</div>
 
-<div class="container">
-    <div class="gate-grid">
-        <div class="gate-card active" onclick="switchTab('bank', this)"><i class="fa-solid fa-building-columns" style="color:var(--pink)"></i><span>ACB BANK</span></div>
-        <div class="gate-card" onclick="switchTab('momo', this)"><i class="fa-solid fa-wallet" style="color:#a50064"></i><span>MOMO PAY</span></div>
-        <div class="gate-card" onclick="switchTab('card', this)"><i class="fa-solid fa-sd-card" style="color:#ffca28"></i><span>THẺ CÀO</span></div>
-        <div class="gate-card" onclick="switchTab('usdt', this)"><i class="fa-brands fa-ethereum" style="color:#26a17b"></i><span>USDT BEP20</span></div>
+<div class="app-wrapper">
+    <header><h2>NẠP TIỀN TỰ ĐỘNG</h2></header>
+
+    <div class="hero-section">
+        <div class="brand-logo">HPOK BANK</div>
+        <div class="radar-box">
+            <div class="pulse"></div>
+            <div class="pulse"></div>
+            <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
     </div>
 
-    <div id="box_bank" class="form-box active">
-        <input type="number" id="amt_bank" value="100000">
-        <button class="btn-main" onclick="openPay('bank')">TIẾP TỤC THANH TOÁN</button>
+    <div class="tab-grid">
+        <div class="tab-item active" onclick="switchGate('bank', this)">
+            <i class="fa-solid fa-building-columns"></i>
+            <span>BVBANK AUTO</span>
+        </div>
+        <div class="tab-item" onclick="switchGate('momo', this)">
+            <i class="fa-solid fa-wallet"></i>
+            <span>MOMO PAY</span>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <label>Nhập số tiền cần nạp (VNĐ)</label>
+        <input type="number" id="input_amount" value="100000">
+        <button class="btn-pay" onclick="goPayment()">THANH TOÁN NGAY</button>
+        <p style="text-align:center; color:#555; font-size:10px; margin-top:20px; font-weight:800; text-transform:uppercase;">Bảo mật bởi công nghệ mã hóa HPOK</p>
     </div>
 </div>
 
 <div id="paymentUI">
-    <div class="pp-header">HỆ THỐNG THANH TOÁN HPOK</div>
-    
-    <div class="brand-logo-wrapper">
-        <div class="hpok-bank-text">HPOK BANK</div>
-    </div>
+    <div class="app-wrapper">
+        <div class="pp-header">
+            <i class="fa-solid fa-chevron-left" onclick="location.reload()"></i>
+            <span style="font-weight:900; letter-spacing:1px; color:var(--teal)">GIAO DỊCH AN TOÀN</span>
+            <i class="fa-solid fa-shield-check" style="color:var(--teal)"></i>
+        </div>
 
-    <div class="timer-bar">
-        <i class="fa-solid fa-shield-check icon-blink"></i> 
-        Đơn hàng hết hạn sau: <span id="countdown">15:00</span>
-    </div>
+        <div class="timer-strip">
+            ⏳ ĐƠN HÀNG SẼ HẾT HẠN SAU: <span id="timer_val">15:00</span>
+        </div>
 
-    <div class="qr-section">
-        <div class="qr-holder"><img id="mainQr" src=""></div>
-        <div class="price-tag" id="pay_amt">0 VND</div>
-    </div>
+        <div class="qr-master-box">
+            <div class="qr-inner">
+                <div class="laser"></div>
+                <img id="qrImg" src="https://drive.google.com/thumbnail?id=1XTdOah4tNsyPHmvqXlWU5WZllz6OtnR0&sz=w1000">
+            </div>
+        </div>
 
-    <div id="pay_details"></div>
+        <div style="text-align:center;">
+            <p style="font-size:11px; color:#666; font-weight:800; text-transform:uppercase;">Số tiền phải chuyển</p>
+            <h1 id="amt_show" style="font-size:45px; font-weight:900; color:#fff;">0đ</h1>
+        </div>
 
-    <div class="note-area">
+        <div class="info-list">
+            <div class="info-row">
+                <div class="info-data"><label>Ngân hàng</label><b>BVBANK ( NGÂN HÀNG BẢN VIỆT )</b></div>
+            </div>
+            <div class="info-row">
+                <div class="info-data"><label>Số tài khoản</label><b id="stk_val">99MM25287M78000152</b></div>
+                <button class="btn-copy" onclick="copy('stk_val')">COPY</button>
+            </div>
+            <div class="info-row">
+                <div class="info-data"><label>Chủ tài khoản</label><b id="own_val">OKHP BANKING</b></div>
+            </div>
+            <div class="info-row">
+                <div class="info-data"><label>Nội dung nạp</label><b id="code_val" style="color:var(--pink)">...</b></div>
+                <button class="btn-copy" onclick="copy('code_val')">COPY</button>
+            </div>
+        </div>
+            <div class="note-area">
         <div class="note-header">
             <i class="fa-solid fa-circle-exclamation icon-blink"></i> LƯU Ý QUAN TRỌNG
         </div>
         - Chủ tài khoản: <b>OKHP BANKING</b><br>
-        - Ngân hàng thụ hưởng: <b>BVBANK NGÂN HÀNG TMCP BẢN VIỆT</b><br>
+        - Ngân hàng thụ hưởng: <b>BVBANK NGÂN HÀNG TMCP NGÂN HÀNG BẢN VIỆT</b><br>
         - Bạn phải chuyển <b>ĐÚNG NỘI DUNG</b> để được cộng tiền tự động.<br>
         - Sau khi chuyển, nhấn nút "Xác nhận" bên dưới.
     </div>
-        <div class="upload-section">
-        <div class="upload-title">Xác nhận bằng hình ảnh</div>
-        
-        <label class="upload-box" for="billInput" id="dropZone">
-            <i class="fa-solid fa-camera-retro icon-blink"></i>
-            <span>Bấm vào đây để tải ảnh Bill</span>
-            <img id="billPreview" src="">
-        </label>
-        
-        <div style="font-size:10px; color:#999; text-align:center; margin-top:10px;">
-            Hệ thống sẽ duyệt nhanh hơn nếu có ảnh minh chứng
-        </div>
-    </div>
-    <div style="padding:15px">
-        <button class="btn-main" style="background:var(--teal)" onclick="confirmDone()">XÁC NHẬN ĐÃ CHUYỂN KHOẢN</button>
-        <p onclick="location.reload()" style="text-align:center; color:#888; font-weight:800; margin-top:20px; cursor:pointer; font-size:12px;">HỦY GIAO DỊCH</p>
-    </div>
 
-    <div class="footer-source">
-        <span><i class="fa-solid fa-copyright"></i> Nguồn: <b>@HPOK BANK Official</b></span>
+        <div class="bill-zone" onclick="document.getElementById('file_bill').click()">
+            <i class="fa-solid fa-camera-retro"></i>
+            <p style="font-weight:800; font-size:12px; color:#888; margin-top:10px;">Tải lên ảnh Bill chuyển khoản</p>
+            <input type="file" id="file_bill" accept="image/*" style="display:none" onchange="handleOCR(this)">
+            <img id="imgPrev">
+            <div id="ocrStatus">Hệ thống sẽ tự động quét Bill của bạn</div>
+        </div>
+
+        <div style="padding: 0 15px;">
+            <button class="btn-confirm" onclick="submitToFirebase()">XÁC NHẬN ĐÃ CHUYỂN TIỀN</button>
+            <p onclick="location.reload()" style="text-align:center; color:#444; font-size:12px; margin-top:25px; font-weight:800; cursor:pointer;">HỦY GIAO DỊCH NÀY</p>
+        </div>
     </div>
 </div>
 
@@ -201,53 +221,91 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    let currentGate = "bank";
-    let code = "HPOK" + Math.floor(1000 + Math.random() * 8999);
-    let timerInterval;
+    let selectedGate = "bank";
+    let rechargeCode = "HP" + Math.floor(100000 + Math.random() * 899999);
+    let countdown;
 
-    window.switchTab = (gate, el) => {
-        currentGate = gate;
-        document.querySelectorAll('.gate-card').forEach(c => c.classList.remove('active'));
+    window.switchGate = (g, el) => {
+        selectedGate = g;
+        document.querySelectorAll('.tab-item').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
-        document.getElementById('box_bank').classList.add('active'); // Demo
     };
 
-    window.openPay = (type) => {
-        let amt = document.getElementById('amt_bank').value;
+    window.goPayment = () => {
+        const amt = document.getElementById('input_amount').value;
+        if(amt < 1000) return alert("Vui lòng nạp tối thiểu 1.000đ");
+
         document.getElementById('paymentUI').style.display = 'block';
-        document.getElementById('pay_amt').innerText = Number(amt).toLocaleString() + " VND";
+        document.getElementById('amt_show').innerText = Number(amt).toLocaleString() + "đ";
+        document.getElementById('code_val').innerText = rechargeCode;
         
-        document.getElementById('mainQr').src = `https://img.vietqr.io/image/BVBANK -99MM25287M78000152-qr_only.png?amount=${amt}&addInfo=${code}`;
-        
-        document.getElementById('pay_details').innerHTML = `
-            <div class="copy-row"><div><label>CHỦ TÀI KHOẢN</label><b>BVBANK BANKING </b></div></div>
-            <div class="copy-row"><div><label>SỐ TÀI KHOẢN (BVBANK)</label><b>99MM25287M78000152</b></div><button class="btn-copy" onclick="cp('99MM25287M78000152')">COPY</button></div>
-            <div class="copy-row"><div><label>NỘI DUNG CHUYỂN</label><b style="color:red">${code}</b></div><button class="btn-copy" onclick="cp('${code}')">COPY</button></div>
-        `;
         startTimer(900);
     };
 
     function startTimer(duration) {
-        let timer = duration, min, sec;
-        clearInterval(timerInterval);
-        timerInterval = setInterval(() => {
-            min = Math.floor(timer / 60); sec = timer % 60;
-            document.getElementById('countdown').textContent = (min<10?"0"+min:min)+":"+(sec<10?"0"+sec:sec);
-            if (--timer < 0) { clearInterval(timerInterval); location.reload(); }
+        let t = duration;
+        clearInterval(countdown);
+        countdown = setInterval(() => {
+            let m = Math.floor(t / 60);
+            let s = t % 60;
+            document.getElementById('timer_val').innerText = (m<10?"0"+m:m) + ":" + (s<10?"0"+s:s);
+            if(--t < 0) { clearInterval(countdown); location.reload(); }
         }, 1000);
     }
 
-    window.confirmDone = async () => {
-        await push(ref(db, 'recharge_requests'), {
-            username: localStorage.getItem("username") || "Guest",
-            amount: document.getElementById('amt_bank').value,
-            gate: currentGate, code: code, status: "pending", createdAt: serverTimestamp()
-        });
-        alert("Đã gửi yêu cầu! Hệ thống đang kiểm tra.");
-        location.href = "home.html";
+    // OCR NHẬN DIỆN BILL
+    window.handleOCR = (input) => {
+        const file = input.files[0];
+        if(!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = document.getElementById('imgPrev');
+            img.src = e.target.result;
+            img.style.display = 'block';
+            const status = document.getElementById('ocrStatus');
+            status.innerText = "🔍 Đang phân tích Bill...";
+            status.style.color = "cyan";
+
+            Tesseract.recognize(e.target.result, 'vie').then(({ data: { text } }) => {
+                if(text.toLowerCase().includes("thành công") || text.includes("BVBANK")) {
+                    status.innerText = "✅ Bill hợp lệ! Vui lòng bấm xác nhận.";
+                    status.style.color = "#00ffa5";
+                } else {
+                    status.innerText = "⚠️ Ảnh mờ hoặc không rõ Bill, vui lòng thử lại.";
+                    status.style.color = "orange";
+                }
+            });
+        };
+        reader.readAsDataURL(file);
     };
 
-    window.cp = (t) => { navigator.clipboard.writeText(t); alert("Đã sao chép!"); };
+    window.submitToFirebase = async () => {
+        const amt = document.getElementById('input_amount').value;
+        document.getElementById('loader').style.display = 'flex';
+        
+        try {
+            await push(ref(db, 'recharge_requests'), {
+                username: localStorage.getItem("username") || "Guest",
+                amount: amt,
+                gate: selectedGate,
+                code: rechargeCode,
+                status: "pending",
+                createdAt: serverTimestamp()
+            });
+            alert("Gửi yêu cầu thành công! Admin sẽ duyệt bill trong giây lát.");
+            location.reload();
+        } catch (e) {
+            alert("Lỗi kết nối máy chủ!");
+            document.getElementById('loader').style.display = 'none';
+        }
+    };
+
+    window.copy = (id) => {
+        const val = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(val);
+        alert("Đã sao chép: " + val);
+    };
 </script>
 </body>
 </html>
