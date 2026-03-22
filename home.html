@@ -80,6 +80,60 @@
         }
         .feat-item span { font-size: 9px; color: #fff; font-weight: 700; }
 
+        /* --- Animation mới --- */
+
+/* Lắc đĩa (Cho XÓC ĐĨA) */
+@keyframes shakePlate {
+    0%, 100% { transform: scale(1); }
+    20%, 60% { transform: translateX(-3px) rotate(-5deg); }
+    40%, 80% { transform: translateX(3px) rotate(5deg); }
+}
+
+/* Nhảy xí ngầu (Cho TÀI XỈU) */
+@keyframes bounceDice {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px) rotate(45deg); }
+}
+
+/* Rung vé số (Cho XỔ SỐ) */
+@keyframes ticketGlow {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.1); filter: brightness(1.3); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* --- Áp dụng khi Hover --- */
+
+.menu-item a:hover .XocDia-animated {
+    animation: shakePlate 0.4s infinite;
+}
+
+.menu-item a:hover .TaiXiu-animated {
+    animation: bounceDice 0.5s ease infinite;
+    color: #ffeb3b !important; /* Đổi sang màu vàng khi nhảy */
+}
+
+.menu-item a:hover .XoSo-animated {
+    animation: ticketGlow 0.8s infinite;
+}
+
+/* --- Tối ưu cho Mobile (Khi có nhiều mục) --- */
+.menu-tab {
+    display: flex;
+    overflow-x: auto; /* Cho phép vuốt ngang nếu màn hình quá hẹp */
+    white-space: nowrap;
+    gap: 15px;
+    padding: 15px 10px;
+    background: rgba(0, 0, 0, 0.6); /* Nền tối sang trọng cho app game */
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+}
+
+.menu-item span {
+    font-size: 9px; /* Nhỏ lại một chút để hiển thị đủ chữ */
+    margin-top: 8px;
+}
+
         /* ----- GAME GRID & BANNER ----- */
         .banner-box { width: 100%; overflow: hidden; position: relative; }
         .slides { display: flex; transition: transform 0.6s; width: 100%; }
@@ -164,6 +218,60 @@
     <a href="diemdanh.html" class="feat-item"><div class="feat-icon"><i class="fa-solid fa-calendar-check"></i></div><span>Điểm danh</span></a>
     <a href="hoantra.html" class="feat-item"><div class="feat-icon"><i class="fa-solid fa-hand-holding-heart"></i></div><span>Hoàn trả</span></a>
     <a href="taiapp.html" class="feat-item"><div class="feat-icon"><i class="fa-solid fa-mobile-screen"></i></div><span>Tải App</span></a>
+</div>
+
+    <div class="menu-tab">
+    <div class="menu-item">
+        <a href="no-hu.html">
+            <i class="fa-solid fa-clover Clover-animated" style="color:#ff4e50"></i>
+            <span>NỔ HŨ</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="ban-ca.html">
+            <i class="fa-solid fa-fish-fins Fish-animated" style="color:#0072ff"></i>
+            <span>BẮN CÁ</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="bong-da.html">
+            <div class="icon-wrapper">
+                <i class="fa-solid fa-futbol Ball-animated" style="color:#ffd700"></i>
+                <span class="live-badge">LIVE</span>
+            </div>
+            <span>BÓNG ĐÁ</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="xoc-dia.html">
+            <i class="fa-solid fa-circle-dot XocDia-animated" style="color:#ffffff"></i>
+            <span>XÓC ĐĨA</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="tai-xiu.html">
+            <i class="fa-solid fa-dice TaiXiu-animated" style="color:#e91e63"></i>
+            <span>TÀI XỈU</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="game-bai.html">
+            <i class="fa-solid fa-id-card Card-animated" style="color:#f5576c"></i>
+            <span>GAME BÀI</span>
+        </a>
+    </div>
+
+    <div class="menu-item">
+        <a href="xo-so.html">
+            <i class="fa-solid fa-ticket XoSo-animated" style="color:#4caf50"></i>
+            <span>XỔ SỐ</span>
+        </a>
+    </div>
 </div>
 
 <div class="section-title">SẢNH GAME <span>CASINO HPOK</span></div>
