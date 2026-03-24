@@ -437,6 +437,41 @@ document.addEventListener('click', function() {
         player.playVideo();
     }
 }, { once: true });
+    <div id="player" style="display:none"></div>
+
+<script>
+  // 1. Tải YouTube IFrame Player API
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '1',
+      width: '1',
+      videoId: 'emSFAf_pl_0', // ID video của bạn
+      playerVars: {
+        'autoplay': 1,
+        'loop': 1,
+        'playlist': 'emSFAf_pl_0'
+      },
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    // Thử phát nhạc ngay lập tức (thường sẽ bị chặn nếu chưa click)
+    event.target.playVideo();
+    
+    // Quan trọng: Khi người dùng click bất cứ đâu trên trang, nhạc sẽ phát
+    document.body.addEventListener('click', function() {
+        player.playVideo();
+    }, { once: true }); // Chỉ chạy 1 lần duy nhất khi click
+  }
 </script>
 <div id="player" style="display:none"></div>
 <script src="https://www.youtube.com/iframe_api"></script>
