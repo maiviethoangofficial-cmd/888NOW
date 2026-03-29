@@ -197,6 +197,58 @@
                 toggleMenu();
             }
         });
+        <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // 🛡️ Cấu hình Firebase chuẩn (Đã sửa lỗi tiếng Việt)
+    const firebaseConfig = {
+        apiKey: "AIzaSyBD27MYenkjW0Ejqj0hCisbh_61F_6bhSE",
+        authDomain: "hpok-d355c.firebaseapp.com",
+        databaseURL: "https://hpok-d355c-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "hpok-d355c",
+        storageBucket: "hpok-d355c.appspot.com",
+        messagingSenderId: "147356449789",
+        appId: "1:147356449789:web:60bf6c812d5887796bf794"
+    };
+
+    // Khởi tạo Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // 1. Kiểm tra đăng nhập (Logic playGate)
+    window.playGate = function(gameUrl) {
+        const isLoggedIn = localStorage.getItem("isLoggedIn"); 
+        if (isLoggedIn !== "ĐÚNG VẬY") {
+            alert("Vui lòng đăng nhập để vào game!");
+            window.location.href = "login.html";
+        } else {
+            window.location.href = gameUrl;
+        }
+    };
+
+    // 2. Đồng bộ dữ liệu người dùng (Ví dụ path: users/maiviethoang)
+    // Bạn có thể đổi 'maiviethoang' thành ID động nếu cần
+    const userRef = ref(db, 'users/maiviethoang');
+    onValue(userRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            document.getElementById('db-user').innerText = (data.username || "M.V.HOÀNG").toUpperCase();
+            document.getElementById('db-balance').innerText = (data.balance || 0).toLocaleString() + " VND";
+        }
+    });
+
+    // 3. Logic Thanh trượt (Slider)
+    let slideIndex = 0;
+    const slide = document.getElementById('slide');
+    if (slide) {
+        setInterval(() => {
+            slideIndex = (slideIndex + 1) % 2; // Giả định có 2 ảnh slide
+            slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+        }, 4000);
+    }
+
+    console.log("💎 HPOK System: Firebase Connected Successfully!");
     </script>
 </body>
 </html>
