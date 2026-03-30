@@ -1,0 +1,4 @@
+# Firebase service account key
+*.json
+# Hoặc tên chính xác file của bạn
+hpok-d355c-firebase-adminsdk-*.json
